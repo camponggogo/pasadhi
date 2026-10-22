@@ -29,6 +29,15 @@ python pasadhi/bench/run.py            # kernel + pipeline benchmarks, writes be
 python pasadhi/bench/run.py --quick    # smaller sizes
 ```
 
+## The app
+
+One service, three roles, one installer. python pasadhi/app/install.py probes the machine, scores it, and
+picks coordinator / worker / client; the settings page at 127.0.0.1:8765 has five sliders (CPU, GPU, RAM, HDD,
+network), a live earnings estimate, the per-install device token and a boot-time autostart switch.
+
+- Design and platform matrix: [docs/APP_SERVICE.th.md](docs/APP_SERVICE.th.md)
+- Try it: python pasadhi/app/install.py && python pasadhi/app/service.py --port 8765
+
 ## Layout
 
 ```
