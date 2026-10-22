@@ -1,0 +1,58 @@
+{
+  "assumptions": {
+    "machine_cost_thb": 12000,
+    "life_months": 36,
+    "watts": 45,
+    "kwh_thb": 4.2,
+    "duty": 0.6,
+    "gflops_peak": 74.0,
+    "hours_month": 730,
+    "support_thb_per_node_month": 80,
+    "target_margin": 0.7,
+    "cloud_cpu_usd_hour": 0.17,
+    "cloud_cpu_gflops": 60.0,
+    "cloud_gpu_usd_hour": 2.1,
+    "cloud_gpu_gflops": 19500.0
+  },
+  "node": {
+    "amortisation_thb": 333.3,
+    "energy_thb": 138.0,
+    "support_thb": 80,
+    "cost_thb_month": 551.3,
+    "price_thb_month": 1838.0,
+    "price_thb_year": 22052.0,
+    "gross_margin_thb": 1286.0,
+    "effective_gflops": 44.4,
+    "tflop_month": 116683.0,
+    "thb_per_tflop": 0.016
+  },
+  "cloud": {
+    "cloud_cpu_thb_per_tflop": 0.028,
+    "cloud_gpu_thb_per_tflop": 0.001,
+    "node_vs_cloud_cpu": 1.8,
+    "node_vs_cloud_gpu": 0.07
+  },
+  "fleets": [
+    {
+      "nodes": 10,
+      "revenue_thb_year": 220520,
+      "cost_thb_year": 66156,
+      "gross_profit_thb_year": 154364,
+      "margin_pct": 70.0
+    },
+    {
+      "nodes": 50,
+      "revenue_thb_year": 1102600,
+      "cost_thb_year": 330780,
+      "gross_profit_thb_year": 771820,
+      "margin_pct": 70.0
+    },
+    {
+      "nodes": 200,
+      "revenue_thb_year": 4410400,
+      "cost_thb_year": 1323120,
+      "gross_profit_thb_year": 3087280,
+      "margin_pct": 70.0
+    }
+  ]
+}

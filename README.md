@@ -40,6 +40,23 @@ pasadhi/
   docs/ROADMAP.md
 ```
 
+## Commercial
+
+PASADHI is sold as software and support, not as raw FLOPs — the measurements say why.
+
+| | THB per delivered TFLOP |
+|---|---:|
+| PASADHI node (60 % duty) | **0.016** |
+| Cloud CPU (4 vCPU) | 0.028 |
+| Cloud GPU (1× A100) | 0.001 |
+
+We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. The product is therefore
+**residency, sunk hardware and small bursty jobs**, not a cheaper GPU.
+
+- Business plan, pricing and unit economics (Thai): [`docs/BUSINESS.th.md`](docs/BUSINESS.th.md)
+- Sales kit: one-pager, deck outline, objections, quote and SOW (Thai): [`docs/SALES_KIT.th.md`](docs/SALES_KIT.th.md)
+- Calculator behind every number: `python pasadhi/commercial/pricing.py`
+
 ## Provenance
 
 PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement
