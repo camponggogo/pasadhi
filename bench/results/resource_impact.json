@@ -1,0 +1,88 @@
+{
+  "host": {
+    "cpu": "Intel Core i7-8550U",
+    "threads": 8
+  },
+  "cpu": [
+    {
+      "pct": 10,
+      "gflops": 3.76
+    },
+    {
+      "pct": 25,
+      "gflops": 7.65
+    },
+    {
+      "pct": 50,
+      "gflops": 25.37
+    },
+    {
+      "pct": 75,
+      "gflops": 33.29
+    },
+    {
+      "pct": 90,
+      "gflops": 48.72
+    },
+    {
+      "pct": 100,
+      "gflops": 32.35
+    }
+  ],
+  "ram": [
+    {
+      "working_set_mb": 16,
+      "n": 1448,
+      "gflops": 90.88
+    },
+    {
+      "working_set_mb": 64,
+      "n": 2896,
+      "gflops": 98.05
+    },
+    {
+      "working_set_mb": 256,
+      "n": 5792,
+      "gflops": 94.85
+    },
+    {
+      "working_set_mb": 512,
+      "n": 8192,
+      "gflops": 92.32
+    },
+    {
+      "working_set_mb": 1024,
+      "n": 11585,
+      "gflops": 94.66
+    }
+  ],
+  "disk": {
+    "write_mb_s": 74.6,
+    "read_mb_s": 1138.6,
+    "random_4k_iops": 42400.0,
+    "model_load_s_per_gb": 0.9
+  },
+  "net": [
+    {
+      "payload_kb": 1.0,
+      "mb_per_s": 12.0,
+      "jobs_per_s": 12327.0
+    },
+    {
+      "payload_kb": 64.0,
+      "mb_per_s": 524.1,
+      "jobs_per_s": 8386.0
+    },
+    {
+      "payload_kb": 1024.0,
+      "mb_per_s": 321.7,
+      "jobs_per_s": 322.0
+    }
+  ],
+  "gpu": {
+    "cpu_gflops": 83.3,
+    "gpu_gflops": 1862.0,
+    "ratio": 22.4
+  },
+  "elasticity_cpu_10pp": 231.6
+}

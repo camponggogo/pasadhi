@@ -1,0 +1,18 @@
+{
+  "cpu_elasticity_10pp_pct": 48.1,
+  "base_gflops_at_35pct": 14.7,
+  "shares_host": {
+    "CPU": 98.0,
+    "GPU": 0.0,
+    "RAM": 0.4,
+    "DISK": 1.0,
+    "NET": 0.6
+  },
+  "shares_with_gpu": {
+    "CPU": 56.6,
+    "GPU": 42.2,
+    "RAM": 0.2,
+    "DISK": 0.6,
+    "NET": 0.4
+  }
+}
