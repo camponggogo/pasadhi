@@ -49,6 +49,20 @@ Small cards are a different machine, not a faster node. The model (`core/gpu.py`
 - [ ] burn-in test for second-hand cards (30 min GEMM, reject on ECC/thermal faults)
 - [ ] publish the supported matrix: card × driver × CUDA version
 
+## M2.6 — one scheduler for 1050s and A100s
+
+Fifteen hundred cards of five generations, one placement decision. The simulation (`core/hetero.py`) says:
+
+- 2 % of jobs need 35 GB → only ten A100s can run them → **92 % utilisation on those cards while 1 440 idle**;
+  the makespan is 13.19 s regardless of policy
+- with the tail removed, policy is worth **19×**: best_fit 0.38 s vs worst_fit 7.31 s
+- aggregate: 9.54 PFLOPS f32, 47.7 POPS int8, 143.5 kW, ฿0.00007 per delivered TFLOP (cost basis)
+
+- [ ] split any job larger than the largest spare card (tile / split-K) instead of queueing it
+- [ ] policy hook in the scheduler (`hetero.choose`), best_fit as the default
+- [ ] per-class utilisation on the dashboard; total FLOPs hides the idle fleet
+- [ ] 10/25 GbE for the big cards only; 1 GbE stays for the 1050 tier
+
 ## M3 — distributed matrix plane (two hosts, then ten)
 
 - [ ] row-panel sharding of the output, 256-row panels, retry-safe tile ids

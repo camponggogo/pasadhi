@@ -66,6 +66,15 @@ is sharded across them over 1 GbE — 91.5 % of the card's time would wait for d
 - Design, capacity model and the 1 000-machine reality check: [`docs/GPU_FLEET.md`](docs/GPU_FLEET.md)
 - Run the model: `python pasadhi/bench/gpu_model.py`
 
+## Mixed fleet
+
+One scheduler from a 2 GB GTX 1050 to a 40 GB A100: 1 450 cards, **9.54 PFLOPS f32 / 47.7 POPS int8** at
+143.5 kW. The simulation shows the tail, not the policy, owns the clock — and that splitting a job larger than
+any spare card is worth more than buying another one.
+
+- Results and operating notes: [`docs/HETERO_FLEET.md`](docs/HETERO_FLEET.md)
+- Run it: `python pasadhi/bench/hetero_model.py`
+
 ## Provenance
 
 PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement

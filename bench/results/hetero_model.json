@@ -1,0 +1,193 @@
+{
+  "note": "card figures are published specifications; scheduling is simulated, not run on hardware",
+  "inventory": {
+    "GTX 1050 2GB": 1000,
+    "Tesla T4 16GB": 200,
+    "RTX 3060 12GB": 200,
+    "RTX 4090 24GB": 40,
+    "A100 40GB": 10
+  },
+  "aggregate_f32": {
+    "dtype": "f32",
+    "peak_pflops": 9.54,
+    "power_kw": 143.5,
+    "vram_tb": 8.9,
+    "cards": 1450,
+    "gflops_per_watt": 66.5
+  },
+  "aggregate_int8": {
+    "dtype": "int8",
+    "peak_pflops": 47.7,
+    "power_kw": 143.5,
+    "vram_tb": 8.9,
+    "cards": 1450,
+    "gflops_per_watt": 332.1
+  },
+  "runs": [
+    {
+      "policy": "best_fit",
+      "scenario": "mixed",
+      "makespan": 13.19,
+      "mean_wait": 0.13,
+      "throughput_tflops": 188.3,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0003,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.0066,
+        "RTX 4090 24GB": 0.0217,
+        "A100 40GB": 0.9222
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 2810,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 776,
+        "RTX 4090 24GB": 331,
+        "A100 40GB": 83
+      },
+      "class_finish": {
+        "0.4GB": 0.0,
+        "6GB": 0.09,
+        "18GB": 0.31,
+        "35GB": 13.19
+      }
+    },
+    {
+      "policy": "fastest",
+      "scenario": "mixed",
+      "makespan": 13.19,
+      "mean_wait": 0.27,
+      "throughput_tflops": 188.3,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.0,
+        "RTX 4090 24GB": 0.027,
+        "A100 40GB": 0.9222
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 0,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 0,
+        "RTX 4090 24GB": 3917,
+        "A100 40GB": 83
+      },
+      "class_finish": {
+        "0.4GB": 0.35,
+        "6GB": 0.35,
+        "18GB": 0.38,
+        "35GB": 13.19
+      }
+    },
+    {
+      "policy": "worst_fit",
+      "scenario": "mixed",
+      "makespan": 18.71,
+      "mean_wait": 7.93,
+      "throughput_tflops": 132.7,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.0,
+        "RTX 4090 24GB": 0.0,
+        "A100 40GB": 0.9723
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 0,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 0,
+        "RTX 4090 24GB": 0,
+        "A100 40GB": 4000
+      },
+      "class_finish": {
+        "0.4GB": 17.75,
+        "6GB": 17.75,
+        "18GB": 17.72,
+        "35GB": 18.71
+      }
+    },
+    {
+      "policy": "best_fit",
+      "scenario": "no_huge",
+      "makespan": 0.38,
+      "mean_wait": 0.02,
+      "throughput_tflops": 2598.2,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0113,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.2286,
+        "RTX 4090 24GB": 0.9409,
+        "A100 40GB": 0.0
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 2810,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 776,
+        "RTX 4090 24GB": 414,
+        "A100 40GB": 0
+      },
+      "class_finish": {
+        "0.4GB": 0.0,
+        "6GB": 0.09,
+        "18GB": 0.38
+      }
+    },
+    {
+      "policy": "fastest",
+      "scenario": "no_huge",
+      "makespan": 0.45,
+      "mean_wait": 0.2,
+      "throughput_tflops": 2209.3,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.0,
+        "RTX 4090 24GB": 0.9555,
+        "A100 40GB": 0.0
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 0,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 0,
+        "RTX 4090 24GB": 4000,
+        "A100 40GB": 0
+      },
+      "class_finish": {
+        "0.4GB": 0.41,
+        "6GB": 0.42,
+        "18GB": 0.45
+      }
+    },
+    {
+      "policy": "worst_fit",
+      "scenario": "no_huge",
+      "makespan": 7.31,
+      "mean_wait": 3.51,
+      "throughput_tflops": 135.2,
+      "rejected": 0,
+      "utilisation": {
+        "GTX 1050 2GB": 0.0,
+        "Tesla T4 16GB": 0.0,
+        "RTX 3060 12GB": 0.0,
+        "RTX 4090 24GB": 0.0,
+        "A100 40GB": 0.9908
+      },
+      "per_class_jobs": {
+        "GTX 1050 2GB": 0,
+        "Tesla T4 16GB": 0,
+        "RTX 3060 12GB": 0,
+        "RTX 4090 24GB": 0,
+        "A100 40GB": 4000
+      },
+      "class_finish": {
+        "0.4GB": 7.2,
+        "6GB": 7.21,
+        "18GB": 7.31
+      }
+    }
+  ]
+}
