@@ -63,6 +63,18 @@ Fifteen hundred cards of five generations, one placement decision. The simulatio
 - [ ] per-class utilisation on the dashboard; total FLOPs hides the idle fleet
 - [ ] 10/25 GbE for the big cards only; 1 GbE stays for the 1050 tier
 
+## M2.7 — group worker (one LAN, one id)
+
+150 machines, 30 % each, managed by an elected controller inside the office:
+
+- 3 564 GFLOP/s allocated, 35 100 node-hours/month
+- internal −149 745 THB, shared +175 032 THB, **hybrid −3 885 THB** (break-even)
+- works offline for internal jobs; only shared work waits for the WAN
+
+- [ ] controller service with join tokens, policy and heartbeat failover
+- [ ] per-department quotas and a Group tab in the app
+- [ ] sandbox before any shared mode is enabled
+
 ## M3 — distributed matrix plane (two hosts, then ten)
 
 - [ ] row-panel sharding of the output, 256-row panels, retry-safe tile ids

@@ -1,0 +1,90 @@
+{
+  "group": {
+    "group_id": "grp_62f17112f8b8",
+    "name": "Office group",
+    "mode": "hybrid",
+    "plan": "yearly",
+    "share_pct": 0.3,
+    "reserve_pct": 0.05,
+    "machines": [
+      {
+        "name": "desktop",
+        "kind": "desktop",
+        "threads": 8,
+        "peak_gflops": 74.0,
+        "profile": {
+          "day": 0.65,
+          "evening": 0.15,
+          "night": 0.1
+        },
+        "nodes": 120
+      },
+      {
+        "name": "server",
+        "kind": "server",
+        "threads": 16,
+        "peak_gflops": 120.0,
+        "profile": {
+          "day": 0.8,
+          "evening": 0.7,
+          "night": 0.6
+        },
+        "nodes": 20
+      },
+      {
+        "name": "laptop",
+        "kind": "laptop",
+        "threads": 8,
+        "peak_gflops": 60.0,
+        "profile": {
+          "day": 0.45,
+          "evening": 0.2,
+          "night": 0.05
+        },
+        "nodes": 10
+      }
+    ]
+  },
+  "rows": [
+    {
+      "machines": 150,
+      "threads": 1360,
+      "peak_gflops": 11880.0,
+      "shared_capacity_gflops": 3564.0,
+      "node_hours_month": 35100.0,
+      "shared_thread_hours_month": 318240.0,
+      "shared_earnings_thb_month": 175032.0,
+      "subscription_thb_month": 149745.0,
+      "net_thb_month": -149745.0,
+      "per_node_month": -998.0,
+      "mode": "internal"
+    },
+    {
+      "machines": 150,
+      "threads": 1360,
+      "peak_gflops": 11880.0,
+      "shared_capacity_gflops": 3564.0,
+      "node_hours_month": 35100.0,
+      "shared_thread_hours_month": 318240.0,
+      "shared_earnings_thb_month": 175032.0,
+      "subscription_thb_month": 149745.0,
+      "net_thb_month": 175032.0,
+      "per_node_month": 1167.0,
+      "mode": "shared"
+    },
+    {
+      "machines": 150,
+      "threads": 1360,
+      "peak_gflops": 11880.0,
+      "shared_capacity_gflops": 3564.0,
+      "node_hours_month": 35100.0,
+      "shared_thread_hours_month": 318240.0,
+      "shared_earnings_thb_month": 175032.0,
+      "subscription_thb_month": 149745.0,
+      "net_thb_month": -3885.0,
+      "per_node_month": -26.0,
+      "mode": "hybrid"
+    }
+  ],
+  "join_token": "grp_fa1a2715b3da3ce112857f07"
+}

@@ -38,6 +38,8 @@ network), a live earnings estimate, the per-install device token and a boot-time
 - Design and platform matrix: [docs/APP_SERVICE.th.md](docs/APP_SERVICE.th.md)
 - Try it: python pasadhi/app/install.py && python pasadhi/app/service.py --port 8765
 - Hardware and per-resource impact (Thai): [docs/RESOURCE_IMPACT.th.md](docs/RESOURCE_IMPACT.th.md)
+- Group worker (100–200 machines, one id, internal/shared/hybrid): [docs/GROUP.th.md](docs/GROUP.th.md)
+
 
 
 ## Layout

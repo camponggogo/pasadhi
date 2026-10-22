@@ -1,0 +1,41 @@
+[
+  {
+    "machines": 150,
+    "threads": 1360,
+    "peak_gflops": 11880.0,
+    "shared_capacity_gflops": 3564.0,
+    "node_hours_month": 35100.0,
+    "shared_thread_hours_month": 318240.0,
+    "shared_earnings_thb_month": 175032.0,
+    "subscription_thb_month": 149745.0,
+    "net_thb_month": -149745.0,
+    "per_node_month": -998.0,
+    "mode": "internal"
+  },
+  {
+    "machines": 150,
+    "threads": 1360,
+    "peak_gflops": 11880.0,
+    "shared_capacity_gflops": 3564.0,
+    "node_hours_month": 35100.0,
+    "shared_thread_hours_month": 318240.0,
+    "shared_earnings_thb_month": 175032.0,
+    "subscription_thb_month": 149745.0,
+    "net_thb_month": 175032.0,
+    "per_node_month": 1167.0,
+    "mode": "shared"
+  },
+  {
+    "machines": 150,
+    "threads": 1360,
+    "peak_gflops": 11880.0,
+    "shared_capacity_gflops": 3564.0,
+    "node_hours_month": 35100.0,
+    "shared_thread_hours_month": 318240.0,
+    "shared_earnings_thb_month": 175032.0,
+    "subscription_thb_month": 149745.0,
+    "net_thb_month": -3885.0,
+    "per_node_month": -26.0,
+    "mode": "hybrid"
+  }
+]
