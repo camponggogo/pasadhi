@@ -80,6 +80,19 @@ Fifteen hundred cards of five generations, one placement decision. The simulatio
 - [ ] block-sparse GEMM for graph and PDE workloads
 - [ ] one CLI: `pasadhi run job.toml`, one dashboard, one quota system (inherited from SUAY)
 
+## M4.5 — token economy (paid pilot stage)
+
+Capacity split 10 % free / 40 % standard / 50 % premium, contribution credits capped at 50 % of the invoice,
+and 10 % of profit into a reserve that backs an internal credit token. Modelled at 1 450 nodes:
+
+- revenue ฿3.39 M/month, credits ฿0.39 M (11.5 %), profit ฿2.04 M (68.1 %)
+- stress: every node contributes 720 h → credits hit the 50 % cap → margin 43.5 %, still positive
+- boot cost ฿0.0017 = 0.08 % of one hour of service, because the machine is already on
+
+- [ ] measure real contribution acceptance (do customers give up the machine at night?)
+- [ ] measure credit breakage before promising the discount in a contract
+- [ ] legal review before any transferable token (Thai digital-asset rules)
+
 ## M5 — the virtual machine
 
 - [ ] one address space across machines: `pasadhi matmul --rows 65536 --cols 65536 --workers 10`

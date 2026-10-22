@@ -55,6 +55,7 @@ We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. T
 
 - Business plan, pricing and unit economics (Thai): [`docs/BUSINESS.th.md`](docs/BUSINESS.th.md)
 - Sales kit: one-pager, deck outline, objections, quote and SOW (Thai): [`docs/SALES_KIT.th.md`](docs/SALES_KIT.th.md)
+- Token economy: credits, layer split and the liquidity reserve (Thai): [`docs/TOKEN_ECONOMY.th.md`](docs/TOKEN_ECONOMY.th.md)
 - Calculator behind every number: `python pasadhi/commercial/pricing.py`
 
 ## GPU layer

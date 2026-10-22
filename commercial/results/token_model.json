@@ -1,0 +1,94 @@
+{
+  "model": {
+    "nodes": 1450,
+    "free_share": 0.1,
+    "standard_share": 0.4,
+    "premium_share": 0.5,
+    "cost_thb_node_month": 551.0,
+    "standard_price_thb": 1490.0,
+    "premium_price_thb": 3490.0,
+    "credit_thb_per_hour": 2.5,
+    "contributed_hours_per_node": 120.0,
+    "redemption_cap": 0.5,
+    "profit_to_reserve": 0.1,
+    "reserve_backing_thb": 1.0,
+    "monthly_opex_thb": 160000.0,
+    "boot_seconds": 45.0,
+    "idle_watts": 12.0,
+    "load_watts": 45.0,
+    "kwh_thb": 4.2
+  },
+  "result": {
+    "nodes": {
+      "free": 145,
+      "standard": 580,
+      "premium": 725
+    },
+    "revenue": {
+      "standard": 864200,
+      "premium": 2530250,
+      "gross": 3394450
+    },
+    "cost": 798950,
+    "opex": 160000,
+    "credits": {
+      "issued_thb": 391500,
+      "redeemed_thb": 391500,
+      "cap_thb": 1697225,
+      "cap_binding": false
+    },
+    "revenue_net": 3002950,
+    "profit_gross": 2044000,
+    "margin_pct": 68.1,
+    "reserve_thb": 204400,
+    "profit_after_reserve": 1839600,
+    "psd_outstanding": 204400.0,
+    "boot": {
+      "cost_thb": 0.0017,
+      "share_of_one_hour": 0.08
+    },
+    "credit_liability_ratio": 0.115
+  },
+  "sweep": [
+    {
+      "hours": 30.0,
+      "redeemed_thb": 97875,
+      "share_of_revenue": 2.9,
+      "cap_binding": false,
+      "profit_gross": 2337625,
+      "margin_pct": 70.9
+    },
+    {
+      "hours": 60.0,
+      "redeemed_thb": 195750,
+      "share_of_revenue": 5.8,
+      "cap_binding": false,
+      "profit_gross": 2239750,
+      "margin_pct": 70.0
+    },
+    {
+      "hours": 120.0,
+      "redeemed_thb": 391500,
+      "share_of_revenue": 11.5,
+      "cap_binding": false,
+      "profit_gross": 2044000,
+      "margin_pct": 68.1
+    },
+    {
+      "hours": 240.0,
+      "redeemed_thb": 783000,
+      "share_of_revenue": 23.1,
+      "cap_binding": false,
+      "profit_gross": 1652500,
+      "margin_pct": 63.3
+    },
+    {
+      "hours": 360.0,
+      "redeemed_thb": 1174500,
+      "share_of_revenue": 34.6,
+      "cap_binding": false,
+      "profit_gross": 1261000,
+      "margin_pct": 56.8
+    }
+  ]
+}
