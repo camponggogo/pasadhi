@@ -1,0 +1,64 @@
+# PASADHI roadmap
+
+Hardware target: Haswell-era office PCs (4c/8t, 8–16 GB RAM, SATA SSD), one 1 GbE switch, no GPU.
+Every milestone ends with a number, a figure and a "what did not work" paragraph.
+
+## M0 — the baseline (done, 2026-10-22)
+
+- [x] f32 GEMM baseline via BLAS: **58–74 GFLOP/s** on the i7-8550U
+- [x] explicit tiling and int8 quantised GEMM, both **slower** than BLAS (7–11 and 1.2 GFLOP/s)
+- [x] thread scaling 1 → 8: 38 / 59 / 83 / 78 GFLOP/s, sweet spot at four threads
+- [x] multi-layer process pipeline with back-pressure, measured against a single loop: **0.26–0.55×**
+- [x] harness writes `bench/results/summary.json` and one white figure
+
+Exit criterion: a reproducible baseline that any later claim is measured against. Met.
+
+## M1 — a packed int8 kernel in C (next)
+
+The numpy fallback at 1.2 GFLOP/s is the largest single opportunity: AVX2 `vpmaddubsw` + `vpmaddwd` with 6×16
+blocking should reach **25–45 GFLOP/s** on this part, a 20–35× gain over the fallback and 3–5× the f32 BLAS path
+for the same accuracy budget.
+
+- [ ] C kernel + ctypes binding, `-O3 -mavx2 -mfma`
+- [ ] pack/quantise once per weight, reuse across items
+- [ ] correctness gate: max relative error ≤ 1.5 % against f32 on 2 048² random matrices
+- [ ] benchmark at 256/512/1024/2048 and publish the roofline against DDR4 bandwidth
+
+## M2 — shared memory transport (on-host)
+
+The pipeline loses because every hop pickles 256 KB. Replace `mp.Queue` with a ring buffer in
+`multiprocessing.shared_memory` for arrays above 64 KiB.
+
+- [ ] zero-copy handoff for same-host layers
+- [ ] target: pipeline ≥ 1.5× the single loop at 512² blocks
+- [ ] fallback to pickling below the threshold, with the crossover point measured, not guessed
+
+## M3 — distributed matrix plane (two hosts, then ten)
+
+- [ ] row-panel sharding of the output, 256-row panels, retry-safe tile ids
+- [ ] length-prefixed TCP frames, 4 MiB cap, checksum per frame
+- [ ] coordinator never materialises the full output
+- [ ] measure: GFLOP/s per machine, end-to-end latency, recovery time after killing a worker mid-panel
+- [ ] target: 10 machines × 40 GFLOP/s int8 ≈ **350–400 GFLOP/s** aggregate on 1 GbE (bandwidth budget: a
+      1 024² f32 panel is 4 MiB, so a 4 MiB/s link caps at ~1 panel per second — the arithmetic has to be
+      checked before the claim)
+
+## M4 — workloads beyond AI
+
+- [ ] convolution as GEMM (im2col) — image filters on old hardware
+- [ ] FFT as GEMM for small transforms; direct FFT above 4 096 points
+- [ ] block-sparse GEMM for graph and PDE workloads
+- [ ] one CLI: `pasadhi run job.toml`, one dashboard, one quota system (inherited from SUAY)
+
+## M5 — the virtual machine
+
+- [ ] one address space across machines: `pasadhi matmul --rows 65536 --cols 65536 --workers 10`
+- [ ] placement aware of RAM, current load and link speed
+- [ ] checkpoint the tile graph so a reboot costs minutes, not the job
+- [ ] publish a paper: "Matrix-first virtual machines on hardware that was written off"
+
+## Rules for every milestone
+
+1. A number without a host name and a date is not a number.
+2. Keep the failed configurations in the repository; they are the documentation.
+3. If a layer cannot be measured in isolation, it is not a layer yet.

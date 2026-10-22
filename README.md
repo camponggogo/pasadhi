@@ -1,0 +1,49 @@
+# PASADHI · ปัสสัทธิ
+
+**A virtual distributed machine for old hardware.** PASADHI turns a room of ageing PCs into one addressable
+compute surface — matrix-first, process-layered, and honest about what each generation of CPU can actually do.
+
+> Status: **M0 prototype**. Kernel and pipeline benchmarks run on one host. The distributed plane is specified,
+> not yet implemented. Numbers below are measured on the development machine (i7-8550U, 4 cores / 8 threads).
+
+## Why
+
+Cloud GPUs are rented by the hour. Offices already own machines that idle for sixteen hours a day. SUAY proved
+the control-plane half of that idea: a token gateway, a node plane, prefix caching, expert routing. PASADHI takes
+the half that matters for compute: **the kernel, the pipeline and the scheduler** — and it is not only for LLMs.
+
+## The three ideas
+
+1. **Matrix processor first.** Everything is a matrix operation: dense GEMM, quantised GEMM, block-sparse,
+   FFT-as-GEMM, convolution-as-GEMM. One optimised path, many workloads.
+2. **Multi-Layer Process.** Work is split into layers (L1 transport, L2 policy, L3 scheduler, L4 kernel,
+   L5 storage). Each layer is a process group with its own queue, so a slow layer degrades gracefully instead
+   of stalling the machine.
+3. **Old hardware is the target, not the excuse.** Haswell-era AVX2, 2–8 GB of usable RAM per box, SATA disks.
+   The design budgets for it: int8 before fp32, blocking before threads, streaming before caching.
+
+## Quick start
+
+```bash
+python pasadhi/bench/run.py            # kernel + pipeline benchmarks, writes bench/results/*.json
+python pasadhi/bench/run.py --quick    # smaller sizes
+```
+
+## Layout
+
+```
+pasadhi/
+  core/matrix.py      blocked / quantised GEMM kernels
+  core/layers.py      multi-process layer pipeline with back-pressure
+  bench/run.py        the harness that produces every number in docs/
+  docs/ARCHITECTURE.md
+  docs/ROADMAP.md
+```
+
+## Provenance
+
+PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement
+discipline — medians, p95, negative results kept in — and replaces the AI-only framing with a general
+matrix-compute plane. Code is MIT; see `LICENSE`.
+
+Named after *ปัสสัทธิ* — calm, settled, at rest. The machine should be quiet and the numbers should be boring.

@@ -1,0 +1,81 @@
+{
+  "host": {
+    "cpu": "Intel Core i7-8550U (4 cores / 8 threads)",
+    "numpy": "2.5.4",
+    "visible_cpus": 8
+  },
+  "kernels": [
+    {
+      "size": 256,
+      "f32_gflops": 57.91,
+      "blocked_gflops": 10.74,
+      "int8_gflops": 1.21,
+      "blocked_rel_error": 1e-06,
+      "int8_mean_rel_error": 0.0098
+    },
+    {
+      "size": 512,
+      "f32_gflops": 74.1,
+      "blocked_gflops": 7.15,
+      "int8_gflops": 1.24,
+      "blocked_rel_error": 1e-06,
+      "int8_mean_rel_error": 0.0105
+    },
+    {
+      "size": 1024,
+      "f32_gflops": 74.23,
+      "blocked_gflops": 8.34,
+      "int8_gflops": 1.23,
+      "blocked_rel_error": 0.0,
+      "int8_mean_rel_error": 0.0111
+    }
+  ],
+  "threads": [
+    {
+      "size": 1024,
+      "gflops": 38.06,
+      "threads": 1
+    },
+    {
+      "size": 1024,
+      "gflops": 59.01,
+      "threads": 2
+    },
+    {
+      "size": 1024,
+      "gflops": 83.26,
+      "threads": 4
+    },
+    {
+      "size": 1024,
+      "gflops": 78.41,
+      "threads": 8
+    }
+  ],
+  "pipeline": [
+    {
+      "stages": 1,
+      "sequential_rps": 761.63,
+      "pipeline_rps": 293.94,
+      "sequential_ms": 1.31,
+      "pipeline_ms": 3.4,
+      "speedup": 0.39
+    },
+    {
+      "stages": 2,
+      "sequential_rps": 771.31,
+      "pipeline_rps": 203.46,
+      "sequential_ms": 1.3,
+      "pipeline_ms": 4.91,
+      "speedup": 0.26
+    },
+    {
+      "stages": 3,
+      "sequential_rps": 415.75,
+      "pipeline_rps": 227.07,
+      "sequential_ms": 2.41,
+      "pipeline_ms": 4.4,
+      "speedup": 0.55
+    }
+  ]
+}
