@@ -6,7 +6,12 @@ for a reference machine and scales linearly with what the user actually offers.
 """
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass, asdict
+from pathlib import Path
+
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 REFERENCE = {'cores': 4, 'ram_gb': 8, 'disk_gb': 64, 'mbps': 100, 'gpu': 0.0}
 REFERENCE_HOURLY_THB = 2.5
@@ -55,19 +60,28 @@ def limits(share: Share, cores: int, ram_gb: float, disk_free_gb: float, mbps: f
 
 def hourly_earnings(share: Share, cores: int, ram_gb: float, disk_free_gb: float, mbps: float,
                     vram_gb: float = 0.0) -> dict:
-    lim = limits(share, cores, ram_gb, disk_free_gb, mbps, vram_gb)
-    cpu = lim['cpu_cores'] * RATE_PER_CORE_H
-    ram = lim['ram_gb'] * RATE_PER_GB_RAM_H
-    gpu = (lim['gpu_hours_share'] * RATE_PER_GPU_HOUR * max(1.0, vram_gb / 2)) if share.gpu_pct else 0.0
-    disk = lim['disk_gb'] * (RATE_PER_GB_DISK_MONTH / 730) if lim['disk_gb'] else 0.0
-    net = lim['mbps'] * 3600 / 8 / 1024 * (share.network_pct / 100) * 0  # traffic is metered on delivery
-    net = 0.0
-    total = cpu + ram + gpu + disk + net
+    """Payout follows the measured impact of each resource (`app/impact.py`), not a flat rate."""
+    from pasadhi.app import impact
+
+    result = impact.node_value(
+        impact.Share(cpu_pct=share.cpu_pct, gpu_pct=share.gpu_pct, ram_pct=share.ram_pct,
+                     disk_pct=share.disk_pct, network_pct=share.network_pct),
+        threads=cores, ram_gb=ram_gb, vram_gb=vram_gb * (share.gpu_pct / 100))
+    pool = result['detail']['cpu_pool_thb']
+    contribution = result['contribution']
     return {
-        'hourly_thb': round(total, 3),
-        'daily_thb': round(total * 24, 2),
-        'monthly_thb': round(total * 24 * 30, 0),
-        'breakdown': {'cpu': round(cpu, 3), 'ram': round(ram, 3), 'gpu': round(gpu, 3), 'disk': round(disk, 3)},
+        'hourly_thb': result['hourly_thb'],
+        'daily_thb': result['daily_thb'],
+        'monthly_thb': result['monthly_thb'],
+        'breakdown': {
+            'cpu': round(contribution['CPU'] * pool, 3),
+            'ram': round(contribution['RAM'] * pool, 3),
+            'gpu': result['detail']['gpu_part'],
+            'disk': round(contribution['DISK'] * pool, 3),
+            'net': round(contribution['NET'] * pool, 3),
+        },
+        'weights': result['weights'],
+        'weighted_fraction': result['weighted_fraction'],
     }
 
 

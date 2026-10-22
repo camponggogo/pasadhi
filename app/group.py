@@ -15,6 +15,12 @@ import argparse
 import hashlib
 import json
 import secrets
+import sys
+from pathlib import Path
+
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 
@@ -58,54 +64,66 @@ class Group:
 BANDS = {'day': (9, 18), 'evening': (18, 24), 'night': (0, 9)}
 
 
-def node_hours_available(group: Group, days=30, weekday_ratio=0.73) -> dict:
-    """How many node-hours per month can actually be shared, given each machine's own utilisation."""
-    total = {'day': 0.0, 'evening': 0.0, 'night': 0.0}
+def machine_hours_month(group: Group, days=30) -> list:
+    """Usable hours per machine type per month, honouring each machine's own utilisation."""
+    weekday_days, weekend_days = 22, 8
+    rows = []
     for machine in group.machines:
+        hours = 0.0
         for band, (start, end) in BANDS.items():
-            hours = end - start
-            utilisation = machine.profile[band]
-            usable = max(0.0, min(group.share_pct, 1.0 - utilisation))
-            total[band] += usable * hours * machine.nodes
+            span = end - start
+            usable = max(0.0, min(group.share_pct, 1.0 - machine.profile[band]))
+            weekday = span if band != 'night' else 24  # night band is charged daily below
+            if band == 'night':
+                hours += usable * span * days
+            else:
+                hours += usable * span * weekday_days + usable * span * weekend_days
+        rows.append({'machine': machine, 'hours_month': hours * machine.nodes})
+    return rows
 
-    weekday_hours = total['day'] * 22 + total['evening'] * 22 + total['night'] * 30
-    weekend_hours = total['day'] * 8 + total['evening'] * 8 + total['night'] * 8
-    month_hours = weekday_hours + weekend_hours
-    return {'band_hours_per_day': {k: round(v, 1) for k, v in total.items()},
-            'node_hours_month': round(month_hours, 0),
-            'thread_hours_month': round(month_hours * (sum(m.threads * m.nodes for m in group.machines)
-                                                       / max(1, sum(m.nodes for m in group.machines))), 0)}
+
+def node_hours_available(group: Group, days=30) -> dict:
+    rows = machine_hours_month(group, days)
+    total = sum(row['hours_month'] for row in rows)
+    threads = sum(m.threads * m.nodes for m in group.machines)
+    machines = sum(m.nodes for m in group.machines)
+    return {'node_hours_month': round(total, 0),
+            'thread_hours_month': round(total * (threads / max(1, machines)), 0)}
 
 
 def economics(group: Group) -> dict:
+    from pasadhi.app import impact
+
     totals = group.totals()
-    hours = node_hours_available(group)
-    threads_per_node = totals['threads'] / max(1, totals['machines'])
-    shared_thread_hours = hours['node_hours_month'] * threads_per_node
+    rows = machine_hours_month(group)
+    shared = 0.0
+    for row in rows:
+        machine = row['machine']
+        result = impact.node_value(
+            impact.Share(cpu_pct=int(group.share_pct * 100), gpu_pct=0, ram_pct=int(group.share_pct * 100),
+                         disk_pct=int(group.share_pct * 100), network_pct=int(group.share_pct * 100)),
+            threads=machine.threads, ram_gb=32.0, vram_gb=0.0)
+        shared += row['hours_month'] * result['hourly_thb']
 
-    shared_earnings = shared_thread_hours * RATE_PER_CORE_HOUR_THB
-
-    list_price = LIST_PRICE_THB * (1 - GROUP_DISCOUNT) if group.plan != 'premium' else PREMIUM_PRICE_THB * (1 - GROUP_DISCOUNT * 0.5)
+    list_price = (LIST_PRICE_THB * (1 - GROUP_DISCOUNT) if group.plan != 'premium'
+                  else PREMIUM_PRICE_THB * (1 - GROUP_DISCOUNT * 0.5))
     subscription = list_price * totals['machines']
 
     if group.mode == 'internal':
         net = -subscription
     elif group.mode == 'shared':
-        net = shared_earnings
+        net = shared
     else:
         reserved = group.reserve_pct / max(group.share_pct, 1e-9)
-        net = shared_earnings * (1 - reserved) - subscription
-
-    capacity_gflops = totals['peak_gflops'] * group.share_pct
+        net = shared * (1 - reserved) - subscription
 
     return {
         'machines': totals['machines'],
         'threads': totals['threads'],
         'peak_gflops': totals['peak_gflops'],
-        'shared_capacity_gflops': round(capacity_gflops, 1),
-        'node_hours_month': hours['node_hours_month'],
-        'shared_thread_hours_month': round(shared_thread_hours, 0),
-        'shared_earnings_thb_month': round(shared_earnings, 0),
+        'shared_capacity_gflops': round(totals['peak_gflops'] * group.share_pct, 1),
+        'node_hours_month': node_hours_available(group)['node_hours_month'],
+        'shared_earnings_thb_month': round(shared, 0),
         'subscription_thb_month': round(subscription, 0),
         'net_thb_month': round(net, 0),
         'per_node_month': round(net / totals['machines'], 0),

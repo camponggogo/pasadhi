@@ -1,6 +1,6 @@
 {
   "group": {
-    "group_id": "grp_62f17112f8b8",
+    "group_id": "grp_7799119b1b31",
     "name": "Office group",
     "mode": "hybrid",
     "plan": "yearly",
@@ -51,9 +51,8 @@
       "threads": 1360,
       "peak_gflops": 11880.0,
       "shared_capacity_gflops": 3564.0,
-      "node_hours_month": 35100.0,
-      "shared_thread_hours_month": 318240.0,
-      "shared_earnings_thb_month": 175032.0,
+      "node_hours_month": 31860.0,
+      "shared_earnings_thb_month": 53460.0,
       "subscription_thb_month": 149745.0,
       "net_thb_month": -149745.0,
       "per_node_month": -998.0,
@@ -64,12 +63,11 @@
       "threads": 1360,
       "peak_gflops": 11880.0,
       "shared_capacity_gflops": 3564.0,
-      "node_hours_month": 35100.0,
-      "shared_thread_hours_month": 318240.0,
-      "shared_earnings_thb_month": 175032.0,
+      "node_hours_month": 31860.0,
+      "shared_earnings_thb_month": 53460.0,
       "subscription_thb_month": 149745.0,
-      "net_thb_month": 175032.0,
-      "per_node_month": 1167.0,
+      "net_thb_month": 53460.0,
+      "per_node_month": 356.0,
       "mode": "shared"
     },
     {
@@ -77,14 +75,13 @@
       "threads": 1360,
       "peak_gflops": 11880.0,
       "shared_capacity_gflops": 3564.0,
-      "node_hours_month": 35100.0,
-      "shared_thread_hours_month": 318240.0,
-      "shared_earnings_thb_month": 175032.0,
+      "node_hours_month": 31860.0,
+      "shared_earnings_thb_month": 53460.0,
       "subscription_thb_month": 149745.0,
-      "net_thb_month": -3885.0,
-      "per_node_month": -26.0,
+      "net_thb_month": -105195.0,
+      "per_node_month": -701.0,
       "mode": "hybrid"
     }
   ],
-  "join_token": "grp_fa1a2715b3da3ce112857f07"
+  "join_token": "grp_b6e80de3e5dfffabe33b3ca8"
 }

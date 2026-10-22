@@ -1,0 +1,32 @@
+[
+  {
+    "share": 0.2,
+    "earnings": 24480.0,
+    "per_node": 163
+  },
+  {
+    "share": 0.3,
+    "earnings": 53460.0,
+    "per_node": 356
+  },
+  {
+    "share": 0.5,
+    "earnings": 126450.0,
+    "per_node": 843
+  },
+  {
+    "share": 0.7,
+    "earnings": 218452.0,
+    "per_node": 1456
+  },
+  {
+    "share": 0.9,
+    "earnings": 327848.0,
+    "per_node": 2186
+  },
+  {
+    "share": 1.0,
+    "earnings": 364950.0,
+    "per_node": 2433
+  }
+]
