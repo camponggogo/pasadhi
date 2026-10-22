@@ -1,3 +1,5 @@
+<p align="center"><img src="brand/logo-light-transparent.png" alt="PASADHI brain network logo" width="280"></p>
+
 # PASADHI · ปัสสัทธิ
 
 **A virtual distributed machine for old hardware.** PASADHI turns a room of ageing PCs into one addressable
@@ -44,6 +46,21 @@ paper sits on a white background. The landing page with the same downloads:
 [campong.online/projects/pasadhi](https://campong.online/projects/pasadhi/).
 
 ## Quick start
+
+### Release downloads · v0.1.0
+
+| OS | Download | Requirements |
+|---|---|---|
+| Windows x64 | [Standalone app](web/download/PASADHI-0.1.0-windows.zip) | Unzip, run `PASADHI.bat`; Python included |
+| Linux | [Python bundle](web/download/PASADHI-0.1.0-linux.tar.gz) | Python 3.10+; run `sh pasadhi.sh` |
+| macOS | [Python bundle](web/download/PASADHI-0.1.0-macos.tar.gz) | Python 3.10+; run `sh PASADHI.command` |
+| Android | [Termux bundle](web/download/PASADHI-0.1.0-android-termux.zip) | Termux + Python; run `bash pasadhi.sh`; not an APK |
+| Source | [Source archive](web/download/PASADHI-0.1.0-source.zip) | Python 3.10+ |
+
+See each archive's `README.txt` for dependency installation. Builds are unsigned.
+[SHA-256 checksums](web/download/SHA256SUMS.txt) · [Release manifest](web/download/release.json).
+Windows startup is tested using the packaged executable; the Python bundles are startup-tested on Windows.
+Native Linux, macOS and Android builds and device testing remain pending.
 
 ```bash
 python bench/run.py            # kernel + pipeline benchmarks, writes bench/results/*.json
@@ -171,3 +188,21 @@ discipline — medians, p95, negative results kept in — and replaces the AI-on
 matrix-compute plane. The 2026-10-20 → 10-21 entries above are that evidence base. Code is MIT; see `LICENSE`.
 
 Named after *ปัสสัทธิ* — calm, settled, at rest. The machine should be quiet and the numbers should be boring.
+
+## Download · release and latest
+
+**Release: v0.1.0 · Latest: v0.1.0.** Versioned links stay fixed; latest links follow the newest published build.
+Downloads below are included in this repository and staged for the website; the website update has not been deployed.
+
+| OS | Release v0.1.0 | Latest | How to run |
+|---|---|---|---|
+| Windows x64 | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-windows.zip) | [Latest ZIP](web/download/latest/PASADHI-windows.zip) | Unzip and run `PASADHI.bat`; standalone EXE, Python included |
+| Linux | [Download tar.gz](web/download/v0.1.0/PASADHI-0.1.0-linux.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-linux.tar.gz) | Python 3.10+; `sh pasadhi.sh` |
+| macOS | [Download tar.gz](web/download/v0.1.0/PASADHI-0.1.0-macos.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-macos.tar.gz) | Python 3.10+; `sh PASADHI.command` |
+| Android / Termux | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-android-termux.zip) | [Latest ZIP](web/download/latest/PASADHI-android-termux.zip) | Termux + Python; `bash pasadhi.sh`; not an APK |
+| Source | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-source.zip) | [Latest ZIP](web/download/latest/PASADHI-source.zip) | Python 3.10+; instructions in `README.txt` |
+
+[Release checksums](web/download/v0.1.0/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) ·
+[Release manifest](web/download/v0.1.0/release.json) · [Latest version manifest](web/download/latest/release.json).
+
+The website and White Papers use bundled open-source fonts; see [font licenses](web/fonts/README.md).

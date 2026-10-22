@@ -1,0 +1,161 @@
+{
+  "status": "Founder planning proposal, not forecast or approved spend",
+  "runway_months": 24,
+  "raise_usd": 750000,
+  "operating_budget_usd": 637500,
+  "contingency_usd": 112500,
+  "monthly_operating_budget_usd": 26562.5,
+  "budget": [
+    {
+      "use": "Engineering",
+      "amount": 337500,
+      "percent": 45,
+      "outcome": "Kernel, scheduler, two-host recovery; planned roles, not existing headcount"
+    },
+    {
+      "use": "Pilot delivery + QA",
+      "amount": 112500,
+      "percent": 15,
+      "outcome": "Test hardware, rollout, workload benchmarks and recovery verification"
+    },
+    {
+      "use": "Customer discovery + sales",
+      "amount": 112500,
+      "percent": 15,
+      "outcome": "Interviews, qualified pipeline and paid pilot conversion"
+    },
+    {
+      "use": "Security + legal + operations",
+      "amount": 75000,
+      "percent": 10,
+      "outcome": "Data controls, contracts, IP and release operations"
+    },
+    {
+      "use": "Contingency",
+      "amount": 112500,
+      "percent": 15,
+      "outcome": "15% buffer; release only against milestone review"
+    }
+  ],
+  "price_per_node_month_usd": 44.28,
+  "direct_cost_per_node_month_usd": 16.37,
+  "post_runway_fixed_cost_usd_month": 24000,
+  "nodes_per_site": 50,
+  "break_even_nodes": 860,
+  "break_even_sites_rounded_up": 18,
+  "scenarios": [
+    {
+      "name": "Downside",
+      "sites": 5,
+      "nodes": 250,
+      "mrr": 11070.0,
+      "direct_cost": 4092.5,
+      "fixed_cost": 24000,
+      "operating_profit": -17022.5
+    },
+    {
+      "name": "Base",
+      "sites": 10,
+      "nodes": 500,
+      "mrr": 22140.0,
+      "direct_cost": 8185.0,
+      "fixed_cost": 24000,
+      "operating_profit": -10045.0
+    },
+    {
+      "name": "Profit gate",
+      "sites": 18,
+      "nodes": 900,
+      "mrr": 39852.0,
+      "direct_cost": 14733.0,
+      "fixed_cost": 24000,
+      "operating_profit": 1119.0
+    },
+    {
+      "name": "Expansion",
+      "sites": 25,
+      "nodes": 1250,
+      "mrr": 55350.0,
+      "direct_cost": 20462.5,
+      "fixed_cost": 24000,
+      "operating_profit": 10887.5
+    }
+  ],
+  "broad_cloud_revenue_usd_ttm": 500000000000,
+  "market_source": "https://www.srgresearch.com/articles/q2-cloud-market-passes-143-billion-highest-growth-rate-in-eight-years",
+  "market_cap_snapshot_usd": 5124000000000,
+  "market_cap_source": "https://companiesmarketcap.com/nvidia/marketcap/",
+  "market_cap_accessed": "2026-10-23",
+  "usd_fx_local_per_usd": 33.65,
+  "profit_gate_arr_usd": 478224.0,
+  "profit_gate_share_of_broad_spending_percent": 9.56448e-05,
+  "assumptions": [
+    "No validated conversion rate or probability of success is available.",
+    "MRR requires active paying nodes; contracted backlog and pilots are not MRR.",
+    "A node cost is an inherited model allocation, not a supplier quote.",
+    "Month-six fixed cost falls to $24k; this requires an explicit lean staffing/operations plan.",
+    "Operating profit excludes taxes, financing and exceptional costs.",
+    "Pilot fees are credited to year one and are not counted again as recurring revenue.",
+    "If the base case holds, follow-on funding, stronger sales or cost reductions are required."
+  ],
+  "proposed_instrument": "Post-money valuation-cap SAFE; subject to jurisdiction and legal review",
+  "illustrative_post_money_cap_usd": 5000000,
+  "illustrative_ownership_sold_percent": 15,
+  "financing_status": "Negotiation scenario, not a valuation appraisal or an executed offer",
+  "milestone_gates": [
+    {
+      "months": "1\u20135",
+      "evidence": "15 interviews, three design-partner targets, two paid-pilot targets, two/ten-host recovery tests"
+    },
+    {
+      "months": "6\u201312",
+      "evidence": "Validate paid retention, support cost and one repeatable workload; target ten paid sites"
+    },
+    {
+      "months": "13\u201318",
+      "evidence": "Target eighteen paid sites and verify lean unit economics; review next-round readiness"
+    },
+    {
+      "months": "19\u201324",
+      "evidence": "Repeatable renewals and sales; stretch twenty-five sites; preserve fundraising optionality"
+    }
+  ],
+  "dilution_sensitivity": [
+    {
+      "post_money_cap_usd": 3750000,
+      "raise_usd": 750000,
+      "ownership_sold_percent": 20.0
+    },
+    {
+      "post_money_cap_usd": 5000000,
+      "raise_usd": 750000,
+      "ownership_sold_percent": 15.0
+    },
+    {
+      "post_money_cap_usd": 7500000,
+      "raise_usd": 750000,
+      "ownership_sold_percent": 10.0
+    }
+  ],
+  "delivery_milestone_months": 5,
+  "staged_operating_cost_usd": 626000,
+  "one_off_delivery_reserve_usd": 11500,
+  "monthly_cost_schedule": [
+    {
+      "months": "1\u20135",
+      "count": 5,
+      "monthly_fixed_cost_usd": 34000
+    },
+    {
+      "months": "6\u201324",
+      "count": 19,
+      "monthly_fixed_cost_usd": 24000
+    }
+  ],
+  "runway_sources": [
+    "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+    "https://carta.com/uk/en/learn/startups/fundraising/",
+    "https://www.crv.com/content/when-to-raise-series-a"
+  ],
+  "alternative_18_month_raise_usd": 600000
+}

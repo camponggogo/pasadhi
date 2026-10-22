@@ -1,3 +1,5 @@
+<img src="../brand/logo-light-transparent.png" alt="PASADHI brain network logo" width="240">
+
 # PASADHI: a matrix-first pool built from the machines you already own
 
 **Full paper · v1.1 · 23 October 2026** · PASADHI contributors · MIT for the open core
@@ -5,6 +7,8 @@
 **Companion to the solution paper.** This volume carries the whole evidence base: every experiment, every
 figure, the installation procedure, the price model and the limits. Numbers are reported as measured; where a
 figure is a model rather than a measurement, the caption says so.
+
+**Currency:** All prices and monetary amounts are in US dollars ($). Original local-currency amounts are divided by 33.65, using the [Bank of Thailand reference rate for 22 October 2026](https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?language=eng&reportID=123). This is a reporting-currency conversion; model assumptions, margins and performance ratios are unchanged.
 
 ## Abstract
 
@@ -20,8 +24,8 @@ queueing above a 174 ms service floor; a prefix cache takes an 8 000-token docum
 (**157×**, 88.2 % reuse); a document router reaches **90.15 %** at 31.5 µs; separating the node plane raises
 heartbeat capacity from 44 to **161 req/s** per shard. Modelled fleets: 1 000 GTX 1050 cards give **1.30 PFLOPS**
 f32 independent but only **0.16 PFLOPS** sharded over 1 GbE (8.5 %); 1 450 mixed cards give **9.54 PFLOPS**
-f32 and **47.7 POPS** int8 in 143.5 kW; used hardware costs **฿0.016/TFLOP** against ฿0.028 for cloud CPU and
-฿0.001 for a rented A100; the token economy clears **68.1 %** gross margin at fleet scale and **43.5 %** under a
+f32 and **47.7 POPS** int8 in 143.5 kW; used hardware costs **$0.00047548/TFLOP** against $0.0008321 for cloud CPU and
+$0.00002972 for a rented A100; the token economy clears **68.1 %** gross margin at fleet scale and **43.5 %** under a
 720-hour stress case.
 
 ## 1. Introduction
@@ -275,7 +279,7 @@ versus 274 ms; delivery decay 0.0085 with a 0.35 floor; the ceiling arrives at 3
 ![](report/growth/figures/fig38_complexity_classes.png)
 
 **Figure 29.** Eight classes: O(1) 5.94 µs, O(log n) 7.34 µs, O(n) 500 → 15.70 ms, O(2n) 1 000, O(n log n) 794 →
-3.52 ms, O(n²) 5 000 → 22.166 ms, O(cⁿ)/O(nⁿ) 20 000 → 88.662 ms; dispatch 160 → 8 008 ms; ฿1.77–88.66 per
+3.52 ms, O(n²) 5 000 → 22.166 ms, O(cⁿ)/O(nⁿ) 20 000 → 88.662 ms; dispatch 160 → 8 008 ms; $0.0526–$2.63 per
 million calls. Modelled.
 
 ### 7.10 CPU share and throttling
@@ -323,13 +327,13 @@ local wins on both latency and cost at this scale. Measured.
 
 **Figure 37.** 1 000 × GTX 1050: **1.30 PFLOPS** f32 and **2.60 POPS** int8 independent; sharded over 1 GbE only
 **0.16 PFLOPS** (8.5 %), over 10 GbE 0.89 (48 %), int8 10 GbE 2.41 POPS (64.9 %). Crossover at 177 484 / 17 748
-machines f32 and 88 647 / 8 865 int8. VRAM square 15 543 (f32) and 31 086 (int8). ฿0.0003/TFLOP-hour at cost,
-฿0.0010 at 70 %. Modelled.
+machines f32 and 88 647 / 8 865 int8. VRAM square 15 543 (f32) and 31 086 (int8). $0.00000892/TFLOP-hour at cost,
+$0.00002972 at 70 %. Modelled.
 
 ![](pasadhi/bench/results/fig03_hetero_fleet.png)
 
 **Figure 38.** 1 450 cards, five models: **9.54 PFLOPS** f32, **47.7 POPS** int8, 143.5 kW, 8.9 TB VRAM,
-66.5 GFLOP/W, ฿22.6 M capital, ฿0.00007/TFLOP. A 35 GB job (2 %) pins the A100 at 92 % and equalises makespan at
+66.5 GFLOP/W, $671,619.61 capital, $0.00000208/TFLOP. A 35 GB job (2 %) pins the A100 at 92 % and equalises makespan at
 **13.19 s** for every policy; once huge jobs are excluded, best_fit wins at **0.38 s** against 7.31 s for
 worst_fit. Modelled.
 
@@ -340,21 +344,21 @@ GPU 42.2. Measured.
 
 ### 7.14 Cost and the token economy
 
-![](pasadhi/commercial/results/fig01_cost_per_tflop.png)
+![](pasadhi/paper/figures/usd/fig01_cost_per_tflop.png)
 
-**Figure 40.** ฿0.016/TFLOP for an owned node at 60 % duty (฿12 000 over 36 months, 45 W, ฿4.2/kWh, 74 GFLOP/s)
-against ฿0.028 for cloud CPU and ฿0.001 for a rented A100: 1.8× cheaper than CPU, 17× dearer than GPU. Modelled.
+**Figure 40.** $0.00047548/TFLOP for an owned node at 60 % duty ($356.61 over 36 months, 45 W, $0.1248/kWh, 74 GFLOP/s)
+against $0.0008321 for cloud CPU and $0.00002972 for a rented A100: 1.8× cheaper than CPU, 17× dearer than GPU. Modelled.
 
-![](pasadhi/commercial/results/fig04_token_economy.png)
+![](pasadhi/paper/figures/usd/fig04_token_economy.png)
 
-**Figure 41.** 1 450 machines: revenue ฿3 394 450, credits 391 500 (11.5 %), machine cost 798 950, opex 160 000,
-profit **฿2 044 000 (68.1 %)**, reserve 204 400; at 720 h per machine credits cap at 1 697 225 and margin falls
+**Figure 41.** 1 450 machines: revenue $100,875.19, credits $11,634.47 (11.5 %), machine cost $23,742.94, opex $4,754.83,
+profit **$60,742.94 (68.1 %)**, reserve $6,074.29; at 720 h per machine credits cap at $50,437.59 and margin falls
 to **43.5 %**. Modelled.
 
-![](pasadhi/bench/results/fig07_group.png)
+![](pasadhi/paper/figures/usd/fig07_group.png)
 
-**Figure 42.** A 150-machine group at 30 %: 3 564 GFLOP/s and 31 860 node-hours; internal use −฿149 745, shared
-+฿53 460, hybrid −฿105 195; break-even ≈60 % share or ≈฿350 per machine. Modelled.
+**Figure 42.** A 150-machine group at 30 %: 3 564 GFLOP/s and 31 860 node-hours; internal use −$4,450.07, shared
++$1,588.71, hybrid −$3,126.15; break-even ≈60 % share or ≈$10.40 per machine. Modelled.
 
 ### 7.15 Orbits and the link budget
 
@@ -393,17 +397,17 @@ residency and price stability. Modelled.
 
 | Item | Value | Note |
 |---|---:|---|
-| Cost per machine per month | ฿551 | power, amortisation, support |
-| Price at 70 % margin | ฿1 838 | per machine, monthly |
-| Annual contract | ฿22 052 | per machine |
-| Node cost per TFLOP | ฿0.016 | 60 % duty |
-| Cloud CPU reference | ฿0.028 | 4 vCPU equivalent |
-| Cloud A100 reference | ฿0.001 | per delivered TFLOP |
-| Credit issued | 2.5 ฿/node-hour | 10 % reserve |
+| Cost per machine per month | $16.37 | power, amortisation, support |
+| Price at 70 % margin | $54.62 | per machine, monthly |
+| Annual contract | $655.33 | per machine |
+| Node cost per TFLOP | $0.00047548 | 60 % duty |
+| Cloud CPU reference | $0.0008321 | 4 vCPU equivalent |
+| Cloud A100 reference | $0.00002972 | per delivered TFLOP |
+| Credit issued | $0.0743/node-hour | 10 % reserve |
 
-Contributors are paid in credits at 2.5 THB per node-hour, capped by a 10 % reserve. A group that shares 30 %
-of 150 machines earns 53 460 THB against a 149 745 THB subscription, so the honest advice is: share ≈60 %, or
-price the group at ≈350 THB per machine.
+Contributors are paid in credits at $0.0743 per node-hour, capped by a 10 % reserve. A group that shares 30 %
+of 150 machines earns $1,588.71 against a $4,450.07 subscription, so the honest advice is: share ≈60 %, or
+price the group at ≈$10.40 per machine.
 
 ## 9. Threats to validity
 
@@ -440,7 +444,7 @@ group controller, and a public network with redundant execution and spot checks.
 | GPU fleet 1.30 PFLOPS / 0.16 sharded | `pasadhi/core/gpu.py`, fig02 |
 | Hetero 9.54 PFLOPS / 47.7 POPS / 143.5 kW | `pasadhi/core/hetero.py`, fig03 |
 | Impact weights 98 / 0.4 / 1.0 / 0.6 and 56.6 / 42.2 | `report/IMPACT_PRICING.th.md`, fig06 |
-| Cost ฿0.016 / 0.028 / 0.001 per TFLOP | `pasadhi/commercial/pricing.py`, fig01 cost |
+| Cost $0.00047548 / $0.0008321 / $0.00002972 per TFLOP | `pasadhi/commercial/pricing.py`, fig01 cost |
 | Tokens 68.1 % and 43.5 % stress | `pasadhi/commercial/token_model.py`, fig04 |
 | Group 3 564 GFLOP/s, break-even 60 % | `report/GROUP.th.md`, fig07 |
 | Orbit 6.9 / 32.3 / 2.8 / 0.57 / 0.004 % | `pasadhi/core/orbit.py`, fig05 |

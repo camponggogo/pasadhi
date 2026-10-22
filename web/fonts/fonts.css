@@ -1,0 +1,13 @@
+/* See README.md: Google Fonts OFL, TH Sarabun New GPL + font exception, DejaVu license. */
+@font-face{font-family:Nunito;src:url('./Nunito.ttf') format('truetype');font-weight:200 1000;font-style:normal;font-display:swap}
+@font-face{font-family:'Noto Sans';src:url('./NotoSans.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Noto Serif';src:url('./NotoSerif.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Noto Sans Mono';src:url('./NotoSansMono.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+html,body{font-family:'Nunito','TH Sarabun New','Noto Sans','DejaVu Sans',sans-serif}
+code,pre,kbd,samp{font-family:'Noto Sans Mono','TH Sarabun New','DejaVu Sans',monospace}
+svg text{font-family:'Nunito','TH Sarabun New','Noto Sans','DejaVu Sans',sans-serif}
+@font-face{font-family:'TH Sarabun New';src:url('./THSarabunNew.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;unicode-range:U+0E00-0E7F;size-adjust:125%}
+@font-face{font-family:'TH Sarabun New';src:url('./THSarabunNew-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;unicode-range:U+0E00-0E7F;size-adjust:125%}
+@font-face{font-family:'TH Sarabun New';src:url('./THSarabunNew-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;unicode-range:U+0E00-0E7F;size-adjust:125%}
+@font-face{font-family:'TH Sarabun New';src:url('./THSarabunNew-BoldItalic.ttf') format('truetype');font-weight:700;font-style:italic;font-display:swap;unicode-range:U+0E00-0E7F;size-adjust:125%}
+@font-face{font-family:'DejaVu Sans';src:url('./DejaVuSans.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}

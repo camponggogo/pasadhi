@@ -1,0 +1,77 @@
+[
+  {
+    "file": "Nunito.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/nunito/Nunito%5Bwght%5D.ttf",
+    "sha256": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+  },
+  {
+    "file": "nunito-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/nunito/OFL.txt",
+    "sha256": "580df76c95a1ec5ab878ceb25bb3d85c6a076804e9c970c8c6972aea775fdf65"
+  },
+  {
+    "file": "NotoSans.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf",
+    "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d"
+  },
+  {
+    "file": "notosans-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosans/OFL.txt",
+    "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+  },
+  {
+    "file": "NotoSerif.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notoserif/NotoSerif%5Bwdth%2Cwght%5D.ttf",
+    "sha256": "4d8e6761424656867019081a1a01336f3cb086982682698714054fc33f782713"
+  },
+  {
+    "file": "notoserif-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notoserif/OFL.txt",
+    "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+  },
+  {
+    "file": "NotoSansThai.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosansthai/NotoSansThai%5Bwdth%2Cwght%5D.ttf",
+    "sha256": "5a1c559bb539583c8a1fd99d1c5b9491e5e14478c9cd2bd0970d5c3096cc9ef8"
+  },
+  {
+    "file": "notosansthai-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosansthai/OFL.txt",
+    "sha256": "2e98fd23a52d253db8612cd5942c8f2ff4111b21d2367050fdca91d8ccc374a0"
+  },
+  {
+    "file": "NotoSansMono.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosansmono/NotoSansMono%5Bwdth%2Cwght%5D.ttf",
+    "sha256": "2cb2adb378a8f574213e23df697050b83c54c27df465a2015552740b2769a081"
+  },
+  {
+    "file": "notosansmono-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/45e3d5269e4a17d823f6d84470bc084dc5ae46f6/ofl/notosansmono/OFL.txt",
+    "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+  },
+  {
+    "file": "THSarabunNew.ttf",
+    "source": "https://www.f0nt.com/?dl_name=sipafonts%2FTHSarabunNew.zip",
+    "sha256": "b248f824f3d7a8576bc396826a4d898070c1420564f6ce6aa716aa8ad24f824a"
+  },
+  {
+    "file": "THSarabunNew-Bold.ttf",
+    "source": "https://www.f0nt.com/?dl_name=sipafonts%2FTHSarabunNew.zip",
+    "sha256": "49596f298a8fe248c5340b4589b3b4adfcf34a3e24084ebeb4f49c6600f75fa7"
+  },
+  {
+    "file": "THSarabunNew-Italic.ttf",
+    "source": "https://www.f0nt.com/?dl_name=sipafonts%2FTHSarabunNew.zip",
+    "sha256": "341b9b5d13b696f74c6318d32bbae7ff183e6bdc07ef3ca1a6f9c5dd83c6494b"
+  },
+  {
+    "file": "THSarabunNew-BoldItalic.ttf",
+    "source": "https://www.f0nt.com/?dl_name=sipafonts%2FTHSarabunNew.zip",
+    "sha256": "64a69cbeca6d34dc754a7ab2106615c14fbd359d339ed0f65d2a7b17de14cdfa"
+  },
+  {
+    "file": "DejaVuSans.ttf",
+    "source": "Unmodified DejaVu Sans 2.37, local installed copy; https://dejavu-fonts.github.io/",
+    "sha256": "7da195a74c55bef988d0d48f9508bd5d849425c1770dba5d7bfc6ce9ed848954"
+  }
+]

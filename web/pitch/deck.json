@@ -1,0 +1,644 @@
+{
+  "title": "PASADHI — Compute you already own",
+  "date": "23 October 2026",
+  "coreCount": 14,
+  "currency": "USD; 1 USD = 33.65 local currency units, Bank of Thailand reference, 22 October 2026",
+  "slides": [
+    {
+      "kind": "cover",
+      "title": "AI compute on the computers you already own",
+      "subtitle": "PASADHI · private compute for existing office fleets",
+      "takeaway": "Open-core prototype · seeking design partners",
+      "notes": "เปิดด้วยลูกค้า: องค์กรที่มีเครื่องอยู่แล้วและมีงานคำนวณที่ต้องเก็บข้อมูลภายใน เป้าหมายคือรวมเครื่องเหล่านี้ให้ใช้งานง่าย ปัจจุบันเป็น M0 prototype ยังไม่ใช่คลัสเตอร์ distributed ที่ส่งมอบแล้ว",
+      "sources": [
+        "README.md: status and product vision",
+        "Artwork: AI-generated conceptual background; not a deployed hardware photograph"
+      ]
+    },
+    {
+      "kind": "statements",
+      "title": "The first customer already has a fleet",
+      "items": [
+        [
+          "The assets",
+          "Office PCs, local data and an IT owner"
+        ],
+        [
+          "The friction",
+          "Separate machines, resource limits and manual coordination"
+        ],
+        [
+          "The opening",
+          "One repeatable batch workload that must stay on site"
+        ]
+      ],
+      "takeaway": "Buyer hypothesis: research labs and small IT teams with existing hardware",
+      "notes": "นี่คือสมมติฐานลูกค้าเริ่มต้น ยังไม่ใช่รายชื่อลูกค้าที่จ่ายเงิน เริ่มจากงาน batch ที่วัด baseline ได้ ไม่อ้างว่าแทนคลาวด์ GPU ได้ทุกกรณี",
+      "sources": [
+        "docs/BUSINESS.th.md",
+        "docs/SALES_KIT.th.md: discovery questions"
+      ]
+    },
+    {
+      "kind": "product",
+      "light": true,
+      "title": "One install. A controlled share of every machine",
+      "subtitle": "CPU · GPU · RAM · disk · network",
+      "takeaway": "Windows EXE available; Python bundles for Linux/macOS and Android through Termux",
+      "notes": "แอปต้นแบบตรวจสเปก เลือก role และให้ผู้ใช้ควบคุมสัดส่วนทรัพยากร ภาพเป็นสถาปัตยกรรมเป้าหมาย ส่วน distributed plane ยังเป็น roadmap ฟีเจอร์รายได้เป็นค่าประมาณในโมเดล ไม่ใช่เงินที่จ่ายจริง",
+      "sources": [
+        "app/service.py",
+        "app/budget.py",
+        "web/download/release.json",
+        "web/anatomy/pasadhi-system-fig.png"
+      ]
+    },
+    {
+      "kind": "focus",
+      "title": "Private batch compute is the first wedge",
+      "big": "One site.\nOne workload.\nOne measured outcome.",
+      "subtitle": "Start with matrix-heavy analysis, image processing or small-model inference that fits the available hardware",
+      "takeaway": "Customer discovery and real-workload validation come before fleet expansion",
+      "notes": "เลือกงานเดียวที่ตรงกับฮาร์ดแวร์ เช่น วิเคราะห์สัญญาณ ภาพ หรืองาน inference ขนาดเล็ก ต้องสอบถามผู้ดูแลงานและวัดข้อมูลจริงก่อนตัดสินว่าคุ้ม",
+      "sources": [
+        "docs/SALES_KIT.th.md",
+        "docs/ROADMAP.md: M4 workloads"
+      ]
+    },
+    {
+      "kind": "metrics",
+      "light": true,
+      "title": "A measured baseline, with visible limits",
+      "metrics": [
+        [
+          "58–74",
+          "GFLOP/s",
+          "Local f32 BLAS baseline"
+        ],
+        [
+          "157×",
+          "prefix-cache speedup",
+          "Inherited gateway experiment"
+        ],
+        [
+          "90.15%",
+          "routing accuracy",
+          "6,000-query research test"
+        ]
+      ],
+      "takeaway": "Research evidence: local CPU tests and inherited SUAY mock-backend experiments; not customer traction",
+      "notes": "แยกหลักฐาน: 58–74 GFLOP/s มาจาก PASADHI บน i7-8550U; 157× และ router เป็นหลักฐานจากโครงการต้นทาง SUAY ไม่ใช่ distributed compute ที่ติดตั้งกับลูกค้า 50 เครื่องจริง ผล TTFT มาจาก mock backend จึงไม่ใช่คำรับประกัน inference รุ่น production",
+      "sources": [
+        "paper/SOLUTION.md: Abstract and §5",
+        "paper/SOLUTION_FULL.md: §6 and §7",
+        "bench/results/summary.json"
+      ]
+    },
+    {
+      "kind": "chart",
+      "title": "Reused context can remove the wait",
+      "big": "111.4 s → 0.71 s",
+      "subtitle": "Time to first token on an 8,000-token document",
+      "chart": {
+        "categories": [
+          "Cold prefix",
+          "Reused prefix"
+        ],
+        "values": [
+          111.4,
+          0.71
+        ],
+        "unit": "seconds",
+        "max": 125
+      },
+      "takeaway": "Measured in the inherited SUAY mock-backend test; caching is one component of the proposed product",
+      "notes": "อธิบายว่า 157× เกิดเมื่อ reuse prefix เดิมในเงื่อนไขทดลองเดียวกัน ไม่ใช่เพิ่ม FLOP/s 157 เท่า และไม่ใช่ผลจาก PASADHI distributed plane จุดขายคือจัดการงานซ้ำให้ดี ไม่ใช่อ้างฮาร์ดแวร์เสมือนแรงเท่า GPU",
+      "sources": [
+        "paper/SOLUTION_FULL.md: §7.3",
+        "report/kv/figures/fig28_ttft_vs_reuse.png"
+      ]
+    },
+    {
+      "kind": "business",
+      "light": true,
+      "title": "Sell a verified outcome, then a recurring plan",
+      "metrics": [
+        [
+          "$1,456",
+          "4-week pilot",
+          "Proposed; credited to year one"
+        ],
+        [
+          "$44.28",
+          "per node / month",
+          "Proposed standard plan"
+        ],
+        [
+          "$16.37",
+          "per node / month",
+          "Modelled operating cost basis"
+        ]
+      ],
+      "takeaway": "Pricing hypothesis, not booked revenue. USD conversion: 33.65 local units per dollar",
+      "notes": "ตัวเลขมาจาก Sales Kit: pilot 49,000 บาท, standard 1,490 บาทต่อเดือน; ค่าใช้จ่ายในโมเดล 551 บาท แปลงด้วย 33.65 บาทต่อดอลลาร์ ตัวเลขเหล่านี้ยังเป็นข้อเสนอ ไม่ใช่ราคาที่ลูกค้าทดสอบยอมจ่ายแล้ว ค่าใช้จ่ายยังไม่รวม CAC และความเสี่ยงในการดูแลหน้างานทั้งหมด",
+      "sources": [
+        "docs/SALES_KIT.th.md: proposed pilot and standard pricing",
+        "paper/SOLUTION_FULL.md: §8",
+        "https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?language=eng&reportID=123"
+      ]
+    },
+    {
+      "kind": "market-context",
+      "light": true,
+      "title": "Global spending supports a focused local wedge",
+      "metrics": [
+        [
+          "$500B",
+          "cloud infrastructure revenue",
+          "Trailing 12 months to Q2 2026; Synergy estimate"
+        ],
+        [
+          "$5.124T",
+          "NVIDIA equity market cap",
+          "Live-source snapshot accessed 23 Oct 2026"
+        ],
+        [
+          "18 sites",
+          "lean profit threshold",
+          "Our operating scenario; demand unvalidated"
+        ]
+      ],
+      "takeaway": "Spending sizes demand context; public market cap is a valuation reference. PASADHI addressable demand needs validation.",
+      "notes": "ตลาดคลาวด์500Bเป็นรายได้12เดือนตามSynergy ไม่ใช่TAMของPASADHIทั้งหมด มูลค่าหุ้นNVIDIA5.124Tเป็นsnapshotจากCompaniesMarketCapตรวจ23ต.ค.2026ซึ่งเปลี่ยนได้ ไม่ใช่เงินที่PASADHIเข้าถึงได้หรือvaluationที่เสนอ ทุน750kมาจากงบrunway24เดือนและmilestone5เดือนแรก ไม่ได้เอาเปอร์เซ็นต์marketcapมาคิดเป็นเงินระดมทุน",
+      "sources": [
+        "https://www.srgresearch.com/articles/q2-cloud-market-passes-143-billion-highest-growth-rate-in-eight-years",
+        "https://companiesmarketcap.com/nvidia/marketcap/",
+        "web/pitch/financial-plan.json"
+      ]
+    },
+    {
+      "kind": "market",
+      "title": "A bottom-up path to $2.66M ARR",
+      "big": "100 sites × 50 nodes",
+      "subtitle": "× $44.28 per node / month × 12 months",
+      "takeaway": "Illustrative operating scenario; not TAM, forecast, signed pipeline or current ARR",
+      "notes": "แสดงขนาดโอกาสแบบตรวจสูตรได้: 100×50×44.28×12 = 2,656,800 ดอลลาร์ต่อปี 100 sites และ50nodes เป็นสมมติฐานแผนงาน ไม่ใช่ฐานลูกค้าที่มีอยู่ ไม่ใช้จำนวนตลาดที่ไม่มีแหล่งอ้างอิง",
+      "sources": [
+        "Scenario calculation: 100 * 50 * 44.28 * 12 = 2656800 USD ARR",
+        "docs/SALES_KIT.th.md: pricing input"
+      ]
+    },
+    {
+      "kind": "comparison",
+      "light": true,
+      "title": "Win where control and reuse matter",
+      "table": [
+        [
+          "Approach",
+          "Best fit",
+          "Trade-off"
+        ],
+        [
+          "Cloud GPU",
+          "Maximum throughput per dollar",
+          "Data movement and external service requirements"
+        ],
+        [
+          "DIY local stack",
+          "Teams with systems expertise",
+          "Integration and ongoing operations"
+        ],
+        [
+          "PASADHI proposal",
+          "Existing fleets; private batch jobs",
+          "Lower raw efficiency; product still at M0"
+        ]
+      ],
+      "takeaway": "Owned CPU compute is modelled at about 17× the A100 cost per delivered TFLOP",
+      "notes": "อย่าหลบข้อจำกัด: ต้นทุนต่อFLOP ของเครื่องเก่ายังแพ้ A100 ตามโมเดล ควรชนะด้วย data residency และการใช้เครื่องที่มีอยู่ เมื่อรวม workflow แล้วเท่านั้น ห้ามสัญญาประหยัดหรือเร็วขึ้นกับทุกงาน",
+      "sources": [
+        "paper/SOLUTION_FULL.md: Figure 40 and §8",
+        "docs/SALES_KIT.th.md: objection handling"
+      ]
+    },
+    {
+      "kind": "steps",
+      "title": "One pilot creates the next buying decision",
+      "items": [
+        [
+          "01",
+          "Baseline",
+          "Five machines. One real workload. Three days."
+        ],
+        [
+          "02",
+          "Paid pilot",
+          "Four weeks. Agree on speed, cost and recovery gates."
+        ],
+        [
+          "03",
+          "Expand",
+          "Annual plan only after the customer sees the result."
+        ]
+      ],
+      "takeaway": "Proposed go-to-market motion; no signed pilots or paying customers claimed",
+      "notes": "เกณฑ์2×เร็วขึ้น,40%ลดต้นทุนและnode-recoveryในSalesKitเป็นเป้าหมายpilot ไม่ใช่ผลที่พิสูจน์แล้ว ต้องทำsystemให้มีfailure recoveryก่อนยอมรับงานที่ต้องการเงื่อนไขนี้",
+      "sources": [
+        "docs/SALES_KIT.th.md: Pilot SOW and acceptance criteria"
+      ]
+    },
+    {
+      "kind": "roadmap",
+      "light": true,
+      "title": "Prove two hosts before scaling the story",
+      "items": [
+        [
+          "Months 1–5",
+          "Product + pilot",
+          "Recovery tests, one real workload and two paid-pilot targets"
+        ],
+        [
+          "Months 6–12",
+          "Repeatability",
+          "Ten paid-site target; verify retention and support cost"
+        ],
+        [
+          "Months 13–24",
+          "Economics + growth",
+          "Eighteen-site profit gate; renewal evidence and next-round readiness"
+        ]
+      ],
+      "takeaway": "First delivery in five months; cash runway planned for 24 months. All customer milestones are targets.",
+      "notes": "ระยะส่งมอบไม่เท่ากับrunway:product/pilot5เดือน เงินสด24เดือน เดือน6–12ตรวจการจ่ายซ้ำจริง เดือน13–24พิสูจน์unit economicsและrenewals เตรียมระดมทุนครั้งต่อไปเมื่อยังมีเงินเหลือพอ ไม่รอเงินหมด",
+      "sources": [
+        "docs/ROADMAP.md: M0, M1, M2 and M3",
+        "README.md: prototype status"
+      ]
+    },
+    {
+      "kind": "team",
+      "title": "Built in the open. Ready for design partners.",
+      "big": "Mr. Supakrit Wapakpetch\nand AI Team",
+      "subtitle": "Founder-led engineering · MIT open core · reproducible research",
+      "items": [
+        [
+          "Engineering focus",
+          "Kernels, scheduling and reliable local deployment"
+        ],
+        [
+          "Partner focus",
+          "A lab or IT team with one measurable workload"
+        ]
+      ],
+      "takeaway": "Current stage: M0 prototype; commercial demand remains to be validated",
+      "notes": "ชื่อทีมระบุโดยผู้ก่อตั้ง: Mr. Supakrit Wapakpetch and AI Team ไม่อ้างประวัติการศึกษา จำนวนพนักงาน หรือประสบการณ์ที่ยังไม่ได้ให้ข้อมูล ผลงานที่ตรวจได้คือโค้ดและผลทดลอง",
+      "sources": [
+        "README.md",
+        "LICENSE",
+        "paper/SOLUTION_FULL.md: threats to validity",
+        "Founder identity supplied by the user, 23 October 2026"
+      ]
+    },
+    {
+      "kind": "ask",
+      "title": "$750k for a repeatable, paid compute product",
+      "subtitle": "24-month runway · first product and pilot gates in five months",
+      "items": [
+        [
+          "Product gate",
+          "Two-host recovery, ten-host validation and real-workload ROI"
+        ],
+        [
+          "Commercial gate",
+          "Ten paid sites by month 12; eighteen-site profit gate targeted by month 18"
+        ]
+      ],
+      "takeaway": "Proposed raise. Customer targets are unvalidated; revenue is excluded from the base cash-runway calculation.",
+      "notes": "ทุน750kสำหรับ24เดือน แยกmilestoneproduct/pilot5เดือนแรก คำนวณ5×34k+19×24k=626k บวกone-offreserve11.5kและcontingency112.5kรวม750k ไม่สมมติรายได้เพื่อยืดrunway ต้นทุนลูกค้าที่เพิ่มต้องเก็บเงินให้ครอบคลุมและตรวจcashflowจริง ไม่ตั้งrunway5เดือนอีกแล้ว",
+      "sources": [
+        "web/pitch/financial-plan.json",
+        "web/pitch/funding-plan.md",
+        "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+        "https://carta.com/uk/en/learn/startups/fundraising/",
+        "https://www.crv.com/content/when-to-raise-series-a"
+      ]
+    },
+    {
+      "kind": "academic",
+      "light": true,
+      "title": "Research question: when does pooling pay?",
+      "big": "Useful throughput\nafter coordination cost",
+      "items": [
+        [
+          "Design",
+          "Matrix-first kernels and bounded process layers"
+        ],
+        [
+          "Question",
+          "Which workloads survive memory and network limits?"
+        ],
+        [
+          "Test",
+          "Compare single-host, pipeline and multi-host execution"
+        ]
+      ],
+      "takeaway": "Academic extension · distributed-plane claims require new multi-host measurements",
+      "notes": "คำถามวิจัยไม่ใช่รวมเครื่องได้กี่เครื่อง แต่ได้useful throughputหลังหักoverheadเท่าไร วัดservice time,queueing,activation trafficและfailure recovery เทียบbaselineเดิม",
+      "sources": [
+        "paper/SOLUTION.md: §1–4",
+        "docs/ARCHITECTURE.md"
+      ]
+    },
+    {
+      "kind": "methods",
+      "title": "Read every result with its test conditions",
+      "items": [
+        [
+          "Local kernel",
+          "i7-8550U; BLAS baseline; tiling and int8 comparisons"
+        ],
+        [
+          "Inherited gateway",
+          "50 containers on one 8-vCPU host; Docker Desktop; mock backend"
+        ],
+        [
+          "Fleet capacity",
+          "Parameterized hardware models; no deployed 1,450-card fleet"
+        ]
+      ],
+      "takeaway": "Neither a container count nor a simulated fleet is a customer deployment",
+      "notes": "แยกหน่วยทดลองให้ถูกต้อง50 containersบนhostเดียวไม่ใช่50physicalPC ตัวเลขPFLOPSเป็นการรวมสเปกในโมเดล การทดลองproductionยังต้องทำเพิ่ม รวมp95,thermal,energyและfailure recovery",
+      "sources": [
+        "paper/SOLUTION_FULL.md: §6 and §9",
+        "paper/SOLUTION.md: §9"
+      ]
+    },
+    {
+      "kind": "limits",
+      "light": true,
+      "title": "The negative results shape the design",
+      "metrics": [
+        [
+          "7–11",
+          "GFLOP/s",
+          "Tiled fallback vs 58–74 BLAS"
+        ],
+        [
+          "0.26–0.55×",
+          "single-loop throughput",
+          "Process pipeline on one host"
+        ],
+        [
+          "8.5%",
+          "surviving compute",
+          "Modelled f32 sharding on 1 GbE"
+        ]
+      ],
+      "takeaway": "Keep inner loops local; use independent jobs before tightly coupled sharding",
+      "notes": "นี่คือผลลบที่ต้องอธิบายในเวทีวิชาการ: Pythonfallbackช้ากว่าBLASและpipelineแพ้singleloop ไม่ซ่อนข้อมูล สิ่งที่ควรทำคือCkernelและลดcopy;8.5%เป็นแบบจำลองGPU over1GbE ไม่ใช่ผลวัดdeployment",
+      "sources": [
+        "docs/ROADMAP.md: M0 and M2.5",
+        "paper/SOLUTION_FULL.md: §7.11 and §7.13"
+      ]
+    },
+    {
+      "kind": "model",
+      "title": "A fleet model is a capacity hypothesis",
+      "metrics": [
+        [
+          "9.54",
+          "PFLOPS f32",
+          "Aggregate modeled capacity"
+        ],
+        [
+          "47.7",
+          "POPS int8",
+          "Mixed 1,450-card scenario"
+        ],
+        [
+          "143.5",
+          "kW",
+          "Modelled fleet power"
+        ]
+      ],
+      "takeaway": "Modelled totals, not measured end-to-end throughput; placement, bandwidth and VRAM constrain delivery",
+      "notes": "โมเดลfleetแสดงว่าฮาร์ดแวร์ผสมมีcapacityแต่การจัดงานและVRAMtailเป็นคอขวด ย้ำว่าไม่ใช่clusterที่สร้างแล้ว ไม่คูณประสิทธิภาพsinglehostเพื่ออ้างscalingเส้นตรง",
+      "sources": [
+        "paper/SOLUTION_FULL.md: Figure 38",
+        "bench/results/hetero_model.json",
+        "core/hetero.py"
+      ]
+    },
+    {
+      "kind": "references",
+      "light": true,
+      "title": "Reproduce the baseline. Challenge the assumptions.",
+      "items": [
+        [
+          "Read",
+          "Solution paper · full evidence paper · MIT source"
+        ],
+        [
+          "Run",
+          "python bench/run.py --quick"
+        ],
+        [
+          "Validate next",
+          "Real workloads, independent hosts, fault recovery and power"
+        ]
+      ],
+      "takeaway": "pasadhi.tech · github.com/camponggogo/pasadhi",
+      "notes": "ปิดภาควิชาการด้วยคำเชิญให้ทำซ้ำ ไม่ใช่คำโฆษณา ตรวจเวอร์ชันโค้ดและสภาพแวดล้อมก่อนเทียบตัวเลข แหล่งเอกสารอยู่บนหน้าweb pitchและspeaker notesแต่ละslide เงินดอลลาร์แปลงจากเอกสารเดิมตามอัตราอ้างอิงที่ระบุ",
+      "sources": [
+        "paper/SOLUTION.md",
+        "paper/SOLUTION_FULL.md",
+        "bench/run.py",
+        "https://www.ycombinator.com/blog/guide-to-demo-day-pitches/",
+        "https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?language=eng&reportID=123"
+      ]
+    },
+    {
+      "kind": "budget",
+      "light": true,
+      "title": "24-month use of funds: $750,000",
+      "table": [
+        [
+          "Use",
+          "Amount",
+          "Share"
+        ],
+        [
+          "Engineering",
+          "$337,500",
+          "45%"
+        ],
+        [
+          "Pilot delivery + QA",
+          "$112,500",
+          "15%"
+        ],
+        [
+          "Customer discovery + sales",
+          "$112,500",
+          "15%"
+        ],
+        [
+          "Security + legal + operations",
+          "$75,000",
+          "10%"
+        ],
+        [
+          "Contingency",
+          "$112,500",
+          "15%"
+        ],
+        [
+          "Total",
+          "$750,000",
+          "100%"
+        ]
+      ],
+      "takeaway": "$626k staged operations + $11.5k deployment reserve + $112.5k contingency. No revenue assumed for runway.",
+      "notes": "Budget45%engineering337.5k,15%pilot112.5k,15%GTM112.5k,10%security/legal75k,15%buffer112.5k Operatingรวม637.5kรองรับfixedcost626kและoneoff11.5k งบเป็นข้อเสนอ ต้องทดสอบต้นทุนจริงก่อนจ้าง",
+      "sources": [
+        "web/pitch/financial-plan.json"
+      ]
+    },
+    {
+      "kind": "sensitivity",
+      "title": "Operating profit needs 18 paid sites",
+      "table": [
+        [
+          "Scenario",
+          "Sites / nodes",
+          "MRR",
+          "Profit / month"
+        ],
+        [
+          "Downside",
+          "5 / 250",
+          "$11,070",
+          "-$17,022"
+        ],
+        [
+          "Base",
+          "10 / 500",
+          "$22,140",
+          "-$10,045"
+        ],
+        [
+          "Profit gate",
+          "18 / 900",
+          "$39,852",
+          "$1,119"
+        ],
+        [
+          "Expansion",
+          "25 / 1250",
+          "$55,350",
+          "$10,888"
+        ]
+      ],
+      "takeaway": "Steady-state scenarios: $44.28 price; $16.37/node direct cost; $24k/month fixed overhead from month six. Not a forecast.",
+      "notes": "กำไรเป็นscenarioไม่ใช่คำรับประกันหลัง24เดือน:10sitesขาดทุน10045,18sitesบวก1119,25sitesบวก10887.5ต่อเดือน ขั้นต้นก่อนภาษีและข้อยกเว้น Break-even860payingnodesหรือ18sitesถ้า50nodes/site การคงfixedcost24kต้องทำตามแผนจริง",
+      "sources": [
+        "web/pitch/financial-plan.json",
+        "paper/SOLUTION_FULL.md: node cost",
+        "docs/SALES_KIT.th.md: proposed price"
+      ]
+    },
+    {
+      "kind": "gates",
+      "light": true,
+      "title": "Separate delivery gates from cash runway",
+      "items": [
+        [
+          "Months 1–5",
+          "Two paid-pilot targets; validate workload ROI and recovery"
+        ],
+        [
+          "Months 6–12",
+          "Ten paid-site target; validate retention and support burden"
+        ],
+        [
+          "Months 13–24",
+          "Eighteen-site profit gate; renewals and next-round readiness"
+        ]
+      ],
+      "takeaway": "Review evidence and cash monthly. Missed gates trigger scope or hiring changes before contingency release.",
+      "notes": "แผน24เดือนมีproductmilestone5เดือนแรก แบ่งreleasecapitalตามหลักฐาน ไม่สับสนaccelerator3เดือนหรือpilot4สัปดาห์กับrunwayบริษัท Targetทั้งหมดไม่ใช่signedpipeline",
+      "sources": [
+        "web/pitch/financial-plan.json",
+        "docs/ROADMAP.md"
+      ]
+    },
+    {
+      "kind": "terms",
+      "light": true,
+      "title": "Financing terms: a negotiation framework",
+      "table": [
+        [
+          "Post-money cap",
+          "Proposed raise",
+          "Illustrative ownership"
+        ],
+        [
+          "$3.75M",
+          "$750k",
+          "20.00%"
+        ],
+        [
+          "$5.0M",
+          "$750k",
+          "15.00%"
+        ],
+        [
+          "$7.5M",
+          "$750k",
+          "10.00%"
+        ]
+      ],
+      "takeaway": "Post-money SAFE illustration before future-round dilution; cap is not an independent appraisal. No YC affiliation implied.",
+      "notes": "ตัวอย่างการเจรจา750kที่cap5Mเท่ากับ15%ตามสูตรเบื้องต้น ไม่ใช่บริษัทมีvaluation5Mที่ตลาดรับรอง ต้องตรวจSAFEอื่น,optionpoolและfuture-round dilution YCstandarddeal500kต่างจากแผน750kของPASADHI และไม่อ้างYCendorsement",
+      "sources": [
+        "https://www.ycombinator.com/safe",
+        "https://www.ycombinator.com/deal/",
+        "web/pitch/financial-plan.json"
+      ]
+    },
+    {
+      "kind": "runway-research",
+      "light": true,
+      "title": "Runway guidance has moved beyond a short pilot",
+      "table": [
+        [
+          "Source",
+          "Guidance",
+          "Planning use"
+        ],
+        [
+          "YC seed guide",
+          "12–18 months",
+          "Older milestone-based baseline"
+        ],
+        [
+          "Carta / CRV guidance",
+          "24–30 months",
+          "Allow for longer funding intervals"
+        ],
+        [
+          "PASADHI proposal",
+          "24 months",
+          "Five-month delivery gate within longer cash runway"
+        ]
+      ],
+      "takeaway": "Guidance is not a universal rule or observed runway median. Financing needs follow milestones and cash costs.",
+      "notes": "Researchตรวจ23ต.ค.2026:YCguideเดิมกล่าว12–18เดือน ขณะที่CartaและCRVแนะนำ24–30เดือน ไม่เรียกตัวเลขนี้ว่าmedianrunwayเพราะเป็นguidance ช่วงห่างรอบทุนที่วัดได้ไม่เท่ากับระยะเวลาที่ใช้pitch กรณีPASADHIเลือก24เดือนเป็นbaseline18เดือนเป็นแผนscopeเล็กและ6เดือนเป็นเพียงmilestone",
+      "sources": [
+        "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
+        "https://carta.com/uk/en/learn/startups/fundraising/",
+        "https://www.crv.com/content/when-to-raise-series-a"
+      ]
+    }
+  ]
+}

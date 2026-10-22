@@ -1,0 +1,42 @@
+[
+  {
+    "file": "PASADHI-0.1.0-windows.zip",
+    "platform": "windows",
+    "version": "0.1.0",
+    "kind": "native",
+    "bytes": 10689855,
+    "sha256": "15d6d3abd32d17fbacdbddca685bc6432f8f55b97e1f0adbaf5c59f896a7718e"
+  },
+  {
+    "file": "PASADHI-0.1.0-linux.tar.gz",
+    "platform": "linux",
+    "version": "0.1.0",
+    "kind": "python-source",
+    "bytes": 1703742,
+    "sha256": "63bdf78b5c2ee4004506267c5f5cf928434e2453e211d7d87b7429f884023d27"
+  },
+  {
+    "file": "PASADHI-0.1.0-macos.tar.gz",
+    "platform": "macos",
+    "version": "0.1.0",
+    "kind": "python-source",
+    "bytes": 1703732,
+    "sha256": "3641bef5988fd7cb842fc743e6ba6c0fda809bb84055b0a0c64dc5c2ce3080c6"
+  },
+  {
+    "file": "PASADHI-0.1.0-android-termux.zip",
+    "platform": "android-termux",
+    "version": "0.1.0",
+    "kind": "python-source",
+    "bytes": 1707074,
+    "sha256": "ec7e3edca00356324c32603db3d6e1990740e8421b82ef48070737c5887e66be"
+  },
+  {
+    "file": "PASADHI-0.1.0-source.zip",
+    "platform": "source",
+    "version": "0.1.0",
+    "kind": "python-source",
+    "bytes": 1707028,
+    "sha256": "239e9aa2c2764a40f70b96ad505bffd5c91e77cfb1cc7761c809d22f2bfda73e"
+  }
+]

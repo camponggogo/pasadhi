@@ -1,0 +1,7 @@
+﻿PASADHI is derived from SUAY (https://github.com/camponggogo/suay), MIT licensed.
+
+The control-plane design, the measurement harness conventions and the MIT licence text originate there.
+PASADHI replaces the AI-only framing with a general matrix-compute plane and adds the multi-layer
+process runtime and the old-hardware kernel strategy.
+
+Copyright (c) 2026 PASADHI contributors

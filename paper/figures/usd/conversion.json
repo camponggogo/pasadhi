@@ -1,0 +1,69 @@
+{
+  "reporting_currency": "USD",
+  "local_units_per_usd": "33.65",
+  "rate_date": "2026-10-22",
+  "source": "https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?language=eng&reportID=123",
+  "figures": [
+    {
+      "file": "fig01_cost_per_tflop.png",
+      "axes": [
+        {
+          "title": "Cost of delivered matrix throughput (indicative, Oct 2026)",
+          "x": "",
+          "y": "USD ($) per delivered TFLOP (log)",
+          "annotations": [
+            "$0.00047548",
+            "$0.00083210",
+            "$0.00002972",
+            "cloud = list price, no egress, no ops labour"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "fig04_token_economy.png",
+      "axes": [
+        {
+          "title": "Monthly money flow at 1 450 nodes (USD $)",
+          "x": "",
+          "y": "",
+          "annotations": [
+            "$25,682",
+            "$75,193",
+            "-$11,634",
+            "-$23,743",
+            "$60,743",
+            "-$6,074"
+          ]
+        },
+        {
+          "title": "Does the discount mechanism stay solvent?",
+          "x": "contributed hours per node per month",
+          "y": "margin %",
+          "annotations": []
+        }
+      ]
+    },
+    {
+      "file": "fig07_group.png",
+      "axes": [
+        {
+          "title": "Office utilisation vs the 30 % share (150 machines)",
+          "x": "hour of day",
+          "y": "% of capacity",
+          "annotations": []
+        },
+        {
+          "title": "Monthly net position by mode",
+          "x": "",
+          "y": "USD ($) per month",
+          "annotations": [
+            "-$4,450",
+            "$1,589",
+            "-$3,126"
+          ]
+        }
+      ]
+    }
+  ]
+}

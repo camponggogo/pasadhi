@@ -1,6 +1,10 @@
+<img src="../brand/logo-light-transparent.png" alt="PASADHI brain network logo" width="240">
+
 # PASADHI: a matrix-first pool built from the machines you already own
 
 **Solution paper · v1.1 · 23 October 2026** · PASADHI contributors · MIT for the open core
+
+**Currency:** All prices and monetary amounts are in US dollars ($). Original local-currency amounts are divided by 33.65, using the [Bank of Thailand reference rate for 22 October 2026](https://app.bot.or.th/BTWS_STAT/statistics/BOTWEBSTAT.aspx?language=eng&reportID=123). This is a reporting-currency conversion; model assumptions, margins and performance ratios are unchanged.
 
 ## Abstract
 
@@ -121,7 +125,7 @@ tiles that fit one host stay on one host, and only the panel boundary crosses th
 
 Weights come from the same sweep that produced the performance numbers: CPU 98.0 %, RAM 0.4 %, disk 1.0 %,
 network 0.6 % on a CPU-only node; CPU 56.6 %, GPU 42.2 % once a GTX 1050 is present. A four-thread machine
-shared at 100 % earns 2.50 THB per hour; an eight-thread machine at 35 % earns ≈711 THB per month.
+shared at 100 % earns $0.0743 per hour; an eight-thread machine at 35 % earns ≈$21.13 per month.
 
 ## 5. What we measured, and what it bought
 
@@ -159,7 +163,7 @@ live monthly estimate update as they move. Nothing needs a reboot, and `uninstal
 ## 7. Capacity and the commercial model
 
 At a 30 % share a 150-machine office delivers 3 564 GFLOP/s and 31 860 node-hours per month, which earns
-53 460 THB against a 149 745 THB subscription: the break-even is ≈60 % share, or ≈350 THB per machine. The
+$1,588.71 against a $4,450.07 subscription: the break-even is ≈60 % share, or ≈$10.40 per machine. The
 product is therefore sold three ways — **share and use free**, **rent monthly or yearly**, **buy an on-prem
 licence** scoped to a group with unlimited machines.
 
@@ -170,7 +174,7 @@ credits, and a stress case at 720 h per machine that still clears 43.5 %.
 
 - **No 50-way pipeline sharding** — S* is 3–10 stages, overhead is 150 ms per step, activation traffic 65.5 Mbit/s.
 - **No interplanetary inner loop** — 0.004 % of compute survives Earth–Mars; only checkpointed work crosses it.
-- **No claim of cheaper FLOPs than a GPU** — a used-card fleet lands at ฿0.0010 per delivered TFLOP, the same as
+- **No claim of cheaper FLOPs than a GPU** — a used-card fleet lands at $0.00002972 per delivered TFLOP, the same as
   a rented A100. The margin comes from software, support and residency.
 
 ## 9. Threats to validity
