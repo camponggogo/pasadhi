@@ -1,51 +1,124 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>PASADHI: one pool from the machines you already own</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>PASADHI: a matrix-first pool built from the machines you already own</title>
 <style>
-@page { size: A4; margin: 20mm 18mm 22mm 18mm; }
-body { font-family: "Charter", Georgia, "Times New Roman", serif; font-size: 10.6pt; line-height: 1.58; color: #14302a; }
+@page { size: A4; margin: 18mm 17mm 20mm 17mm; }
+body { font-family: "Charter", Georgia, "Times New Roman", serif; font-size: 10.2pt; line-height: 1.55; color: #14302a; }
 h1, h2, h3 { font-family: "Segoe UI", Arial, sans-serif; color: #0f4f3c; }
-h1 { font-size: 24pt; line-height: 1.16; margin: 0 0 6mm; letter-spacing: -0.01em; }
-h2 { font-size: 14.5pt; margin: 8mm 0 3mm; break-after: avoid; }
-h3 { font-size: 11.5pt; margin: 6mm 0 2mm; }
-p { margin: 0 0 3mm; text-align: justify; }
-table { width: 100%; border-collapse: collapse; font-size: 8.9pt; margin: 3mm 0 5mm; break-inside: avoid; }
+h1 { font-size: 23pt; line-height: 1.14; margin: 0 0 5mm; letter-spacing: -0.01em; }
+h2 { font-size: 13.5pt; margin: 7mm 0 2.6mm; break-after: avoid; }
+h3 { font-size: 11pt; margin: 5mm 0 1.8mm; break-after: avoid; }
+p { margin: 0 0 2.8mm; text-align: justify; }
+img { display: block; width: 100%; height: auto; margin: 2mm 0 1mm; border: 0.25mm solid #e2e9e5; border-radius: 1.2mm; }
+p > img + em, p em { color: #4a675c; }
+table { width: 100%; border-collapse: collapse; font-size: 8.6pt; margin: 2.5mm 0 4mm; break-inside: avoid; }
 th { background: #e9f5ef; text-align: left; }
-th, td { border: 0.25mm solid #cfded6; padding: 1.6mm 2mm; vertical-align: top; }
-code { font-family: Consolas, monospace; font-size: 9pt; background: #f2f6f4; padding: 0.3mm 1mm; }
-pre { background: #f5f9f7; border: 0.3mm solid #d9e7e0; border-radius: 1.5mm; padding: 4mm; break-inside: avoid; }
-pre code { font-size: 8.6pt; line-height: 1.45; background: none; }
-ul { margin: 0 0 3mm 0; padding-left: 6mm; }
-li { margin-bottom: 1.4mm; }
-.cover { height: 244mm; display: flex; flex-direction: column; justify-content: space-between; }
+th, td { border: 0.25mm solid #cfded6; padding: 1.5mm 1.9mm; vertical-align: top; }
+code { font-family: Consolas, monospace; font-size: 8.8pt; background: #f2f6f4; padding: 0.2mm 0.9mm; }
+pre { background: #f5f9f7; border: 0.3mm solid #d9e7e0; border-radius: 1.4mm; padding: 3.4mm; break-inside: avoid; }
+pre code { font-size: 8.4pt; line-height: 1.42; background: none; }
+ul, ol { margin: 0 0 2.8mm 0; padding-left: 6mm; }
+li { margin-bottom: 1.2mm; }
+.cover { height: 246mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
 .cover .kicker { font: 700 9pt "Segoe UI", sans-serif; letter-spacing: 0.18em; color: #159a72; }
-.cover .rule { width: 44mm; height: 1.4mm; background: #159a72; margin: 6mm 0; }
-.cover .meta { font: 9pt "Segoe UI", sans-serif; color: #4a675c; line-height: 1.9; }
-.toc { break-before: page; }
-.toc ol { list-style: none; padding: 0; }
-.toc li { border-bottom: 0.2mm dotted #c8d8d0; padding: 2mm 0; font: 10pt "Segoe UI", sans-serif; display: flex; gap: 8mm; }
-.toc .num { color: #159a72; font-weight: 700; width: 10mm; }
+.cover .rule { width: 44mm; height: 1.3mm; background: #159a72; margin: 5mm 0; }
+.cover .meta { font: 9pt "Segoe UI", sans-serif; color: #4a675c; line-height: 1.85; }
+.cover .rule-bottom { border-top: 0.3mm solid #d7e5de; padding-top: 4mm; }
 </style></head><body>
 <section class="cover">
-  <div><p class="kicker">PASADHI · SOLUTION PAPER</p><div class="rule"></div><h1>PASADHI: one pool from the machines you already own</h1></div>
-  <div class="meta">PASADHI contributors · v1.0<br>23 October 2026 · MIT for the open core<br>
-    github.com/camponggogo/pasadhi · pasadhi.tech</div>
+  <div><p class="kicker">PASADHI · SOLUTION PAPER</p><div class="rule"></div><h1>PASADHI: a matrix-first pool built from the machines you already own</h1>
+       <p style="font:10pt 'Segoe UI',sans-serif;color:#4a675c;margin-top:4mm">Solution paper · 2 figures</p></div>
+  <div class="meta"><div class="rule-bottom">
+    PASADHI contributors · v1.1<br>23 October 2026 · MIT for the open core<br>
+    github.com/camponggogo/pasadhi · pasadhi.tech</div></div>
 </section>
-<p><strong>A solution paper · v1.0 · 23 October 2026</strong> · PASADHI contributors · MIT for the open core</p>
+<p><strong>Solution paper · v1.1 · 23 October 2026</strong> · PASADHI contributors · MIT for the open core</p>
 <h2>Abstract</h2>
 <p>Organisations already own the hardware they need; what they lack is a way to use it as one machine. PASADHI
 turns office PCs, servers, laptops and small GPUs into a single compute pool with four properties: it is
-<strong>matrix-first</strong>, <strong>layered as processes</strong>, <strong>priced by measured impact</strong>, and <strong>honest about the physics</strong>.
-On a 50-machine test bed we measure 15.7 req/s from one gateway worker and 22.3–24.8 req/s from two; a content
-addressed prefix cache lifts time-to-first-token on an 8 000-token document from 111.4 s to 0.71 s (157×); a
-document-aware router reaches 90.15 % accuracy in 31.5 µs; and a mixed fleet of 1 450 cards (2 GB to 40 GB)
-aggregates 9.54 PFLOPS f32 and 47.7 POPS int8 at 143.5 kW. The design rule that survives every measurement is
-simple: <strong>the inner loop stays local, and the price follows the measurement</strong>.</p>
+<strong>matrix-first</strong>, <strong>layered as processes</strong>, <strong>priced by measured impact</strong>, and <strong>honest about the physics</strong>.</p>
+<p>The paper states the coordination problem formally, derives the three ceilings that decide the architecture,
+then reports what a 50-machine test bed actually did: 15.7 req/s from one gateway worker and 22.3–24.8 req/s
+from two; a content-addressed prefix cache that lifts time-to-first-token on an 8 000-token document from
+111.4 s to 0.71 s (157×); a document-aware router at 90.15 % accuracy in 31.5 µs; a separated node plane that
+raises heartbeat capacity from 44 to 161 req/s per shard; and a mixed fleet of 1 450 cards (2 GB to 40 GB) that
+aggregates 9.54 PFLOPS f32 and 47.7 POPS int8 inside 143.5 kW.</p>
+<p>The design rule that survives every measurement is simple: <strong>the inner loop stays local, and the price follows
+the measurement</strong>. Installation is four moves on every supported OS, shown isometrically in §6.</p>
 <h2>1. The problem, stated exactly</h2>
-<p>A cloud GPU is rented by the hour and priced per token. An office already owns machines that idle for sixteen
-hours a day. The naive arithmetic — sum the RAM, sum the FLOPs — fails for a reason that has nothing to do with
-silicon: coordination cost. Our first 50-machine run made this visible in one table: throughput sat at 12 req/s
-while latency grew linearly, and at 50 concurrent clients <strong>96.5 % of the response time was queueing</strong> above a
-174 ms service floor. The fleet was not slow; the control path was.</p>
-<h2>2. The solution in one picture</h2>
+<h3>1.1 Three quantities, one budget</h3>
+<p>Let a pool serve requests with arrival rate λ and mean service time <em>S</em>. Little's law fixes the number in
+system, <em>L = λW</em>. Every request therefore spends <em>W = S + Q</em> seconds, where <em>Q</em> is time spent waiting rather
+than computing. The useful fraction of the pool is</p>
+<pre><code>efficiency  η = S / (S + Q)          utilisation  ρ = λ·S / m        (m = parallel servers)
+</code></pre>
+<p>Two regimes follow. When ρ &lt; 0.7 the system is compute-bound and the only thing that helps is more or faster
+servers. When ρ → 1 the system is <strong>coordination-bound</strong>: adding servers adds queueing faster than it adds
+throughput, because every new server also adds a control message, a cache entry and a scheduling decision.</p>
+<p>The first 50-machine run landed in the second regime. Throughput sat at 12 req/s while latency grew linearly,
+and at 50 concurrent clients <strong>96.5 % of response time was queueing</strong> on top of a 174 ms service floor. The
+fleet was not slow; the control path was. This is the problem the paper solves.</p>
+<h3>1.2 Why the obvious answers fail</h3>
+<table>
+<thead>
+<tr>
+<th>Obvious answer</th>
+<th>Why it fails here</th>
+<th>What we measured</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add more workers per host</td>
+<td>one event loop, one accept queue; the host becomes the server</td>
+<td>4 workers peak at 29.1 req/s, then fall to 20.5</td>
+</tr>
+<tr>
+<td>Add more ports</td>
+<td>ports buy isolation, not throughput</td>
+<td>2 ports beat 2 workers by 16 %; a userspace proxy gives it back (−25 %)</td>
+</tr>
+<tr>
+<td>Shard the model across all machines</td>
+<td>activation traffic grows with depth</td>
+<td>50-way pipeline ⇒ 65.5 Mbit/s, 1 922× gateway traffic</td>
+</tr>
+<tr>
+<td>Put the scheduler in PostgreSQL</td>
+<td>the hot path inherits an RPC and a lock</td>
+<td>4.5 req/s with errors, versus 15.0 on the local path</td>
+</tr>
+<tr>
+<td>Price by core-hour</td>
+<td>double-counts idle cores and slow disks</td>
+<td>weights must come from the impact sweep, not from core count</td>
+</tr>
+</tbody>
+</table>
+<h2>2. Background and how this differs</h2>
+<p>Distributed inference is usually built either as a <strong>pipeline</strong> (Petals-style layer sharding), as a <strong>cluster
+scheduler</strong> (Ray, Dask, Kubernetes), or as a <strong>volunteer network</strong> (BOINC, Folding@home). Each solves a piece:</p>
+<ul>
+<li>pipelines move activations between stages, which is the right shape for one model that does not fit;</li>
+<li>cluster schedulers place jobs on homogeneous nodes with a fast fabric;</li>
+<li>volunteer networks aggregate embarrassingly parallel work with untrusted peers.</li>
+</ul>
+<p>PASADHI targets a fourth case: <strong>an office that owns 100–200 heterogeneous machines on a 1 GbE LAN, wants to
+run many small-to-medium matrix jobs, and cannot ask staff to babysit a cluster.</strong> That case needs the opposite
+of a deep pipeline: shallow stages, local inner loops, a control plane that survives heartbeat storms, and a
+pricing rule a finance team can audit.</p>
+<p>Three design commitments distinguish it from the systems above:</p>
+<ol>
+<li><strong>Matrix-first.</strong> The unit of work is a matrix operation, not a model layer. GEMM, int8 GEMM, FFT and
+   convolution all reduce to the same tiled kernel, so one scheduler serves many workloads.</li>
+<li><strong>Process-per-layer with bounded queues.</strong> Back-pressure is the scheduling signal; no layer can stall another.</li>
+<li><strong>Impact pricing.</strong> A contributor is paid by measured effect on delivered work, not by core-hours offered.</li>
+</ol>
+<h2>3. The architecture in one picture</h2>
+<p><img alt="" src="file:///D:/Projects/Petals_Distributed_Inference/pasadhi/web/anatomy/pasadhi-system-fig.png" /></p>
+<p><strong>Figure 1.</strong> The whole system on one floor. Office devices (bottom and sides) feed the <strong>pool</strong> platform,
+which holds the tiled matrix kernel and the card inventory; the <strong>gateway</strong> platform holds identity, policy and
+audit; the <strong>app</strong> platform is what a user touches; <strong>storage</strong> keeps content-addressed blocks. Red tags are the
+measured shares that drive the design: 30 % of a machine is the usual contribution, 88.7 % of prefixes hit the
+cache, 96.5 % of response time is queueing at C=50, and the impact weights are 98 % CPU / 42 % GPU.</p>
 <pre><code> L5 storage     content-addressed blocks, local disks
  L4 kernel      GEMM · int8 GEMM · FFT/conv as GEMM
  L3 scheduler   tiling, placement, back-pressure, retries
@@ -53,9 +126,30 @@ while latency grew linearly, and at 50 concurrent clients <strong>96.5 % of the 
  L1 transport   framed TCP; shared memory on the same host
 </code></pre>
 <p>Each layer is a process group with its own bounded queue. A slow layer blocks its producer, which is the signal
-the scheduler needs; no layer can stall another. The gateway and the node plane are separate processes, so a
-heartbeat storm cannot delay an inference request.</p>
-<h2>3. What we measured, and what it bought</h2>
+the scheduler needs. The gateway and the node plane are separate processes, so a heartbeat storm cannot delay an
+inference request; the node list is cached for 5 s, and heartbeats run every 10 s.</p>
+<h2>4. Principles, and the measurements that produced them</h2>
+<h3>4.1 Serve the median first</h3>
+<p>Prefix reuse shortens the median dramatically and leaves the tail alone: 157× on the median of an 8 000-token
+document, p95 unchanged. The cache is therefore a <em>median</em> instrument; tail latency must be bought with
+redundancy, not with cache.</p>
+<h3>4.2 Scale workers until the host, then stop</h3>
+<p>The gateway ceiling is the event loop: a raw health endpoint serves 58.7–71.2 req/s, while a completion costs
+≈60 ms of loop time. Two workers reach 22.3/24.8 req/s; four workers reach 29.1 at C=8 and fall to 20.5 at C=32.
+The crossover is the operating point, and it is measurable in ten minutes.</p>
+<h3>4.3 Separate planes, bound the queues</h3>
+<p>Moving the node plane out of the gateway raised heartbeat capacity from 44 to 161 req/s per shard and cut C=1
+latency from 210 ms to 105 ms. The mechanism is queue isolation, not faster code: the scheduler can now drop
+stale heartbeats without touching a request.</p>
+<h3>4.4 Keep the inner loop local</h3>
+<p>Sharded GEMM keeps only 6.9 % of compute across an antipodal fibre link, 32.3 % over LEO, 2.8 % over GEO and
+0.004 % across Earth–Mars. The rule that follows is not "never distribute" but "distribute the outer loop":
+tiles that fit one host stay on one host, and only the panel boundary crosses the wire.</p>
+<h3>4.5 Price by impact, not by cores</h3>
+<p>Weights come from the same sweep that produced the performance numbers: CPU 98.0 %, RAM 0.4 %, disk 1.0 %,
+network 0.6 % on a CPU-only node; CPU 56.6 %, GPU 42.2 % once a GTX 1050 is present. A four-thread machine
+shared at 100 % earns 2.50 THB per hour; an eight-thread machine at 35 % earns ≈711 THB per month.</p>
+<h2>5. What we measured, and what it bought</h2>
 <table>
 <thead>
 <tr>
@@ -102,69 +196,77 @@ heartbeat storm cannot delay an inference request.</p>
 </tr>
 </tbody>
 </table>
-<p>Three numbers deserve emphasis because they decide architecture, not tuning:</p>
-<ol>
-<li><strong>The gateway ceiling is the event loop.</strong> A raw health endpoint serves 58.7–71.2 req/s; a completion costs
-   ≈60 ms of loop time. Workers scale until the host does: four workers peak at 29.1 req/s at C=8 and fall to
-   20.5 at C=32.</li>
-<li><strong>Prefix reuse is the largest single win.</strong> 157× on the median, with p95 unchanged — the cache fixes the
-   median, not the tail.</li>
-<li><strong>Ports are not throughput.</strong> Two ports beat two workers by 16 % because each process owns its accept queue;
-   a userspace proxy gives the gain back (−25 %), and a hundred ports buy 4.4 GiB of memory and no extra
-   request per second.</li>
-</ol>
-<h2>4. Capacity, priced by impact</h2>
-<p>Contributions are paid by what they actually contribute, weighted from the same sweep that produced the
-performance numbers: <strong>CPU 98.0 %</strong>, RAM 0.4 %, disk 1.0 %, network 0.6 % on a CPU-only node; <strong>CPU 56.6 %,
-GPU 42.2 %</strong> once a GTX 1050 is present. A four-thread machine shared at 100 % earns exactly 2.50 THB per hour;
-an eight-thread machine at 35 % earns ≈711 THB per month.</p>
-<p>That honesty changes the commercial model. At a 30 % share a 150-machine office earns 53 460 THB per month
-against a 149 745 THB subscription, so the break-even share is ≈60 %, or the group price must fall to ≈350 THB
-per machine. The product is therefore sold three ways: <strong>share and use free</strong>, <strong>rent monthly/yearly</strong>, or
-<strong>buy an on-prem licence</strong> scoped to a group, unlimited machines, departments rolled up, multi-licence merge for
-enterprises.</p>
-<h2>5. The fleet we would build</h2>
+<p>Three numbers decide architecture rather than tuning: the loop ceiling (58.7–71.2 req/s raw), the cache win
+(157× median), and the port illusion (100 ports = 4.4 GiB of memory, no extra request per second).</p>
+<h2>6. Installing it, in four moves</h2>
+<p><img alt="" src="file:///D:/Projects/Petals_Distributed_Inference/pasadhi/web/anatomy/pasadhi-install-fig.png" /></p>
+<p><strong>Figure 2.</strong> Installation as it actually runs, in isometric order: (1) unpack the build, (2) probe the machine
+and set the five shares, (3) let it start with the operating system, (4) join the pool and begin earning.</p>
 <table>
 <thead>
 <tr>
-<th>Tier</th>
-<th>What</th>
-<th>Why</th>
+<th>Step</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>Android</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Office tier</td>
-<td>100–200 desktops and laptops, 20–30 % each</td>
-<td>the capacity already exists and is paid for</td>
+<td>1 · unpack</td>
+<td><code>PASADHI-0.1.0-win64-portable.zip</code></td>
+<td>tarball</td>
+<td><code>PASADHI-0.1.0-macos.tar.gz</code></td>
+<td>APK</td>
 </tr>
 <tr>
-<td>Accelerator tier</td>
-<td>small cards (2–16 GB) for independent jobs</td>
-<td>22× per card on the same job; independent jobs need no network</td>
+<td>2 · probe</td>
+<td><code>python service.py --once</code></td>
+<td>same</td>
+<td>same</td>
+<td>in-app probe</td>
 </tr>
 <tr>
-<td>Anchor tier</td>
-<td>a few 24–80 GB cards</td>
-<td>the only place a 35 GB job can run; without them the tail owns the clock</td>
+<td>3 · autostart</td>
+<td><code>install.py --autostart</code> (Run key)</td>
+<td>systemd <code>--user</code> unit</td>
+<td>LaunchAgent</td>
+<td>foreground service</td>
 </tr>
 <tr>
-<td>Network</td>
-<td>1 GbE for the office tier, 10 GbE only for the anchor tier</td>
-<td>sharded GEMM keeps 6.9 % of compute across an antipodal fibre link and 32.3 % over LEO; the inner loop must stay local</td>
+<td>4 · join</td>
+<td>open <code>127.0.0.1:8765</code>, set shares</td>
+<td>same</td>
+<td>same</td>
+<td>same</td>
 </tr>
 </tbody>
 </table>
-<h2>6. What is deliberately not in the product</h2>
+<p>The probe reports cores, RAM ceiling, disk free and network class, then proposes a share. The five sliders —
+CPU, GPU, RAM, disk, network — are the only configuration a contributor ever sees; the worker score and the
+live monthly estimate update as they move. Nothing needs a reboot, and <code>uninstall.py</code> removes every trace.</p>
+<h2>7. Capacity and the commercial model</h2>
+<p>At a 30 % share a 150-machine office delivers 3 564 GFLOP/s and 31 860 node-hours per month, which earns
+53 460 THB against a 149 745 THB subscription: the break-even is ≈60 % share, or ≈350 THB per machine. The
+product is therefore sold three ways — <strong>share and use free</strong>, <strong>rent monthly or yearly</strong>, <strong>buy an on-prem
+licence</strong> scoped to a group with unlimited machines.</p>
+<p>At fleet scale the same arithmetic holds: 1 450 machines, 68.1 % gross margin, 11.5 % of revenue issued as
+credits, and a stress case at 720 h per machine that still clears 43.5 %.</p>
+<h2>8. What is deliberately not in the product</h2>
 <ul>
-<li><strong>No 50-way pipeline sharding.</strong> S* is 3–10 stages, overhead is 150 ms per step, and activation traffic would
-  be 65.5 Mbit/s — 1 922× the measured gateway traffic.</li>
-<li><strong>No interplanetary inner loop.</strong> A 4 096³ GEMM keeps 0.004 % of compute across Earth–Mars; only
-  store-and-forward, checkpointed work crosses that link.</li>
-<li><strong>No claim of cheaper FLOPs than a GPU.</strong> A used-card fleet lands at ฿0.0010 per delivered TFLOP, the same as
-  a rented A100. The margin comes from software, support and residency, not from silicon.</li>
+<li><strong>No 50-way pipeline sharding</strong> — S* is 3–10 stages, overhead is 150 ms per step, activation traffic 65.5 Mbit/s.</li>
+<li><strong>No interplanetary inner loop</strong> — 0.004 % of compute survives Earth–Mars; only checkpointed work crosses it.</li>
+<li><strong>No claim of cheaper FLOPs than a GPU</strong> — a used-card fleet lands at ฿0.0010 per delivered TFLOP, the same as
+  a rented A100. The margin comes from software, support and residency.</li>
 </ul>
-<h2>7. Roadmap</h2>
+<h2>9. Threats to validity</h2>
+<p>Every measurement here comes from one host (8 vCPU, Docker Desktop), a mock backend and published card
+specifications. Absolute ceilings move with the host; the shape of the results does not. Fleet numbers are
+models parameterised by measured per-card throughput, not a 1 450-machine deployment. Where a figure is
+modelled rather than measured, the text says so. The full evidence table, with every graph and every run,
+is the companion volume <em>PASADHI Full Paper</em>.</p>
+<h2>10. Roadmap</h2>
 <table>
 <thead>
 <tr>
@@ -195,12 +297,9 @@ enterprises.</p>
 </tr>
 </tbody>
 </table>
-<h2>8. Limits</h2>
-<p>Every number here comes from one host (8 vCPU, Docker Desktop), a mock backend and published card
-specifications. The fleet ceilings move with the host; the shape of the results does not. Where a figure is
-modelled rather than measured, the text says so.</p>
 <h2>Appendix: where each number lives</h2>
 <p><code>report/RPS_LIMIT.md</code> (gateway ceiling), <code>report/MULTIPORT_100.md</code> (ports), <code>report/KV_CACHE.md</code> (prefix reuse),
 <code>report/EXPERTS_WHITEPAPER.md</code> (router), <code>report/HETERO_FLEET.md</code> (mixed fleet), <code>report/IMPACT_PRICING.th.md</code>
-(weights), <code>report/GROUP.th.md</code> (group economics), <code>pasadhi/core/orbit.py</code> (link budgets).</p>
+(weights), <code>report/GROUP.th.md</code> (group economics), <code>pasadhi/core/orbit.py</code> (link budgets),
+<code>report/IMAGE_FACTS.md</code> + <code>report/IMAGE_FACTS_KERNELS.md</code> + <code>report/IMAGE_FACTS_MODELS.md</code> (what every figure shows).</p>
 </body></html>
