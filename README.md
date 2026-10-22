@@ -38,8 +38,8 @@ the half that matters for compute: **the kernel, the pipeline and the scheduler*
 
 | Paper | What is inside | Download |
 |---|---|---|
-| **Solution paper** v1.1 · 8 pages | the problem in queueing terms, the three ceilings, the architecture, the four-move install, results, price model, threats to validity | [PASADHI-solution.pdf]([https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-solution-raw.pdf]) | 
-| **Full paper** · 29 pages · 46 figures | every experiment with its figure and its source file: gateway, ports, queueing, prefix cache, router, experts, fleet, sharding, growth laws, CPU sweep, kernels, GPU fleet, heterogeneous fleet, orbit link budgets, cost, token economy | [PASADHI-full-paper.pdf]([https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-full-raw.pdf]) |
+| **Solution paper** v1.1 · 8 pages | the problem in queueing terms, the three ceilings, the architecture, the four-move install, results, price model, threats to validity | [PASADHI-solution.pdf](https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-solution-raw.pdf) | 
+| **Full paper** · 29 pages · 46 figures | every experiment with its figure and its source file: gateway, ports, queueing, prefix cache, router, experts, fleet, sharding, growth laws, CPU sweep, kernels, GPU fleet, heterogeneous fleet, orbit link budgets, cost, token economy | [PASADHI-full-paper.pdf](https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-full-raw.pdf) |
 
 Both are rebuilt by `python scripts/build_paper_pdf.py` (in the parent workspace); every figure in the full
 paper sits on a white background. The landing page with the same downloads:
