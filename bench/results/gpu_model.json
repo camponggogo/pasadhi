@@ -1,0 +1,126 @@
+{
+  "note": "GTX 1050 figures are published specifications, not measurements on this host",
+  "card": {
+    "name": "GTX 1050 2GB",
+    "vram_gb": 2.0,
+    "tflops_f32": 1.862,
+    "tops_int8": 3.72,
+    "bandwidth_gbps": 112.0,
+    "watts": 75.0
+  },
+  "crossover_n": {
+    "f32_1gbe": 177484,
+    "f32_10gbe": 17748,
+    "int8_1gbe": 88647,
+    "int8_10gbe": 8865
+  },
+  "vram_limits": {
+    "f32_square": 15543,
+    "int8_square": 31086
+  },
+  "efficiency_curve": [
+    {
+      "n": 512,
+      "f32_1g": 0.011,
+      "int8_1g": 0.023,
+      "f32_10g": 0.103,
+      "int8_10g": 0.188
+    },
+    {
+      "n": 1024,
+      "f32_1g": 0.023,
+      "int8_1g": 0.044,
+      "f32_10g": 0.188,
+      "int8_10g": 0.316
+    },
+    {
+      "n": 2048,
+      "f32_1g": 0.044,
+      "int8_1g": 0.085,
+      "f32_10g": 0.316,
+      "int8_10g": 0.48
+    },
+    {
+      "n": 4096,
+      "f32_1g": 0.085,
+      "int8_1g": 0.156,
+      "f32_10g": 0.48,
+      "int8_10g": 0.649
+    },
+    {
+      "n": 8192,
+      "f32_1g": 0.156,
+      "int8_1g": 0.27,
+      "f32_10g": 0.649,
+      "int8_10g": 0.787
+    }
+  ],
+  "fleets": {
+    "independent_f32": {
+      "mode": "independent",
+      "cards": 1000,
+      "dtype_bytes": 4,
+      "n": 4096,
+      "link_gbps": 1.0,
+      "per_card_efficiency": 0.7,
+      "aggregate_tflops": 1303.4,
+      "aggregate_pflops": 1.3,
+      "network_dependency": 0.0,
+      "total_vram_gb": 2000.0,
+      "power_kw": 75.0
+    },
+    "independent_int8": {
+      "mode": "independent",
+      "cards": 1000,
+      "dtype_bytes": 1,
+      "n": 4096,
+      "link_gbps": 1.0,
+      "per_card_efficiency": 0.7,
+      "aggregate_tflops": 2604.0,
+      "aggregate_pflops": 2.6,
+      "network_dependency": 0.0,
+      "total_vram_gb": 2000.0,
+      "power_kw": 75.0
+    },
+    "sharded_f32_1gbe": {
+      "mode": "sharded",
+      "cards": 1000,
+      "dtype_bytes": 4,
+      "n": 4096,
+      "link_gbps": 1.0,
+      "per_card_efficiency": 0.085,
+      "aggregate_tflops": 157.4,
+      "aggregate_pflops": 0.16,
+      "network_dependency": 0.915,
+      "total_vram_gb": 2000.0,
+      "power_kw": 75.0
+    },
+    "sharded_f32_10gbe": {
+      "mode": "sharded",
+      "cards": 1000,
+      "dtype_bytes": 4,
+      "n": 4096,
+      "link_gbps": 10.0,
+      "per_card_efficiency": 0.48,
+      "aggregate_tflops": 893.8,
+      "aggregate_pflops": 0.89,
+      "network_dependency": 0.52,
+      "total_vram_gb": 2000.0,
+      "power_kw": 75.0
+    },
+    "sharded_int8_10gbe": {
+      "mode": "sharded",
+      "cards": 1000,
+      "dtype_bytes": 1,
+      "n": 4096,
+      "link_gbps": 10.0,
+      "per_card_efficiency": 0.649,
+      "aggregate_tflops": 2413.9,
+      "aggregate_pflops": 2.41,
+      "network_dependency": 0.351,
+      "total_vram_gb": 2000.0,
+      "power_kw": 75.0
+    }
+  },
+  "thb_per_tflop_hour": 0.0003
+}

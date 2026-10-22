@@ -57,6 +57,15 @@ We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. T
 - Sales kit: one-pager, deck outline, objections, quote and SOW (Thai): [`docs/SALES_KIT.th.md`](docs/SALES_KIT.th.md)
 - Calculator behind every number: `python pasadhi/commercial/pricing.py`
 
+## GPU layer
+
+Small second-hand cards are a different machine, not a faster node: 1 000 × GTX 1050 2 GB gives
+**1.30 PFLOPS f32 (2.60 POPS int8)** for independent jobs, but only **0.16 PFLOPS** if a single GEMM
+is sharded across them over 1 GbE — 91.5 % of the card's time would wait for data.
+
+- Design, capacity model and the 1 000-machine reality check: [`docs/GPU_FLEET.md`](docs/GPU_FLEET.md)
+- Run the model: `python pasadhi/bench/gpu_model.py`
+
 ## Provenance
 
 PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement

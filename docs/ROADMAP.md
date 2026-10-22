@@ -33,6 +33,22 @@ The pipeline loses because every hop pickles 256 KB. Replace `mp.Queue` with a r
 - [ ] target: pipeline ≥ 1.5× the single loop at 512² blocks
 - [ ] fallback to pickling below the threshold, with the crossover point measured, not guessed
 
+## M2.5 — GPU layer: 1 000 × GTX 1050 2 GB
+
+Small cards are a different machine, not a faster node. The model (`core/gpu.py`, `bench/gpu_model.py`) says:
+
+- independent jobs: **1.30 PFLOPS f32 / 2.60 POPS int8** across 1 000 cards
+- sharded GEMM on 1 GbE: **0.16 PFLOPS (8.5 %)** — 91.5 % of the card's time waits for data
+- sharded GEMM on 10 GbE: 0.89 PFLOPS f32, 2.41 POPS int8 (48 % / 64.9 %)
+- crossover: n ≈ 177 000 on 1 GbE f32 (impossible in 2 GB), n ≈ 8 900 with int8 on 10 GbE
+- cost: ฿0.0003 per delivered TFLOP on cost basis → ฿0.0010 at 70 % margin, i.e. **parity with a rented A100**
+
+- [ ] discovery via `nvidia-ml-py`, DP4A path through cupy/numba
+- [ ] VRAM-aware bin packing in the scheduler (`plan_bins`)
+- [ ] prove independent mode on 10 cards before any sharding work
+- [ ] burn-in test for second-hand cards (30 min GEMM, reject on ECC/thermal faults)
+- [ ] publish the supported matrix: card × driver × CUDA version
+
 ## M3 — distributed matrix plane (two hosts, then ten)
 
 - [ ] row-panel sharding of the output, 256-row panels, retry-safe tile ids
