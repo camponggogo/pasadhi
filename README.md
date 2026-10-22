@@ -56,6 +56,7 @@ We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. T
 - Business plan, pricing and unit economics (Thai): [`docs/BUSINESS.th.md`](docs/BUSINESS.th.md)
 - Sales kit: one-pager, deck outline, objections, quote and SOW (Thai): [`docs/SALES_KIT.th.md`](docs/SALES_KIT.th.md)
 - Token economy: credits, layer split and the liquidity reserve (Thai): [`docs/TOKEN_ECONOMY.th.md`](docs/TOKEN_ECONOMY.th.md)
+- Public / orbital network: what survives the speed of light (Thai): [`docs/OPEN_NETWORK.th.md`](docs/OPEN_NETWORK.th.md)
 - Calculator behind every number: `python pasadhi/commercial/pricing.py`
 
 ## GPU layer
@@ -66,6 +67,16 @@ is sharded across them over 1 GbE — 91.5 % of the card's time would wait for d
 
 - Design, capacity model and the 1 000-machine reality check: [`docs/GPU_FLEET.md`](docs/GPU_FLEET.md)
 - Run the model: `python pasadhi/bench/gpu_model.py`
+
+## Public network
+
+PASADHI is designed to be open to anyone, and eventually to links that are not on this planet. The rule that
+survives the speed of light: **the inner loop stays local**. A 4 096³ GEMM sharded over an antipodal fibre link
+keeps only **6.9 %** of the card's compute (10 collective rounds × 196 ms); over Earth–Mars it keeps 0.004 %.
+Independent 10-minute jobs, by contrast, survive up to the Moon (99.6 %) and only break at Mars (18–62 %).
+
+- Link budgets, DTN design, public-network trust: [`docs/OPEN_NETWORK.th.md`](docs/OPEN_NETWORK.th.md)
+- Run it: `python pasadhi/bench/orbit_model.py`
 
 ## Mixed fleet
 

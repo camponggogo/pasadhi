@@ -93,6 +93,24 @@ and 10 % of profit into a reserve that backs an internal credit token. Modelled 
 - [ ] measure credit breakage before promising the discount in a contract
 - [ ] legal review before any transferable token (Thai digital-asset rules)
 
+## M6 — public network, then orbit
+
+Open participation at planetary scale. The physics sets the rule (`core/orbit.py`):
+
+| link | RTT | sharded GEMM keeps | 10-minute batch job keeps |
+|---|---:|---:|---:|
+| Earth fibre (antipodal) | 196 ms | 6.9 % | 100 % |
+| LEO 550 km | 31 ms | 32.3 % | 100 % |
+| GEO | 518 ms | 2.8 % | 99.9 % |
+| Moon | 2.56 s | 0.57 % | 99.6 % |
+| Mars (closest) | 6 min | 0.004 % | 62 % |
+
+- [ ] public testnet: node identity, burn-in attestation, redundant execution 2× + spot-check 5 %
+- [ ] credit ledger with a daily Merkle root; slash on mismatched results
+- [ ] DTN transport (bundle) and checkpointed tiles for links above 1 s RTT
+- [ ] deadline-based scheduling instead of RTT-based
+- [ ] legal review: cross-border data, spectrum, contracts across jurisdictions
+
 ## M5 — the virtual machine
 
 - [ ] one address space across machines: `pasadhi matmul --rows 65536 --cols 65536 --workers 10`

@@ -1,0 +1,59 @@
+{
+  "note": "speed-of-light arithmetic; no hardware assumptions beyond the link budget",
+  "links": [
+    {
+      "link": "Earth \u00b7 fibre (antipodal)",
+      "rtt_ms": 196.2,
+      "mbps": 10000,
+      "gemm_eff": 0.069486,
+      "batch_eff_10min": 0.9997,
+      "min_job_s_for_90pct": 1.8,
+      "note": "two thirds of c in glass"
+    },
+    {
+      "link": "LEO satellite \u00b7 550 km",
+      "rtt_ms": 30.7,
+      "mbps": 200,
+      "gemm_eff": 0.323243,
+      "batch_eff_10min": 0.9999,
+      "min_job_s_for_90pct": 0.3,
+      "note": "path ~4x altitude, plus ground segment"
+    },
+    {
+      "link": "GEO satellite \u00b7 35 786 km",
+      "rtt_ms": 517.5,
+      "mbps": 50,
+      "gemm_eff": 0.027535,
+      "batch_eff_10min": 0.9991,
+      "min_job_s_for_90pct": 4.7,
+      "note": "one hop up and down"
+    },
+    {
+      "link": "Earth\u2013Moon",
+      "rtt_ms": 2564.4,
+      "mbps": 10,
+      "gemm_eff": 0.005681,
+      "batch_eff_10min": 0.9957,
+      "min_job_s_for_90pct": 23.1,
+      "note": "1.28 s one way, unavoidable"
+    },
+    {
+      "link": "Earth\u2013Mars \u00b7 closest",
+      "rtt_ms": 364252.0,
+      "mbps": 2,
+      "gemm_eff": 4e-05,
+      "batch_eff_10min": 0.6222,
+      "min_job_s_for_90pct": 3278.3,
+      "note": "3 min one way"
+    },
+    {
+      "link": "Earth\u2013Mars \u00b7 farthest",
+      "rtt_ms": 2675184.0,
+      "mbps": 2,
+      "gemm_eff": 5e-06,
+      "batch_eff_10min": 0.1832,
+      "min_job_s_for_90pct": 24076.7,
+      "note": "22 min one way"
+    }
+  ]
+}
