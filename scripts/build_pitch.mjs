@@ -35,8 +35,10 @@ if(!process.argv.includes('--finalize-only'))for(let i=0;i<data.slides.length;i+
  s.background.fill=d.light?'#F3F6EF':dark;
  if(d.kind==='cover'||d.kind==='ask'){
   s.images.add({blob:bg,contentType:'image/png',alt:'Conceptual compute network artwork, not deployed PASADHI hardware',fit:'cover',position:{left:0,top:0,width:1280,height:720}});
+  if(d.kind==='cover'){
   s.images.add({blob:logo,contentType:'image/png',alt:'PASADHI original logo',fit:'contain',position:{left:68,top:40,width:88,height:72}});
   text(s,'PASADHI',176,61,440,50,32,white,true);
+  }else{s.shapes.add({geometry:'rect',position:{left:0,top:0,width:745,height:720},fill:dark,line:{fill:'none',width:0}});}
  }
  if(d.kind==='cover'){
   text(s,'AI compute on the\ncomputers you\nalready own',72,185,730,275,62,white,true,'title');
@@ -45,7 +47,7 @@ if(!process.argv.includes('--finalize-only'))for(let i=0;i<data.slides.length;i+
   text(s,d.title,72,65,1136,132,46,c.ink,true,'title');
   if(d.kind==='product'){
    text(s,d.subtitle,72,188,1136,40,27,c.accent,true);
-   s.images.add({path:path.join(root,'web/pitch/assets/system.png'),alt:'PASADHI target system architecture; distributed plane remains roadmap',fit:'contain',position:{left:92,top:242,width:1096,height:345}});
+   s.images.add({blob:await fs.readFile(path.join(root,'web/pitch/assets/system.png')),contentType:'image/png',alt:'PASADHI target system architecture; distributed plane remains roadmap',fit:'contain',position:{left:92,top:242,width:1096,height:345}});
   }else if(d.metrics){addMetrics(s,d,c);
   }else if(d.kind==='chart'){
    text(s,d.big,72,252,575,110,54,mint,true);
@@ -58,7 +60,7 @@ if(!process.argv.includes('--finalize-only'))for(let i=0;i<data.slides.length;i+
   }else if(d.table){
    const values=d.table;
    const cols=values[0].length;
-   const widths=d.kind==='budget'?[650,250,236]:cols===4?[270,270,280,316]:[240,370,526];
+   const widths=d.kind==='budget'?[650,250,236]:d.kind==='runway-research'?[310,300,526]:cols===4?[270,270,280,316]:[240,370,526];
    const table=s.tables.add({rows:values.length,columns:cols,left:72,top:225,width:1136,height:values.length>5?355:320,columnWidths:widths,values});
    for(let r=0;r<values.length;r++)for(let col=0;col<cols;col++){
     const cell=table.getCell(r,col);cell.fill=r===0?(d.light?'#D5E7DD':'#163C3D'):(d.light?'#F3F6EF':dark);cell.text.style={fontSize:23,typeface:font,color:c.ink,bold:r===0,insets:10,verticalAlignment:'middle'};
@@ -102,7 +104,7 @@ if(!process.argv.includes('--finalize-only'))for(let i=0;i<data.slides.length;i+
 const candidate=path.join(tmp,'candidate.pptx');
 if(!process.argv.includes('--finalize-only'))await (await PresentationFile.exportPptx(p)).save(candidate);
 const tableOwners=data.slides.flatMap((d,i)=>d.table?[i+1]:[]);
-const result=await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath:path.join(out,'PASADHI-pitch-2026.pptx'),pythonExecutable:runtime+'/python/python.exe',integrityValidatorPath:skill+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:skill+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],explicitTotalSlideCount:data.slides.length,requiredNativeChartOwnerSlides:[6],materializeLiteralChartWorkbooks:true,tableArithmeticContracts:[{slide:20,table:1,label_column:0,total_row:6,value_columns:[1],component_rows:[1,2,3,4,5]}],requiredNativeTableOwnerSlides:tableOwners,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation.json')});
+const result=await finalizePresentation({workspaceDir:root,candidatePath:candidate,finalPath:path.join(out,'PASADHI-pitch-2026-r2.pptx'),pythonExecutable:runtime+'/python/python.exe',integrityValidatorPath:skill+'/container_tools/inspect_presentation_package_integrity.py',layoutValidatorPath:skill+'/container_tools/inspect_presentation_layout_geometry.py',layoutArgs:['--expected-slide-size-emu','12192000,6858000','--validate-heading-fit',...tableOwners.flatMap(n=>['--require-native-table-slide',String(n)])],explicitTotalSlideCount:data.slides.length,requiredNativeChartOwnerSlides:[6],materializeLiteralChartWorkbooks:true,tableArithmeticContracts:[{slide:20,table:1,label_column:0,total_row:6,value_columns:[1],component_rows:[1,2,3,4,5]}],requiredNativeTableOwnerSlides:tableOwners,fontPolicy:{basis:'design',families:[font]},verifyArtifactToolImport:true,receiptPath:path.join(tmp,'validation-r2.json')});
 console.log(JSON.stringify(result));
-await fs.copyFile(path.join(out,'PASADHI-pitch-2026.pptx'),path.join(root,'web/download/PASADHI-pitch-2026.pptx'));
+await fs.copyFile(path.join(out,'PASADHI-pitch-2026-r2.pptx'),path.join(root,'web/download/PASADHI-pitch-2026.pptx'));
 console.log('Final editable PPTX exported and staged for website.');

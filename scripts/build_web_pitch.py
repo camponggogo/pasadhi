@@ -14,7 +14,7 @@ def slide_html(d,i):
     kind=d['kind']
     cls=f'slide {kind}' + (' light' if d.get('light') else '') + (' artwork' if kind in ('cover','ask') else '')
     content=f'<h1>{esc(d["title"])}</h1>'
-    if kind in ('cover','ask'):
+    if kind == 'cover':
         content='<div class="wordmark"><img src="assets/logo.png" alt=""><b>PASADHI</b></div>'+content
     if d.get('subtitle'):
         content+=f'<p class="subtitle">{esc(d["subtitle"])}</p>'
@@ -49,7 +49,7 @@ def slide_html(d,i):
 body='\n'.join(slide_html(d,i) for i,d in enumerate(data['slides']))
 notes='\n'.join(f'<article data-note="{i}"><h2>{esc(d["title"])}</h2><p lang="th">{esc(d["notes"])}</p><h3>Sources</h3><ul>'+''.join(f'<li>{f"<a href={chr(34)}{e(s)}{chr(34)} target={chr(34)}_blank{chr(34)} rel={chr(34)}noopener{chr(34)}>{e(s)}</a>" if s.startswith("https://") else e(s)}</li>' for s in d['sources'])+'</ul></article>' for i,d in enumerate(data['slides']))
 html=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PASADHI · Investor & research presentation</title><meta name="description" content="PASADHI pitch: existing hardware, reproducible research, a proposed six-month funding plan, and transparent operating scenarios.">
+<title>PASADHI · Investor & research presentation</title><meta name="description" content="PASADHI pitch: existing hardware, reproducible research, a proposed 24-month funding plan, and transparent operating scenarios.">
 <link rel="canonical" href="https://campong.online/projects/pasadhi/pitch/"><link rel="stylesheet" href="../fonts/fonts.css"><link rel="stylesheet" href="present.css"></head>
 <body><header class="toolbar"><a href="../">← PASADHI</a><label>View <select id="mode"><option value="investor">Investor · {data['coreCount']} slides</option><option value="full">Full · {len(data['slides'])} slides</option></select></label><a href="../download/PASADHI-pitch-2026.pptx" download>Download PPTX</a><a href="funding-plan.md">Funding plan</a><button id="notes-toggle" aria-pressed="false">Notes / แหล่งข้อมูล</button><button id="fullscreen">Fullscreen</button></header>
 <main id="stage" tabindex="0" aria-label="Presentation; use left and right arrows to navigate">{body}</main>

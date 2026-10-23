@@ -45,6 +45,12 @@ Both are rebuilt by `python scripts/build_paper_pdf.py` (in the parent workspace
 paper sits on a white background. The landing page with the same downloads:
 [campong.online/projects/pasadhi](https://campong.online/projects/pasadhi/).
 
+## Pitch presentation
+
+[Web presentation](https://campong.online/projects/pasadhi/pitch/) · [PowerPoint](web/download/PASADHI-pitch-2026.pptx) · [Funding assumptions](web/pitch/funding-plan.md).
+
+14 investor slides plus 10 research and financial appendix slides. Proposed $750,000 raise for a 24-month cash runway, with initial product and pilot gates in five months. Customer and revenue targets are hypotheses.
+
 ## Quick start
 
 ### Release downloads · v0.1.0
@@ -192,7 +198,7 @@ Named after *ปัสสัทธิ* — calm, settled, at rest. The machine s
 ## Download · release and latest
 
 **Release: v0.1.0 · Latest: v0.1.0.** Versioned links stay fixed; latest links follow the newest published build.
-Downloads below are included in this repository and staged for the website; the website update has not been deployed.
+Downloads below are included in this repository; the website provides the same release and latest download paths.
 
 | OS | Release v0.1.0 | Latest | How to run |
 |---|---|---|---|
