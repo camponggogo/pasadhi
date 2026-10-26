@@ -2,37 +2,43 @@
 
 # PASADHI · ปัสสัทธิ
 
-**A virtual distributed machine for old hardware.** PASADHI turns a room of ageing PCs into one addressable
-compute surface — matrix-first, process-layered, and honest about what each generation of CPU can actually do.
+**Distributed AI Compute Pool & Hybrid Orchestrator for Edge Networks**
 
-> Status: **M0 prototype, v0.1.0 builds shipped.** Kernel and pipeline benchmarks run on one host; the app
-> runs on Windows today and from source elsewhere. The distributed plane is specified, not yet implemented.
+**PASADHI** turns a room of ageing PCs and local networks into one addressable compute surface. Engineered as a hybrid orchestrator, it dynamically routes, balances, and executes heavy AI workloads—seamlessly shifting between edge networks and cloud endpoints to optimize cost, latency, and hardware utilization. 
+
+> Status: **M0 prototype, v0.1.0 builds shipped.** Kernel and pipeline benchmarks run on one host; the app runs on Windows today and from source elsewhere.
 
 ![The full system: devices feed the pool, the gateway holds policy, storage keeps the blocks](web/anatomy/pasadhi-system-fig.png)
 
-*The whole system in one isometric view. Red tags are measured shares: 30 % of a machine is the usual
-contribution, 88.7 % of prefixes hit the cache, 96.5 % of response time at C=50 is queueing, and the impact
-weights are 98 % CPU / 42 % GPU.*
+*The whole system in one isometric view. Red tags are measured shares: 30 % of a machine is the usual contribution, 88.7 % of prefixes hit the cache, 96.5 % of response time at C=50 is queueing, and the impact weights are 98 % CPU / 42 % GPU.*
+
+## 🏆 Meta Global AI Developer Hackathon 2026
+This repository is developed for the **Startup Track** under the **"Push the Frontier"** theme. Pasadhi demonstrates what becomes possible when world-class frontier models meet robust, production-ready distributed systems.
+
+### ⚡ Built for the Meta Ecosystem
+Instead of relying solely on expensive and high-latency cloud processing, Pasadhi acts as a smart traffic controller for Meta's AI suite:
+* **Hybrid Workload Routing:** Evaluates incoming tasks and pushes lightweight inference to idle local nodes, while seamlessly routing heavy, high-parameter workloads to **Meta Model APIs** or serverless GPU partners (e.g., Modal, Baseten).
+* **Native Integration:** Optimized to orchestrate and extract maximum performance from **Muse Spark, Muse Wonder, SAM 3.1**, and Meta's open-weights models across a fragmented hardware surface.
+* **Cost & Latency Optimization:** Drastically reduces API burn rates and network latency for enterprise applications by maximizing sunk-cost hardware utility.
 
 ![Install in four moves: unpack, probe and set the five shares, autostart, join the pool](web/anatomy/pasadhi-install-fig.png)
 
 *Installation in four moves — the same four on Windows, Linux, macOS and Android.*
 
+## 🔬 The Bigger Vision (Campong Innovation)
+Software orchestration is only the first step. At **Campong Innovation**, we believe the ultimate bottleneck for superintelligence lies in the physical limits of current silicon hardware. Pasadhi serves as our foundational software bridge while we actively research and develop the next generation of **base-frequency photonic processors** for true hardware-level AI acceleration.
+
+---
+
 ## Why
 
-Cloud GPUs are rented by the hour. Offices already own machines that idle for sixteen hours a day. SUAY proved
-the control-plane half of that idea: a token gateway, a node plane, prefix caching, expert routing. PASADHI takes
-the half that matters for compute: **the kernel, the pipeline and the scheduler** — and it is not only for LLMs.
+Cloud GPUs are rented by the hour. Offices already own machines that idle for sixteen hours a day. SUAY proved the control-plane half of that idea: a token gateway, a node plane, prefix caching, expert routing. PASADHI takes the half that matters for compute: **the kernel, the pipeline and the scheduler** — and it is not only for LLMs.
 
 ## The three ideas
 
-1. **Matrix processor first.** Everything is a matrix operation: dense GEMM, quantised GEMM, block-sparse,
-   FFT-as-GEMM, convolution-as-GEMM. One optimised path, many workloads.
-2. **Multi-Layer Process.** Work is split into layers (L1 transport, L2 policy, L3 scheduler, L4 kernel,
-   L5 storage). Each layer is a process group with its own queue, so a slow layer degrades gracefully instead
-   of stalling the machine.
-3. **Old hardware is the target, not the excuse.** Haswell-era AVX2, 2–8 GB of usable RAM per box, SATA disks.
-   The design budgets for it: int8 before fp32, blocking before threads, streaming before caching.
+1. **Matrix processor first.** Everything is a matrix operation: dense GEMM, quantised GEMM, block-sparse, FFT-as-GEMM, convolution-as-GEMM. One optimised path, many workloads.
+2. **Multi-Layer Process.** Work is split into layers (L1 transport, L2 policy, L3 scheduler, L4 kernel, L5 storage). Each layer is a process group with its own queue, so a slow layer degrades gracefully instead of stalling the machine.
+3. **Old hardware is the target, not the excuse.** Haswell-era AVX2, 2–8 GB of usable RAM per box, SATA disks. The design budgets for it: int8 before fp32, blocking before threads, streaming before caching.
 
 ## Papers
 
@@ -41,9 +47,7 @@ the half that matters for compute: **the kernel, the pipeline and the scheduler*
 | **Solution paper** v1.1 · 8 pages | the problem in queueing terms, the three ceilings, the architecture, the four-move install, results, price model, threats to validity | [PASADHI-solution.pdf](https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-solution-raw.pdf) | 
 | **Full paper** · 29 pages · 46 figures | every experiment with its figure and its source file: gateway, ports, queueing, prefix cache, router, experts, fleet, sharding, growth laws, CPU sweep, kernels, GPU fleet, heterogeneous fleet, orbit link budgets, cost, token economy | [PASADHI-full-paper.pdf](https://raw.githubusercontent.com/camponggogo/pasadhi/main/paper/PASADHI-full-raw.pdf) |
 
-Both are rebuilt by `python scripts/build_paper_pdf.py` (in the parent workspace); every figure in the full
-paper sits on a white background. The landing page with the same downloads:
-[campong.online/projects/pasadhi](https://campong.online/projects/pasadhi/).
+Both are rebuilt by `python scripts/build_paper_pdf.py` (in the parent workspace); every figure in the full paper sits on a white background. The landing page with the same downloads: [campong.online/projects/pasadhi](https://campong.online/projects/pasadhi/).
 
 ## Quick start
 
@@ -59,8 +63,7 @@ paper sits on a white background. The landing page with the same downloads:
 
 See each archive's `README.txt` for dependency installation. Builds are unsigned.
 [SHA-256 checksums](web/download/SHA256SUMS.txt) · [Release manifest](web/download/release.json).
-Windows startup is tested using the packaged executable; the Python bundles are startup-tested on Windows.
-Native Linux, macOS and Android builds and device testing remain pending.
+Windows startup is tested using the packaged executable; the Python bundles are startup-tested on Windows. Native Linux, macOS and Android builds and device testing remain pending.
 
 ```bash
 python bench/run.py            # kernel + pipeline benchmarks, writes bench/results/*.json
@@ -70,9 +73,7 @@ python app/service.py --port 8765   # the app, then open 127.0.0.1:8765
 
 ## The app
 
-One service, three roles, one installer. `python app/install.py` probes the machine, scores it, and
-picks coordinator / worker / client; the settings page at 127.0.0.1:8765 has five sliders (CPU, GPU, RAM, HDD,
-network), a live earnings estimate, the per-install device token and a boot-time autostart switch.
+One service, three roles, one installer. `python app/install.py` probes the machine, scores it, and picks coordinator / worker / client; the settings page at 127.0.0.1:8765 has five sliders (CPU, GPU, RAM, HDD, network), a live earnings estimate, the per-install device token and a boot-time autostart switch.
 
 - Design and platform matrix: [docs/APP_SERVICE.th.md](docs/APP_SERVICE.th.md)
 - Hardware and per-resource impact (Thai): [docs/RESOURCE_IMPACT.th.md](docs/RESOURCE_IMPACT.th.md)
@@ -101,8 +102,7 @@ PASADHI is sold as software and support, not as raw FLOPs — the measurements s
 | Cloud CPU (4 vCPU) | 0.028 |
 | Cloud GPU (1× A100) | 0.001 |
 
-We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. The product is therefore
-**residency, sunk hardware and small bursty jobs**, not a cheaper GPU.
+We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. The product is therefore **residency, sunk hardware and small bursty jobs**, not a cheaper GPU.
 
 - Business plan, pricing and unit economics (Thai): [`docs/BUSINESS.th.md`](docs/BUSINESS.th.md)
 - Sales kit: one-pager, deck outline, objections, quote and SOW (Thai): [`docs/SALES_KIT.th.md`](docs/SALES_KIT.th.md)
@@ -112,36 +112,28 @@ We lose to a GPU by 17× on price per FLOP and win against cloud CPU by 1.8×. T
 
 ## GPU layer
 
-Small second-hand cards are a different machine, not a faster node: 1 000 × GTX 1050 2 GB gives
-**1.30 PFLOPS f32 (2.60 POPS int8)** for independent jobs, but only **0.16 PFLOPS** if a single GEMM
-is sharded across them over 1 GbE — 91.5 % of the card's time would wait for data.
+Small second-hand cards are a different machine, not a faster node: 1 000 × GTX 1050 2 GB gives **1.30 PFLOPS f32 (2.60 POPS int8)** for independent jobs, but only **0.16 PFLOPS** if a single GEMM is sharded across them over 1 GbE — 91.5 % of the card's time would wait for data.
 
 - Design, capacity model and the 1 000-machine reality check: [`docs/GPU_FLEET.md`](docs/GPU_FLEET.md)
 - Run the model: `python bench/gpu_model.py`
 
 ## Public network
 
-PASADHI is designed to be open to anyone, and eventually to links that are not on this planet. The rule that
-survives the speed of light: **the inner loop stays local**. A 4 096³ GEMM sharded over an antipodal fibre link
-keeps only **6.9 %** of the card's compute (10 collective rounds × 196 ms); over Earth–Mars it keeps 0.004 %.
-Independent 10-minute jobs, by contrast, survive up to the Moon (99.6 %) and only break at Mars (18–62 %).
+PASADHI is designed to be open to anyone, and eventually to links that are not on this planet. The rule that survives the speed of light: **the inner loop stays local**. A 4 096³ GEMM sharded over an antipodal fibre link keeps only **6.9 %** of the card's compute (10 collective collective rounds × 196 ms); over Earth–Mars it keeps 0.004 %. Independent 10-minute jobs, by contrast, survive up to the Moon (99.6 %) and only break at Mars (18–62 %).
 
 - Link budgets, DTN design, public-network trust: [`docs/OPEN_NETWORK.th.md`](docs/OPEN_NETWORK.th.md)
 - Run it: `python bench/orbit_model.py`
 
 ## Mixed fleet
 
-One scheduler from a 2 GB GTX 1050 to a 40 GB A100: 1 450 cards, **9.54 PFLOPS f32 / 47.7 POPS int8** at
-143.5 kW. The simulation shows the tail, not the policy, owns the clock — and that splitting a job larger than
-any spare card is worth more than buying another one.
+One scheduler from a 2 GB GTX 1050 to a 40 GB A100: 1 450 cards, **9.54 PFLOPS f32 / 47.7 POPS int8** at 143.5 kW. The simulation shows the tail, not the policy, owns the clock — and that splitting a job larger than any spare card is worth more than buying another one.
 
 - Results and operating notes: [`docs/HETERO_FLEET.md`](docs/HETERO_FLEET.md)
 - Run it: `python bench/hetero_model.py`
 
 ## Research timeline
 
-Newest first. Every entry names the number that came out of it; the full evidence is the
-[full paper](https://campong.online/projects/pasadhi/download/PASADHI-full-paper.pdf).
+Newest first. Every entry names the number that came out of it; the full evidence is the [full paper](https://campong.online/projects/pasadhi/download/PASADHI-full-paper.pdf).
 
 | Date | Milestone | The number |
 |---|---|---|
@@ -183,16 +175,13 @@ Newest first. Every entry names the number that came out of it; the full evidenc
 
 ## Provenance
 
-PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement
-discipline — medians, p95, negative results kept in — and replaces the AI-only framing with a general
-matrix-compute plane. The 2026-10-20 → 10-21 entries above are that evidence base. Code is MIT; see `LICENSE`.
+PASADHI is a fork-in-spirit of [SUAY](https://github.com/camponggogo/suay) (MIT). It keeps SUAY's measurement discipline — medians, p95, negative results kept in — and replaces the AI-only framing with a general matrix-compute plane. The 2026-10-20 → 10-21 entries above are that evidence base. Code is MIT; see `LICENSE`.
 
 Named after *ปัสสัทธิ* — calm, settled, at rest. The machine should be quiet and the numbers should be boring.
 
 ## Download · release and latest
 
-**Release: v0.1.0 · Latest: v0.1.0.** Versioned links stay fixed; latest links follow the newest published build.
-Downloads below are included in this repository and staged for the website; the website update has not been deployed.
+**Release: v0.1.0 · Latest: v0.1.0.** Versioned links stay fixed; latest links follow the newest published build. Downloads below are included in this repository and staged for the website; the website update has not been deployed.
 
 | OS | Release v0.1.0 | Latest | How to run |
 |---|---|---|---|
@@ -202,7 +191,6 @@ Downloads below are included in this repository and staged for the website; the 
 | Android / Termux | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-android-termux.zip) | [Latest ZIP](web/download/latest/PASADHI-android-termux.zip) | Termux + Python; `bash pasadhi.sh`; not an APK |
 | Source | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-source.zip) | [Latest ZIP](web/download/latest/PASADHI-source.zip) | Python 3.10+; instructions in `README.txt` |
 
-[Release checksums](web/download/v0.1.0/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) ·
-[Release manifest](web/download/v0.1.0/release.json) · [Latest version manifest](web/download/latest/release.json).
+[Release checksums](web/download/v0.1.0/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) · [Release manifest](web/download/v0.1.0/release.json) · [Latest version manifest](web/download/latest/release.json).
 
 The website and White Papers use bundled open-source fonts; see [font licenses](web/fonts/README.md).
