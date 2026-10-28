@@ -1,0 +1,13 @@
+{
+  "pages": 7,
+  "figures": 8,
+  "tables": 7,
+  "source_files_unchanged": 64,
+  "canonical_runs": 15,
+  "canonical_requests": 120,
+  "visual_review": "All seven final pages inspected",
+  "source_template_unchanged": true,
+  "all_manuscript_items_preserved": true,
+  "embedded_figures_match_generated_pngs": true,
+  "pdf_sha256": "b6f37d567987f850a59de8c5ef4996b21c5259d7079d38fbacfb161bd869e985"
+}
