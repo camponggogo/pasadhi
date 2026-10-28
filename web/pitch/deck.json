@@ -21,7 +21,7 @@
       "items": [
         [
           "The assets",
-          "Office PCs, local data and an IT owner"
+          "50–200 office PCs on one LAN; local data and a named IT owner"
         ],
         [
           "The friction",
@@ -32,11 +32,12 @@
           "One repeatable batch workload that must stay on site"
         ]
       ],
-      "takeaway": "Buyer hypothesis: research labs and small IT teams with existing hardware",
-      "notes": "นี่คือสมมติฐานลูกค้าเริ่มต้น ยังไม่ใช่รายชื่อลูกค้าที่จ่ายเงิน เริ่มจากงาน batch ที่วัด baseline ได้ ไม่อ้างว่าแทนคลาวด์ GPU ได้ทุกกรณี",
+      "takeaway": "Initial ICP hypothesis: on-site IT teams with a recurring, private batch workload",
+      "notes": "สมมติฐานลูกค้าแรก: ทีม IT ในองค์กรที่มี PC 50–200 เครื่องใน LAN เดียว และมีงาน batch ซ้ำที่ข้อมูลต้องอยู่ภายใน ผู้ซื้อคือหัวหน้า IT ผู้ใช้คือ analyst หรือเจ้าของงาน ห้องวิจัยและมหาวิทยาลัยเป็นกลุ่มร่วมตรวจสอบงานวิจัย แผนนี้ยังต้องยืนยันด้วยการสัมภาษณ์และ paid pilot ไม่ใช่ฐานลูกค้าที่มีอยู่",
       "sources": [
         "docs/BUSINESS.th.md",
-        "docs/SALES_KIT.th.md: discovery questions"
+        "docs/SALES_KIT.th.md: discovery questions",
+        "https://www.ycombinator.com/blog/practical-design-pitching"
       ]
     },
     {
@@ -314,7 +315,7 @@
         ]
       ],
       "takeaway": "Proposed raise. Customer targets are unvalidated; revenue is excluded from the base cash-runway calculation.",
-      "notes": "ทุน750kสำหรับ24เดือน แยกmilestoneproduct/pilot5เดือนแรก คำนวณ5×34k+19×24k=626k บวกone-offreserve11.5kและcontingency112.5kรวม750k ไม่สมมติรายได้เพื่อยืดrunway ต้นทุนลูกค้าที่เพิ่มต้องเก็บเงินให้ครอบคลุมและตรวจcashflowจริง ไม่ตั้งrunway5เดือนอีกแล้ว",
+      "notes": "ทุน750kสำหรับ24เดือน แยกmilestoneproduct/pilot5เดือนแรก คำนวณ5×34k+19×24k=626k บวกone-offreserve11.5kและcontingency112.5kรวม750k ไม่สมมติรายได้เพื่อยืดrunway ต้นทุนลูกค้าที่เพิ่มต้องเก็บเงินให้ครอบคลุมและตรวจcashflowจริง",
       "sources": [
         "web/pitch/financial-plan.json",
         "web/pitch/funding-plan.md",
@@ -633,7 +634,7 @@
         ]
       ],
       "takeaway": "Guidance is not a universal rule or observed runway median. Financing needs follow milestones and cash costs.",
-      "notes": "Researchตรวจ23ต.ค.2026:YCguideเดิมกล่าว12–18เดือน ขณะที่CartaและCRVแนะนำ24–30เดือน ไม่เรียกตัวเลขนี้ว่าmedianrunwayเพราะเป็นguidance ช่วงห่างรอบทุนที่วัดได้ไม่เท่ากับระยะเวลาที่ใช้pitch กรณีPASADHIเลือก24เดือนเป็นbaseline18เดือนเป็นแผนscopeเล็กและ6เดือนเป็นเพียงmilestone",
+      "notes": "Researchตรวจ23ต.ค.2026:YCguideเดิมกล่าว12–18เดือน ขณะที่CartaและCRVแนะนำ24–30เดือน ไม่เรียกตัวเลขนี้ว่าmedianrunwayเพราะเป็นguidance ช่วงห่างรอบทุนที่วัดได้ไม่เท่ากับระยะเวลาที่ใช้pitch กรณีPASADHIเลือก24เดือนเป็นbaseline18เดือนเป็นแผนscopeเล็กและ5เดือนแรกเป็นmilestoneส่งมอบ",
       "sources": [
         "https://www.ycombinator.com/blog/how-to-raise-a-seed-round/",
         "https://carta.com/uk/en/learn/startups/fundraising/",

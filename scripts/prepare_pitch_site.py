@@ -18,6 +18,12 @@ for name in ('index.html','th/index.html'):
     text=path.read_text(encoding='utf-8')
     prefix='../' if name.startswith('th/') else './'
     thai=name.startswith('th/')
+    if 'id="prototype-status"' not in text:
+        status='สถานะ M0 prototype: แอปตรวจสเปกและควบคุมทรัพยากรพร้อมทดลอง ส่วนคลัสเตอร์หลายเครื่อง เครดิต รายได้ และบริการเชิงพาณิชย์เป็นแผนพัฒนา ราคาที่แสดงเป็นข้อเสนอ' if thai else 'M0 prototype: hardware probing and resource controls are available to test. Multi-host pooling, credits, payouts and commercial services are planned; displayed prices are proposals.'
+        text=text.replace('<main>',f'<main><aside class="wrap prototype-status" id="prototype-status">{status}</aside>',1)
+        if 'id="prototype-status"' not in text:
+            text=text.replace('</header>',f'</header><aside class="wrap prototype-status" id="prototype-status">{status}</aside>',1)
+        text=text.replace('AVAILABLE NOW','PROTOTYPE AVAILABLE').replace('ALWAYS AVAILABLE','PLANNED LICENCE')
     # Replace the old flat hero diagram with the new conceptual key visual.
     text=re.sub(r'(<div class="hero-art">)\s*<svg.*?</svg>',lambda m:m[1]+f'<img src="{prefix}pitch/assets/compute-background.png" alt="Conceptual artwork of connected compute devices; not a photograph of a deployed PASADHI system">',text,count=1,flags=re.S)
     if 'id="pitch"' not in text:

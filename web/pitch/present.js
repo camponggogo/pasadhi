@@ -7,4 +7,5 @@ document.querySelector('#notes-toggle').addEventListener('click',toggleNotes);do
 document.addEventListener('keydown',event=>{if(/^(INPUT|SELECT|TEXTAREA)$/.test(event.target.tagName))return;if(['ArrowRight','PageDown',' '].includes(event.key)){event.preventDefault();show(index+1);}if(['ArrowLeft','PageUp'].includes(event.key)){event.preventDefault();show(index-1);}if(event.key==='Home')show(0);if(event.key==='End')show(total()-1);if(event.key.toLowerCase()==='n')toggleNotes();if(event.key.toLowerCase()==='f')fullscreen();});
 let start;stage.addEventListener('touchstart',e=>{start=e.changedTouches[0].screenX;},{passive:true});stage.addEventListener('touchend',e=>{const diff=e.changedTouches[0].screenX-start;if(Math.abs(diff)>55)show(index+(diff<0?1:-1));},{passive:true});
 const match=location.hash.match(/^#slide-(\d+)$/);if(match&&Number(match[1])>core)mode.value='full';show(match?Number(match[1])-1:0,false);
+jump.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();show(Number(jump.value)-1);stage.focus();}});
 })();

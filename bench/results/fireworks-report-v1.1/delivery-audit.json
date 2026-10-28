@@ -1,0 +1,14 @@
+{
+  "version": "1.1",
+  "pages": 11,
+  "figures": 12,
+  "tables": 12,
+  "unique_requests": 11221,
+  "source_files_verified": 73,
+  "v1.0_unchanged": true,
+  "visual_review": "all 11 rendered pages inspected",
+  "outputs": {
+    "output\\pdf\\PASADHI-Fireworks-Full-White-Paper-v1.1.pdf": "f4d4002edb0f6e6cd05eb75347ca5247068141f7c8e9ed26f78be6c7846e12e7",
+    "output\\documents\\PASADHI-Fireworks-Full-White-Paper-v1.1.docx": "afb72e2fa7ed9fbaee86995fb2c2cc40a57bf4e51751de137fd1e37ae074f177"
+  }
+}

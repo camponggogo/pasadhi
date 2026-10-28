@@ -8,6 +8,92 @@
 
 > Status: **M0 prototype, v0.1.0 builds shipped.** Kernel and pipeline benchmarks run on one host; the app runs on Windows today and from source elsewhere.
 
+## From idle machines to evidence
+
+An office closes for the evening, but its computers remain. PASADHI starts with a
+question: can those existing machines become a useful shared compute pool? The
+prototype connects a matrix kernel, a scheduler and an application gateway so
+that the idea can be tested one layer at a time.
+
+The first step was local compute. The Docker fleet harness exercises 50/100
+containers with multiple coordinators and worker processes on one host. It checks
+GEMM results and measures latency and throughput. That establishes a repeatable
+container experiment; physical multi-machine scaling still needs a separate trial.
+
+The next step was useful AI work: cleaning noisy Thai and English office notes.
+The app can route to a local Meta model or an explicitly approved cloud backend.
+Its Fireworks evaluation now asks a harder question: how many requests produce
+usable, nonempty text when the load increases?
+
+### What the latest evidence says
+
+The **Fireworks Full White Paper v1.1** (28 October 2026) adds nine serverless
+exports with 22 phases and 11,101 logical requests. Together with the historical
+cohort, the audited corpus contains **11,221 unique requests**. The added cohort
+records **9,007 nonempty outputs and 2,094 errors**: 1,841 HTTP 429 errors and 253
+empty or unsupported responses.
+
+At the requested label of 500, MiniMax and GPT-OSS each returned 500/500 nonempty
+outputs. At 1,000, they returned 674/1,000 and 636/1,000 respectively. More submitted
+work can therefore raise throughput while rejection grows. We report successful
+outputs per second alongside errors and latency, rather than treating attempted
+requests as useful capacity. Nonempty text is a transport/application result;
+it is not a task-quality score.
+
+These are individual observations under different model, output-budget and account
+conditions. Client labels do not prove physical node counts or simultaneous network
+connections. Every added request contains only 848 characters, so this update does
+not establish long-context support. It also contains no fine-tuning outcome.
+
+The next development step follows the evidence: capture actual HTTP status and
+provider request IDs, retain finish reasons and retry-level timing, recover the
+exact load driver, then repeat a controlled study with latency/error targets and a
+labelled Thai/English quality set. A physical fleet trial remains a separate gate.
+
+### Versioned research trail
+
+Application builds and research papers have separate version sequences. The
+Fireworks paper advances from v1.0 to **v1.1**, retaining both.
+The older solution paper's v1.1 belongs to its own document series.
+
+| Fireworks paper | Evidence scope | Read |
+|---|---|---|
+| **v1.1 — latest** | 37 run/phase IDs, 11,221 unique requests; 11 pages, 12 figures, 12 tables | [PDF](output/pdf/PASADHI-Fireworks-Full-White-Paper-v1.1.pdf) · [Word](output/documents/PASADHI-Fireworks-Full-White-Paper-v1.1.docx) · [Markdown](paper/fireworks-v1.1/FULL_WHITE_PAPER_v1.1.md) |
+| v1.0 — retained baseline | 15 runs, 120 unique requests; deployment comparison, local validation and simulation | [PDF](output/pdf/PASADHI-Fireworks-Full-White-Paper-v1.0.pdf) · [Word](output/documents/PASADHI-Fireworks-Full-White-Paper-v1.0.docx) |
+
+[Version notes](docs/RESEARCH-RELEASES.md). The papers describe the supplied
+records, methods, limitations and next experiments; their conclusions are bounded
+by those records. Raw run exports and development tooling remain in the local
+research workspace for this documentation update.
+
+### A day in the pool
+
+Consider the intended office workflow: a team arrives with noisy meeting notes,
+while its older PCs have spare capacity. A coordinator would divide eligible work,
+workers would contribute measured resources, and a gateway would enforce the
+team's data policy. When local capacity is insufficient, an approved cloud route
+could handle an eligible request. This is the product direction; end-to-end
+physical-fleet validation remains future work.
+
+The research brings that scenario down to testable questions. Does the compute
+kernel return the right result? Does adding workers improve completion time?
+Does a model return text, and does that text preserve a Thai deadline or a purchase
+amount? Each question needs its own evidence. The current experiments establish
+parts of the path and expose the next bottlenecks: overload rejection, incomplete
+observability and the need for task-level quality evaluation.
+
+That is the development story behind PASADHI: start with equipment people already
+own, measure what it can do, and let observed failures determine the next build.
+
+## Docker fleet research
+
+The supplied Docker experiment exercises 50/100 fleet containers with multiple
+coordinators and worker processes on one host. It measures GEMM correctness,
+latency and throughput. These results describe a container fleet on one machine,
+separate from the serverless model evaluation above.
+
+[Docker fleet benchmark PDF](output/pdf/PASADHI-docker-fleet-benchmark.pdf).
+
 ![The full system: devices feed the pool, the gateway holds policy, storage keeps the blocks](web/anatomy/pasadhi-system-fig.png)
 
 *The whole system in one isometric view. Red tags are measured shares: 30 % of a machine is the usual contribution, 88.7 % of prefixes hit the cache, 96.5 % of response time at C=50 is queueing, and the impact weights are 98 % CPU / 42 % GPU.*
