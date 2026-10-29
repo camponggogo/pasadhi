@@ -1,5 +1,7 @@
 <p align="center"><img src="brand/logo-light-transparent.png" alt="PASADHI brain network logo" width="280"></p>
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/camponggogo/badge.svg)](https://hub.xerj.org/contributors/camponggogo)
+
 # PASADHI · ปัสสัทธิ
 
 **Distributed AI Compute Pool & Hybrid Orchestrator for Edge Networks**
@@ -7,6 +9,21 @@
 **PASADHI** turns a room of ageing PCs and local networks into one addressable compute surface. Engineered as a hybrid orchestrator, it dynamically routes, balances, and executes heavy AI workloads—seamlessly shifting between edge networks and cloud endpoints to optimize cost, latency, and hardware utilization. 
 
 > Status: **M0 prototype, v0.1.0 builds shipped.** Kernel and pipeline benchmarks run on one host; the app runs on Windows today and from source elsewhere.
+
+## Open source work in the XERJ Corpus Hub
+
+PASADHI grows from the same shared-compute research as
+[SUAY](https://github.com/camponggogo/suay). XERJ selected SUAY's
+[publishing implementation](https://github.com/camponggogo/suay/commit/c7f97c6e8258d80634e564f79ed2e0c73846966f)
+as a worked reference for coding agents and lists the repository on
+[our contributor page](https://hub.xerj.org/contributors/camponggogo), with attribution
+under its MIT license.
+
+For us, the value is practical: other developers can inspect an implementation,
+trace its source and build on what is reusable. PASADHI continues that approach
+with versioned papers and explicit measurement limits. The badge above links to
+our contributor profile, whose current public repository listing is SUAY; inclusion
+of the separate PASADHI repository has not yet been verified.
 
 ## From idle machines to evidence
 
