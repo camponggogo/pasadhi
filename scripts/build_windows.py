@@ -13,4 +13,4 @@ if __name__=='__main__':
         shutil.copytree(ROOT/directory,stage/directory,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     for filename in ['__init__.py','launcher.py']:
         shutil.copy2(ROOT/filename,stage/filename)
-    run(['--noconfirm','--clean','--onefile','--name','pasadhi','--paths',str(stage.parent),'--icon',str(ROOT/'brand/logo-light-transparent.png'),'--distpath',str(ROOT/'paper/_build/native'/VERSION),'--workpath',str(ROOT/'paper/_build/pyinstaller'/VERSION),'--specpath',str(ROOT/'paper/_build'),str(stage/'launcher.py')])
+    run(['--noconfirm','--clean','--onefile','--collect-all','zeroconf','--name','pasadhi','--paths',str(stage.parent),'--icon',str(ROOT/'brand/logo-light-transparent.png'),'--distpath',str(ROOT/'paper/_build/native'/VERSION),'--workpath',str(ROOT/'paper/_build/pyinstaller'/VERSION),'--specpath',str(ROOT/'paper/_build'),str(stage/'launcher.py')])

@@ -62,6 +62,17 @@ class CoordinatorMDNS:
                 raise RuntimeError('mDNS needs zeroconf: install requirements.txt first') from error
             self._backend = (Zeroconf, ServiceInfo, IPVersion.V4Only)
 
+    service_type = TYPE
+
+    def service_name(self):
+        return f'PASADHI {self.name} coordinator.{self.service_type}'
+
+    def properties(self):
+        return {'path': '/dashboard', 'role': 'coordinator'}
+
+    def registered(self, zc):
+        pass
+
     def _withdraw(self):
         zc, info = self._zc, self._info
         self._zc = self._info = None
@@ -87,10 +98,10 @@ class CoordinatorMDNS:
         self.prepare()
         zc_cls, info_cls, version = self._backend
         zc = zc_cls(interfaces=list(addresses), ip_version=version)
-        info = info_cls(TYPE, f'PASADHI {self.name} coordinator.{TYPE}',
+        info = info_cls(self.service_type, self.service_name(),
                         parsed_addresses=list(addresses), port=self.port,
                         server=f'{self.name}.local.', host_ttl=60, other_ttl=60,
-                        properties={'path': '/dashboard', 'role': 'coordinator'})
+                        properties=self.properties())
         try:
             # Do not silently rename a competing coordinator's service.
             zc.register_service(info, allow_name_change=False)
@@ -99,6 +110,12 @@ class CoordinatorMDNS:
             raise
         self._zc, self._info, self._current = zc, info, addresses
         self.last_error = None
+        try:
+            self.registered(zc)
+        except Exception:
+            self._withdraw()
+            self._current = None
+            raise
         print(f'PASADHI mDNS: {self.url} -> {", ".join(addresses)}', flush=True)
         return True
 

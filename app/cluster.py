@@ -117,6 +117,9 @@ def aggregate(local, reports):
             report['status'] = 'duplicate'
             continue
         seen.add(node['node_id']); nodes.append(node)
+    for report in reports:
+        if report.get('node_id') in seen and 'node' not in report:
+            report['status'] = 'duplicate'
     totals = {}
     for group in ['capacity', 'offered', 'usage']:
         totals[group] = {}
@@ -132,8 +135,26 @@ def aggregate(local, reports):
             'scope': 'Host usage includes other applications. Offered resources are configured limits, not reservations. Network bytes are host counters since boot. GPU usage is unavailable.'}
 
 
-def cluster_resources(local):
-    workers = configured_workers()
-    with ThreadPoolExecutor(max_workers=min(16, max(1, len(workers)))) as pool:
-        reports = list(pool.map(fetch_node, workers))
-    return aggregate(local, reports)
+def cluster_resources(local, discovery=None):
+    manual = configured_workers()
+    endpoints = {url: {'url': url, 'source': 'configured'} for url in manual}
+    discovered = discovery.peers() if discovery is not None else []
+    for peer in discovered:
+        if peer['node_id'] != local['node_id'] and len(endpoints) < 256:
+            endpoints.setdefault(peer['url'], dict(peer, source='discovered'))
+    def collect(target):
+        if target.get('source') == 'discovered' and not target.get('lan_enabled'):
+            return dict(target, status='lan-disabled', error='PASADHI found; restart this node with --lan to share telemetry')
+        report = fetch_node(target['url'])
+        if report['status'] == 'online' and target.get('node_id') and report['node']['node_id'] != target['node_id']:
+            report = {'url': target['url'], 'status': 'offline', 'error': 'Node identity changed; waiting for a fresh announcement'}
+        report['source'] = target['source']
+        return report
+    targets = list(endpoints.values())
+    with ThreadPoolExecutor(max_workers=min(16, max(1, len(targets)))) as pool:
+        reports = list(pool.map(collect, targets))
+    result = aggregate(local, reports)
+    result['discovery'] = discovery.status() if discovery is not None else {'enabled':False, 'ready':False, 'message':'Discovery disabled'}
+    result['lan_disabled_nodes'] = sum(report['status'] == 'lan-disabled' for report in reports)
+    result['discovered_nodes'] = len({peer['node_id'] for peer in discovered if peer['node_id'] != local['node_id']})
+    return result

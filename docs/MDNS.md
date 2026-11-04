@@ -1,7 +1,7 @@
 # Stable coordinator name on a LAN
 
-This source update adds opt-in mDNS advertisement. Published 0.1.3 archives predate
-this feature; use the updated Git checkout or rebuild packages from it. The app
+Refreshed 0.1.3 packages include opt-in coordinator hostname advertisement and
+automatic peer discovery. Replace older downloads on every node. The app
 never edits router DNS, firewall rules, hosts files or system proxy configuration.
 
 ## Direct URL with the actual application port

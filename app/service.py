@@ -23,7 +23,7 @@ if __package__ in (None, ''):
 
 from pasadhi.app import budget, identity as ident, probe, roles  # noqa: E402
 from pasadhi.app.ui import PAGE  # noqa: E402
-from pasadhi.app import cluster, startup_urls, mdns
+from pasadhi.app import cluster, startup_urls, mdns, discovery
 from pasadhi.app.coordinator_page import PAGE as COORDINATOR_PAGE
 
 CONFIG_DIR = ident.config_dir()
@@ -148,7 +148,7 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 local = cluster.node_resources(self.hardware, self.share_ref, self.decision.role,
                                                ident.load_or_create(CONFIG_DIR).device_id)
-                payload = cluster.cluster_resources(local) if self.path == '/api/cluster/resources' else local
+                payload = cluster.cluster_resources(local, getattr(self.server, 'pasadhi_discovery', None)) if self.path == '/api/cluster/resources' else local
                 self._send(200, json.dumps(payload, ensure_ascii=False).encode('utf-8'))
             except ValueError as error:
                 self._send(400, json.dumps({'error': str(error)}).encode('utf-8'))
@@ -206,11 +206,15 @@ def main():
     parser.add_argument('--port', type=int, default=int(os.environ.get('PASADHI_PORT', '8765')))
     parser.add_argument('--host', default=os.environ.get('PASADHI_HOST', '127.0.0.1'))
     parser.add_argument('--role', default='auto')
+    parser.add_argument('--lan', action='store_true', help='Listen on LAN and share telemetry with discovered peers')
+    parser.add_argument('--no-discovery', action='store_true', default=os.environ.get('PASADHI_DISCOVERY') == '0')
     parser.add_argument('--mdns', action='store_true', default=os.environ.get('PASADHI_MDNS') == '1')
     parser.add_argument('--mdns-name', default=os.environ.get('PASADHI_MDNS_NAME', 'pasadhi'))
     parser.add_argument('--mdns-port', type=int, default=os.environ.get('PASADHI_MDNS_PORT') or None, help='Advertised proxy port; defaults to actual app port')
     parser.add_argument('--once', action='store_true', help='print the state and exit (for tests)')
     args = parser.parse_args()
+    if args.lan:
+        args.host = '0.0.0.0'
 
     if args.mdns and (args.role != 'coordinator' or args.host != '0.0.0.0'):
         parser.error('--mdns requires --role coordinator --host 0.0.0.0')
@@ -238,17 +242,30 @@ def main():
         return
     port = server.server_address[1]
     announcer = None
+    peer_discovery = None
+    if not args.no_discovery:
+        peer_discovery = discovery.PeerDiscovery(
+            ident.load_or_create(CONFIG_DIR).device_id, Handler.decision.role, port,
+            not server.server_address[0].startswith('127.'), os.environ.get('PASADHI_MDNS_INTERFACE') or None)
+        server.pasadhi_discovery = peer_discovery
+        try:
+            peer_discovery.start()
+        except RuntimeError as error:
+            peer_discovery.last_error = str(error)
+            print(f'PASADHI discovery unavailable: {error}', flush=True)
     if args.mdns:
         announcer = mdns.CoordinatorMDNS(args.mdns_name, args.mdns_port or port, os.environ.get('PASADHI_MDNS_INTERFACE') or None)
         try:
             announcer.start()
         except RuntimeError as error:
+            if peer_discovery is not None:
+                peer_discovery.close()
             server.pasadhi_stop.set()
             server.server_close()
             raise SystemExit(str(error)) from None
     print(f'PASADHI role={Handler.decision.role} score={Handler.decision.score}', flush=True)
     print(startup_urls.startup_links(args.host, port), flush=True)
-    print('Ctrl+C stops PASADHI. Worker URLs are configured with PASADHI_WORKERS.', flush=True)
+    print('LAN discovery: ' + ('disabled' if args.no_discovery else 'enabled') + '. Use --lan on every node to share resources; manual PASADHI_WORKERS remains supported.', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
@@ -257,6 +274,8 @@ def main():
         try:
             if announcer is not None:
                 announcer.close()
+            if peer_discovery is not None:
+                peer_discovery.close()
         finally:
             server.pasadhi_stop.set()
             server.server_close()

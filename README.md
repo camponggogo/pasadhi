@@ -27,25 +27,29 @@ of the separate PASADHI repository has not yet been verified.
 
 ## Coordinator dashboard v0.1.3
 
-Start PASADHI and open **http://127.0.0.1:8766/dashboard** on Linux
-(**http://127.0.0.1:8765/dashboard** on Windows/macOS). The terminal prints
-clickable URLs for the console, coordinator and JSON APIs, including the actual
-port and reachable LAN interface addresses when LAN binding is enabled.
+To see **all computers running the refreshed PASADHI on the same LAN**, start the
+LAN launcher on every computer:
 
-The dashboard sums configured nodes' CPU, RAM, disk and GPU capacity, contribution
-limits and measured host usage. Offline nodes and unavailable measurements remain
-visible. Host usage includes other apps; it does not measure distributed job usage.
+- Windows: `PASADHI-LAN.bat` (Python is included).
+- Linux: install `requirements.txt`, then `sh pasadhi-lan.sh`.
+- macOS: install `requirements.txt`, then `sh PASADHI-LAN.command`.
+- Source checkout: install `requirements.txt`, then `sh pasadhi.sh --lan`.
 
-```dotenv
-PASADHI_HOST=0.0.0.0
-PASADHI_PORT=8765
-PASADHI_WORKERS=http://worker-1.lan:8765,http://worker-2.lan:8765
-PASADHI_PUBLIC_URL=http://pasadhi-coordinator.lan:8765
-```
+LAN nodes announce and discover each other automatically. No worker IP list is
+required. Default localhost-only instances are visible as **LAN off**; restart
+them with the LAN launcher to collect their resources. Older downloads without
+discovery must be replaced on every node. Guest Wi-Fi isolation, VLAN separation
+and firewalls can block multicast discovery.
 
-Use these settings in `.env` on a trusted LAN, replacing the example names. Configure
-router DNS and DHCP reservations separately; setting PASADHI_PUBLIC_URL does not
-register a DNS name. Workers also need v0.1.3 and LAN binding.
+Open **http://127.0.0.1:8766/dashboard** on Linux or
+**http://127.0.0.1:8765/dashboard** on Windows/macOS. The terminal prints local/LAN
+links and the actual port. The dashboard shows per-node status and aggregates only
+fresh telemetry from reachable unique node IDs. Host usage includes other apps;
+monitoring does not imply distributed job execution.
+
+`PASADHI_WORKERS` remains an optional fallback when multicast is unavailable.
+See [automatic LAN discovery](docs/DISCOVERY.md) and
+[resource metric definitions](docs/COORDINATOR.md).
 
 ### Stable coordinator name with automatic LAN IP announcements
 
@@ -59,8 +63,7 @@ sh pasadhi.sh --role coordinator --host 0.0.0.0 --mdns
 Open **http://pasadhi.local:8766/dashboard**. For the exact
 **http://pasadhi.local/dashboard**, configure the optional port-80 reverse proxy
 and use `--mdns-port 80`. The app does not install that proxy or change router DNS.
-This is a source update; existing downloadable 0.1.3 binaries/archives have not
-been rebuilt with mDNS. See [mDNS setup and limitations](docs/MDNS.md).
+The refreshed 0.1.3 packages include mDNS and discovery. See [mDNS setup and limitations](docs/MDNS.md).
 
 [Coordinator setup and metric definitions](docs/COORDINATOR.md) ·
 [Release notes](docs/RELEASE-0.1.3.md) ·

@@ -5,8 +5,8 @@ Windows/macOS default to http://127.0.0.1:8765/dashboard.
 Linux overrides: `PASADHI_PORT=8770 ./pasadhi.sh` or `./pasadhi.sh --port 8770`.
 The shell default is a CLI argument, so a port in .env alone does not override it.
 The terminal prints all supported page/API URLs and the actual bound port.
-The homepage also links to the dashboard. A coordinator label alone does not
-connect machines: worker addresses must be configured explicitly.
+The homepage also links to the dashboard. Use the LAN launcher on every updated node for automatic discovery. Manual worker
+addresses are now optional; see [DISCOVERY.md](DISCOVERY.md).
 
 ## Example trusted LAN
 
@@ -32,7 +32,7 @@ DHCP and configure router/DNS host records for stable names. PASADHI_PUBLIC_URL
 only supplies the displayed URL; it does not create DNS records. If the DNS
 record's IP changes, connections resolve the name again, subject to DNS caches.
 `.local` requires working mDNS (for example Avahi/Bonjour); support varies by OS.
-Opt-in mDNS advertisement is now available in the updated source; see [MDNS.md](MDNS.md). Automatic node discovery remains unimplemented.
+Opt-in mDNS advertisement is now available in the updated source; see [MDNS.md](MDNS.md). Peer discovery is now included in the refreshed packages; see [DISCOVERY.md](DISCOVERY.md).
 
 ## Reading the numbers
 

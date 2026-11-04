@@ -4,39 +4,39 @@
     "platform": "windows",
     "version": "0.1.3",
     "kind": "native",
-    "bytes": 11365151,
-    "sha256": "6a2d6941e6a381e043d4bba3dfcccfd6da48d5c51c731d97504f3b592a716d17"
+    "bytes": 12875011,
+    "sha256": "b83febc14780db6efeda8194e409d431c496d57a6387a7b52527732e506cc420"
   },
   {
     "file": "PASADHI-0.1.3-linux.tar.gz",
     "platform": "linux",
     "version": "0.1.3",
     "kind": "python-source",
-    "bytes": 1717549,
-    "sha256": "cf97a517090e2123ccd5e791dca6180a07fb189287860203eda5986d78f2ba9a"
+    "bytes": 1734632,
+    "sha256": "1cd8432247576144e3aec5405c379e18c8c961c935a49077f53f9600759ca937"
   },
   {
     "file": "PASADHI-0.1.3-macos.tar.gz",
     "platform": "macos",
     "version": "0.1.3",
     "kind": "python-source",
-    "bytes": 1717408,
-    "sha256": "8b666b6fa58ee9503e83ad135ffdb357441361a163ad0f2810374cc745da2e4f"
+    "bytes": 1734601,
+    "sha256": "4a3f3805b88e7d700071f591934c5a1855594177d09a360bbed12e6d52abb626"
   },
   {
     "file": "PASADHI-0.1.3-android-termux.zip",
     "platform": "android-termux",
     "version": "0.1.3",
     "kind": "python-source",
-    "bytes": 1722599,
-    "sha256": "ef4d25d93d0383ad2079fa508378be0bc44f3d5efea35a8cf7935642ea79a463"
+    "bytes": 1743221,
+    "sha256": "db7e403a43da7605d1bdcbd02a13c8a65cef81eb36445fbbe3598f606e219139"
   },
   {
     "file": "PASADHI-0.1.3-source.zip",
     "platform": "source",
     "version": "0.1.3",
     "kind": "python-source",
-    "bytes": 1722554,
-    "sha256": "2b3aa526fb11c6bb6c9e3b62952dc144298b86dfc04930807adcf958e4e11abf"
+    "bytes": 1743180,
+    "sha256": "19749c44ae6d7c57df6dc9346c18df39cb8f8965ec6acefb0b96adabb970fcfd"
   }
 ]

@@ -32,6 +32,7 @@ def main():
         shutil.copy2(ROOT / '__init__.py', package / 'pasadhi/__init__.py')
         for filename in ('LICENSE', 'NOTICE'):
             shutil.copy2(ROOT / filename, package / filename)
+        shutil.copytree(ROOT / 'third_party', package / 'third_party', dirs_exist_ok=True)
         (package / 'brand').mkdir(exist_ok=True)
         shutil.copy2(ROOT / 'brand/logo-light-transparent.png', package / 'brand/logo.png')
         shutil.copy2(ROOT / '.env.example', package / '.env.example')
@@ -42,6 +43,8 @@ def main():
         windows = '@echo off\r\ncd /d "%~dp0"\r\n'
         windows += 'pasadhi.exe %*\r\npause\r\n' if native else 'python -m pasadhi.app.service %*\r\npause\r\n'
         (package / 'PASADHI.bat').write_bytes(windows.encode())
+        lan_windows = windows.replace('pasadhi.exe %*', 'pasadhi.exe --lan %*').replace('python -m pasadhi.app.service %*', 'python -m pasadhi.app.service --lan %*')
+        (package / 'PASADHI-LAN.bat').write_bytes(lan_windows.encode())
         unix = '#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\n'
         if platform == 'linux':
             unix += 'exec python3 -m pasadhi.app.service --port "${PASADHI_PORT:-8766}" "$@"\n'
@@ -49,16 +52,20 @@ def main():
             unix += 'exec python -m pasadhi.app.service "$@"\n' if platform == 'android-termux' else 'exec python3 -m pasadhi.app.service "$@"\n'
         launcher = package / ('PASADHI.command' if platform == 'macos' else 'pasadhi.sh')
         launcher.write_text(unix, encoding='utf-8', newline='\n')
+        lan_launcher = package / ('PASADHI-LAN.command' if platform == 'macos' else 'pasadhi-lan.sh')
+        lan_launcher.write_text('#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\nexec sh ./'+launcher.name+' --lan "$@"\n', encoding='utf-8', newline='\n')
         install = ('pkg install python\npython -m pip install -r requirements.txt\nbash pasadhi.sh' if platform == 'android-termux'
                    else 'python3 -m pip install -r requirements.txt\nsh pasadhi.sh')
         if platform == 'macos':
             install = install.replace('sh pasadhi.sh', 'sh PASADHI.command')
         if platform == 'windows':
             install = 'Double-click PASADHI.bat. No Python installation needed.' if native else 'Install Python 3.10+, then run PASADHI.bat.'
+        default_port = 8766 if platform == 'linux' else 8765
         (package / 'README.txt').write_text(
             f'PASADHI {VERSION} - {platform}\n\n{install}\n\n'
-            'Open http://127.0.0.1:8765/dashboard for the coordinator overview. All page URLs are printed at startup. Ctrl+C stops the service.\n'
-            'Copy .env.example to .env to configure LAN binding, worker URLs and a stable DNS URL. DNS records must be configured on your router or DNS server.\n'
+            f'Open http://127.0.0.1:{default_port}/dashboard for the coordinator overview. All page URLs are printed at startup. Ctrl+C stops the service.\n'
+            'To see all PASADHI computers, use PASADHI-LAN.bat on Windows, pasadhi-lan.sh on Linux/Termux, or PASADHI-LAN.command on macOS on EVERY computer. Python bundles: install requirements.txt first. LAN nodes are discovered automatically without worker IP lists.\n'
+            'Default launchers announce presence but keep HTTP on localhost; those nodes appear as LAN disabled until restarted in LAN mode. Allow the application TCP port and multicast UDP 5353 only on the intended trusted LAN.\n'
             + ('Standalone Windows x64 executable; unsigned.\n' if native else
                'Python source distribution; Python 3.10+ required. psutil enables full hardware probing.\n')
             + ('Android requires Termux; this archive is not an APK.\n' if platform == 'android-termux' else ''), encoding='utf-8')
@@ -75,7 +82,7 @@ def main():
                 for path in sorted(package.rglob('*')):
                     if path.is_file():
                         info = target.gettarinfo(str(path), str(path.relative_to(package.parent)).replace('\\', '/'))
-                        info.mode = 0o755 if path == launcher else 0o644
+                        info.mode = 0o755 if path in (launcher, lan_launcher) else 0o644
                         with path.open('rb') as handle:
                             target.addfile(info, handle)
         entries.append({'file': filename, 'platform': platform, 'version': VERSION,

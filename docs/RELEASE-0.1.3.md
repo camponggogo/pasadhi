@@ -18,3 +18,10 @@ override it). Port conflicts now show an actionable message. The listener binds
 before a worker starts. Shutdown and --once close the listener. Source bundles and
 Windows EXE include the startup fix. SHA256SUMS and manifests identify refreshed
 archives; re-download the package to receive this update.
+
+## Refreshed LAN discovery packages
+
+Adds automatic DNS-SD discovery for all roles, visible LAN-disabled states, LAN
+launchers and per-node dashboard links. Includes coordinator hostname mDNS and its
+required dependencies in the rebuilt Windows EXE. Python bundles require their
+updated requirements.txt. Version stays 0.1.3; archives/checksums are refreshed.
