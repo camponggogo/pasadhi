@@ -44,7 +44,9 @@ and firewalls can block multicast discovery.
 Open **http://127.0.0.1:8766/dashboard** on Linux or
 **http://127.0.0.1:8765/dashboard** on Windows/macOS. The terminal prints local/LAN
 links and the actual port. The dashboard shows per-node status and aggregates only
-fresh telemetry from reachable unique node IDs. Host usage includes other apps;
+fresh telemetry from reachable unique node IDs. Cards show used / total. Updated
+nodes share one coordinator snapshot every 15 seconds (snapshot ID shown); an
+unreachable snapshot source is explicitly marked degraded. Host usage includes other apps;
 monitoring does not imply distributed job execution.
 
 `PASADHI_WORKERS` remains an optional fallback when multicast is unavailable.

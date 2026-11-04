@@ -59,3 +59,15 @@ Tests cover service events, IP changes, same-LAN filtering, localhost-only nodes
 identity mismatches, automatic aggregation without configured IPs, and goodbye
 removal. A real multicast/HTTP loopback test does not certify a particular router,
 firewall, or physical multi-machine deployment.
+
+## Shared dashboard snapshot
+
+Cards show measured used / total capacity. Every updated node elects the same
+snapshot source: coordinator roles first, then the smallest node ID. The selected
+source caches one immutable cluster snapshot per 15-second epoch; other nodes
+fetch that snapshot instead of independently measuring totals. Snapshot ID and
+sample time are displayed. Browser refresh aligns to the same epoch. During
+discovery convergence or different network partitions, node membership may differ;
+identical views require the same discovered peers and reachable, updated source.
+Unavailable sources show a visible degraded local view, never a false sync claim.
+All nodes must download this refreshed build. GPU unavailable remains unavailable.

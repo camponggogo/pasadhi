@@ -8,6 +8,8 @@ from pathlib import Path
 import shutil
 import socket
 import time
+import threading
+import copy
 from urllib.parse import urlsplit
 from urllib.request import build_opener, HTTPRedirectHandler, ProxyHandler
 
@@ -158,3 +160,51 @@ def cluster_resources(local, discovery=None):
     result['lan_disabled_nodes'] = sum(report['status'] == 'lan-disabled' for report in reports)
     result['discovered_nodes'] = len({peer['node_id'] for peer in discovered if peer['node_id'] != local['node_id']})
     return result
+
+
+class SnapshotCache:
+    """One immutable resource sample per 15-second coordinator epoch."""
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.value = None
+
+    def snapshot(self, local, discovery):
+        with self.lock:
+            epoch = int(time.time() // 15)
+            if self.value is None or self.value['sync']['epoch'] != epoch:
+                value = cluster_resources(local, discovery)
+                value['sync'] = {'leader_id': local['node_id'], 'epoch': epoch,
+                                 'snapshot_id': f"{local['node_id']}:{epoch}",
+                                 'expires_at': (epoch + 1) * 15, 'state': 'synchronized'}
+                self.value = value
+            return copy.deepcopy(self.value)
+
+
+def synchronized_resources(local, discovery, cache):
+    candidates = [{'node_id': local['node_id'], 'role': local['role'], 'url': 'local'}]
+    if discovery is not None:
+        candidates.extend(peer for peer in discovery.peers() if peer.get('lan_enabled'))
+    leader = min(candidates, key=lambda peer: (peer['role'] != 'coordinator', peer['node_id']))
+    if leader['url'] == 'local':
+        return cache.snapshot(local, discovery)
+    try:
+        opener = build_opener(ProxyHandler({}), NoRedirect())
+        with opener.open(leader['url'] + '/api/cluster/snapshot', timeout=8) as response:
+            body = response.read(1048577)
+        if len(body) > 1048576:
+            raise ValueError('Snapshot too large')
+        value = json.loads(body)
+        sync = value['sync']
+        if (value['schema'] != SCHEMA or sync['leader_id'] != leader['node_id'] or
+                abs(time.time() - value['sampled_at']) > 30 or
+                sync['expires_at'] < time.time() - 2):
+            raise ValueError('Stale or mismatched coordinator snapshot')
+        # A remote snapshot's local row refers to the coordinator, not this browser.
+        for report in value['nodes']:
+            if report['url'] == 'local':report['url'] = leader['url']
+        return value
+    except Exception:
+        value = cache.snapshot(local, discovery)
+        value['sync']['state'] = 'degraded'
+        value['sync']['message'] = 'Coordinator snapshot unavailable; showing a local view. Update every node and check connectivity.'
+        return value

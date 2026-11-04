@@ -33,3 +33,9 @@ pasadhi.sh or PASADHI.command; separate LAN launchers are compatibility aliases.
 Pass --host 127.0.0.1 for localhost-only access. Python bundles still require
 requirements.txt (including zeroconf). No firewall settings change. Version remains
 0.1.3; re-download all packages and compare refreshed checksums.
+
+## Shared dashboard resource snapshot, 5 November 2026
+
+Cards show used / total. Dashboards elect one coordinator snapshot source and
+share cached 15-second samples, with snapshot ID and degraded-state visibility.
+All nodes need refreshed packages. Version remains 0.1.3.

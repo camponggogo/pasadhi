@@ -144,11 +144,17 @@ class Handler(BaseHTTPRequestHandler):
             self._send(200, PAGE.encode('utf-8'), 'text/html; charset=utf-8')
         elif self.path in ('/dashboard', '/dashboard/'):
             self._send(200, COORDINATOR_PAGE.encode('utf-8'), 'text/html; charset=utf-8')
-        elif self.path in ('/api/node/resources', '/api/cluster/resources'):
+        elif self.path in ('/api/node/resources', '/api/cluster/resources', '/api/cluster/snapshot'):
             try:
                 local = cluster.node_resources(self.hardware, self.share_ref, self.decision.role,
                                                ident.load_or_create(CONFIG_DIR).device_id)
-                payload = cluster.cluster_resources(local, getattr(self.server, 'pasadhi_discovery', None)) if self.path == '/api/cluster/resources' else local
+                discovery = getattr(self.server, 'pasadhi_discovery', None)
+                if self.path == '/api/cluster/resources':
+                    payload = cluster.synchronized_resources(local, discovery, self.server.pasadhi_snapshot)
+                elif self.path == '/api/cluster/snapshot':
+                    payload = self.server.pasadhi_snapshot.snapshot(local, discovery)
+                else:
+                    payload = local
                 self._send(200, json.dumps(payload, ensure_ascii=False).encode('utf-8'))
             except ValueError as error:
                 self._send(400, json.dumps({'error': str(error)}).encode('utf-8'))
@@ -196,6 +202,7 @@ def serve(port: int, role: str, host: str = '127.0.0.1') -> ThreadingHTTPServer:
     stop = threading.Event()
     thread = threading.Thread(target=worker_loop, args=(stop, hardware, Handler.share_ref), daemon=True)
     thread.start()
+    server.pasadhi_snapshot = cluster.SnapshotCache()
     server.pasadhi_stop = stop
     return server
 
