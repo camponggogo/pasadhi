@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PASADHI — share the machines you already own</title>
+<meta name="description" content="PASADHI turns office PCs into a shared AI compute pool. Free while the network is being built: run AI agents on hardware you already own, earn credits by sharing what is idle.">
+<link rel="canonical" href="https://pasadhi.tech/">
+<link rel="stylesheet" href="./style.css">
+<meta property="og:title" content="PASADHI — share the machines you already own">
+<meta property="og:description" content="Free AI agents on hardware you already own. Share idle capacity, earn credits, rent later.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://campong.online/projects/pasadhi/brand/og.png">
+<meta property="og:url" content="https://pasadhi.tech/">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="./theme.css">
+<link rel="icon" type="image/png" href="./brand/favicon.png">
+</head><body>
+
+<header><div class="wrap nav">
+  <a class="brand" href="./"><img class="brand-logo" src="./brand/logo-light-transparent.png" alt="" width="74" height="60"><b>PASADHI</b><small>ปัสสัทธิ</small></a>
+  <nav>
+    <a href="#free">Free first</a><a href="#products">Products</a><a href="#pricing">Pricing</a>
+    <a href="#onprem">On-prem</a><a href="#download">Download</a><a href="./story.html">Story</a>
+  <a href="./pitch/">Pitch</a></nav>
+  <a class="cta" href="#download">Get the app</a>
+</div></header><aside class="wrap prototype-status" id="prototype-status">M0 prototype: hardware probing and resource controls are available to test. Multi-host pooling, credits, payouts and commercial services are planned; displayed prices are proposals.</aside>
+
+<section class="hero wrap">
+  <div>
+    <p class="eyebrow">Shared compute · AI agents · your own hardware</p>
+    <h1>Your office already has<br><em>the computer you need.</em></h1>
+    <p class="lead">PASADHI pools the PCs, servers and laptops an organisation already owns into one friendly
+      compute surface. Run AI agents on it, keep the data inside the building, and earn credits by sharing
+      what would otherwise sit idle.</p>
+    <div class="actions">
+      <a class="btn primary" href="#download">Download · free</a>
+      <a class="btn ghost" href="#pricing">See what sharing pays</a>
+    </div>
+    <div class="trust"><span>No card</span><span>No trial timer</span><span>Leave anytime</span><span>MIT core</span></div>
+  </div>
+
+  <div class="hero-art"><img src="./pitch/assets/compute-background.png" alt="Conceptual artwork of connected compute devices; not a photograph of a deployed PASADHI system">
+    <p>Every machine keeps its own share limit. Nothing is taken that you did not offer.</p>
+  </div>
+</section>
+
+<div class="wrap"><div class="banner">
+  <strong>Free until the network is full</strong>
+  <span>Share 20–30 % of a machine and run AI agents at no charge. Paid rental opens only when the pool has spare capacity.</span>
+  <a href="#pricing">How it works →</a>
+</div></div>
+
+<section class="wrap pitch-promo" id="pitch"><p class="eyebrow">PASADHI · PITCH &amp; RESEARCH</p><h2>The compute you need starts with what you own</h2><p class="sub">Explore the investor story, research evidence and a proposed 24-month funding plan with explicit milestones and assumptions.</p><div class="actions"><a class="btn primary" href="./pitch/">Open presentation</a><a class="btn ghost" href="./download/PASADHI-pitch-2026.pptx" download>PowerPoint · 24 slides</a></div><p class="flow-hint">Mr. Supakrit Wapakpetch and AI Team · proposed plan, not a revenue forecast</p></section>
+<section class="wrap" id="how">
+  <p class="eyebrow">How it works</p>
+  <h2>See the pool, then see the web</h2>
+  <p class="sub">Two isometric drawings, both live: the first shows one office corner wired into a pool, the second
+    shows twelve devices and seven GPUs connected as a mesh. Work packets move while you watch.</p>
+  <div class="dl" style="grid-template-columns:1fr 1fr">
+    <a href="./anatomy/pool.html"><div class="iso-live"><iframe data-iso loading="lazy" title="PASADHI pool: illustrative animated isometric flow" src="./anatomy/pool.html?embed=1"></iframe></div><b>The pool</b><span>4 devices · one bus · dial and counter</span></a>
+    <a href="./anatomy/mesh.html"><div class="iso-live"><iframe data-iso loading="lazy" title="PASADHI mesh: illustrative animated isometric flow" src="./anatomy/mesh.html?embed=1"></iframe></div><b>The mesh</b><span>12 devices · 7 GPUs · 30 links</span></a>
+  </div>
+</section>
+
+<section class="wrap" id="free">
+  <p class="eyebrow">The order of things</p>
+  <h2>Free first, rental second, on-prem always</h2>
+  <p class="sub">We sell nothing until there is spare capacity. The sequence is deliberate: grow the pool with
+    people who share, then rent the surplus, and always let an organisation buy the software outright.</p>
+  <div class="grid3">
+    <article class="card"><span class="tag live">PROTOTYPE AVAILABLE</span><h3>1 · Share &amp; use free</h3>
+      <p>Install the app, pick a share percentage, run agents. Credits offset any future paid use.</p></article>
+    <article class="card"><span class="tag next">OPENS WITH CAPACITY</span><h3>2 · Rent monthly / yearly</h3>
+      <p>When the pool has headroom, rent a slice by the month or the year — no GPU purchase, no cloud egress.</p></article>
+    <article class="card"><span class="tag then">PLANNED LICENCE</span><h3>3 · On-prem licence</h3>
+      <p>Buy the software and run PASADHI only for your own organisation, inside your own network.</p></article>
+  </div>
+</section>
+
+<section class="wrap" id="products">
+  <p class="eyebrow">Products, in order of release</p>
+  <h2>AI Agent → Cloud → VPS</h2>
+  <p class="sub">Each product is the same compute plane with a different face. Nothing is announced before it works.</p>
+  <div class="grid3">
+    <article class="card"><span class="tag live">FIRST</span><h3>AI Agent</h3>
+      <p>A local agent that reads documents, answers questions and runs tools — on your own machines, with your
+        own model, with the data never leaving the building.</p>
+      <ul><li>Runs on the shared pool or a single PC</li><li>Per-install device token</li>
+        <li>Usage visible per department</li></ul></article>
+    <article class="card"><span class="tag next">NEXT</span><h3>Cloud</h3>
+      <p>A hosted control plane for groups that do not want to run the coordinator themselves — same app, same
+        quotas, managed for you.</p>
+      <ul><li>Group id, join tokens, quotas</li><li>Monthly / yearly</li><li>Data residency selectable</li></ul></article>
+    <article class="card"><span class="tag then">THEN</span><h3>VPS</h3>
+      <p>Slices of the pool sold as small virtual machines: a fixed number of cores, RAM and disk, billed by the
+        month, good for services that need a box rather than a model.</p>
+      <ul><li>Sized by measured capacity</li><li>Snapshot and migrate</li><li>Group-scoped networking</li></ul></article>
+  </div>
+</section>
+
+<section class="pricing" id="pricing"><div class="wrap">
+  <p class="eyebrow">Pricing</p>
+  <h2>Pay per machine, or pay for the licence</h2>
+  <p class="sub">Prices are per machine per month unless stated. A group is billed once, no matter how many
+    departments it contains.</p>
+  <table>
+    <tr><th>Plan</th><th>What you get</th><th class="num">THB / machine / month</th></tr>
+    <tr><td><b>Shared</b> (free)</td><td>Use the pool while you share 20–30 % of your machines</td><td class="num">0</td></tr>
+    <tr><td><b>Monthly</b></td><td>Rent capacity month to month, cancel anytime</td><td class="num">1,490</td></tr>
+    <tr><td><b>Yearly</b></td><td>Same, 12 months, two months free</td><td class="num">1,242 <small>(14,900 / yr)</small></td></tr>
+    <tr><td><b>Premium</b></td><td>99.5 % SLA, isolation, 24×7 support, priority queue</td><td class="num">3,490</td></tr>
+    <tr><td><b>On-prem licence</b></td><td>Unlimited machines per group, departments roll up as one group,
+      multi-licence merge for enterprise</td><td class="num">from 18,900 <small>/ group / mo</small></td></tr>
+  </table>
+  <p class="note">On-prem means the software runs inside your network and never phones the public pool. One
+    licence covers one group; departments inside it do not each need a licence. Enterprises can merge several
+    group licences under one contract.</p>
+</div></section>
+
+<section class="wrap" id="onprem">
+  <p class="eyebrow">On-prem</p>
+  <h2>Buy the system, keep the pool private</h2>
+  <div class="grid3">
+    <article class="card"><h3>One group, any number of machines</h3>
+      <p>A licence is scoped to a group id, not to a machine count. Add 50 machines or 500 — the licence does not
+        change.</p></article>
+    <article class="card"><h3>Departments roll up</h3>
+      <p>Finance, R&amp;D and the branch office can be separate departments with their own quotas, still billed as
+        one group.</p></article>
+    <article class="card"><h3>Multi-licence merge</h3>
+      <p>Enterprises with several legal entities can merge licences into a single contract and a single invoice.</p></article>
+  </div>
+</section>
+
+<section class="wrap" id="download">
+  <p class="eyebrow">Download</p>
+  <h2>One app. Windows, Linux, macOS, Android.</h2>
+  <p class="sub">The app probes the machine, chooses a role by itself (coordinator, worker or client) and shows
+    the share sliders with a live earnings estimate.</p>
+  <div class="dl">
+    <a href="./download/PASADHI-0.1.1-windows.zip" download><span class="os"><img src="./assets/os/windows.svg" alt="" width="40" height="40" style="object-fit:contain;"></span><b>Windows</b><span>v0.1.1 · Standalone x64 EXE · 10.3 MB</span></a>
+    <a href="./download/PASADHI-0.1.2-linux.tar.gz" download><span class="os"><img src="./assets/os/linux.svg" alt="" width="40" height="40" style="object-fit:contain;"></span><b>Linux</b><span>v0.1.2 · Python 3.10+ · tar.gz · 1.6 MB</span></a>
+    <a href="./download/PASADHI-0.1.2-macos.tar.gz" download><span class="os"><img src="./assets/os/macos.svg" alt="" width="40" height="40" style="object-fit:contain;filter:brightness(0) invert(1);"></span><b>macOS</b><span>v0.1.2 · Python 3.10+ · tar.gz · 1.6 MB</span></a>
+    <a href="./download/PASADHI-0.1.2-android-termux.zip" download><span class="os"><img src="./assets/os/android-termux.svg" alt="" width="40" height="40" style="object-fit:contain;"></span><b>Android / Termux</b><span>v0.1.2 · Python package · not APK · 1.6 MB</span></a>
+    <a href="./download/PASADHI-0.1.2-source.zip" download><span class="os"><img src="./assets/os/source.svg" alt="" width="40" height="40" style="object-fit:contain;"></span><b>Source</b><span>v0.1.2 · Python source code · 1.6 MB</span></a>
+  </div>
+  <p class="note">All platforms: 7 offline UI languages — English, Thai, Chinese, Japanese, Spanish, French and German. Automatic language detection and remembered selection. Windows includes Python. Linux and macOS require Python 3.10+; see README.txt inside each archive. Android requires Termux and Python; no native APK is available. These builds are unsigned. <a href="./download/SHA256SUMS.txt">SHA-256 checksums</a></p>
+  <div class="dl" style="grid-template-columns:repeat(3,1fr);margin-top:26px">
+    <a href="./download/PASADHI-solution.pdf"><b>Solution paper</b><span>the architecture, measured · 8 pages · PDF</span></a>
+    <a href="./download/PASADHI-full-paper.pdf"><b>Full paper · all evidence</b><span>46 figures, every run · 29 pages · PDF</span></a>
+    <a href="./story.html"><b>Read the build story</b><span>six measurements, six pictures</span></a>
+  </div>
+</section>
+
+<section class="wrap faq" id="faq">
+  <p class="eyebrow">Questions</p>
+  <h2>What people ask before installing</h2>
+  <details><summary>Is it really free?</summary><p>Yes, while the pool is being built: share 20–30 % of a machine
+    and use AI agents at no charge. Paid rental starts only when the network has spare capacity.</p></details>
+  <details><summary>What happens to my files?</summary><p>The agent runs on your machines. In on-prem mode nothing
+    leaves your network; in shared mode only encrypted job tiles are sent, and the worker that runs them never sees
+    your files.</p></details>
+  <details><summary>How much of my computer is used?</summary><p>Whatever you set: the sliders cap CPU, GPU, RAM,
+    disk and network. The default is 20–30 %, which leaves the machine responsive.</p></details>
+  <details><summary>Do I need a GPU?</summary><p>No. A CPU pool works; a small card such as a GTX 1050 makes a
+    machine roughly 22× faster for the same job.</p></details>
+  <details><summary>Can I stop sharing?</summary><p>Yes, at any time, from the same window. The worker stops within
+    one scheduling window and your credits stay in the account.</p></details>
+  <details><summary>What does an on-prem licence cost?</summary><p>From ฿18,900 per group per month, unlimited
+    machines, departments included. Multi-licence merging is quoted per enterprise.</p></details>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 PASADHI contributors · MIT for the open core</span>
+  <span><a href="https://github.com/camponggogo/pasadhi">GitHub</a> ·
+    <a href="mailto:hello@pasadhi.tech">hello@pasadhi.tech</a> · <a href="./th/">ภาษาไทย</a></span>
+</footer>
+<script src="./motion.js" defer></script>
+</body></html>

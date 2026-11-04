@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 import sys
 import threading
@@ -55,6 +56,13 @@ def load_earnings() -> float:
     return 0.0
 
 
+def save_earnings() -> None:
+    """Persist worker credits even before settings or identity have been saved."""
+    EARNINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    EARNINGS_PATH.write_text(json.dumps({'credits_thb': STATE['credits_thb'],
+                                         'saved_at': time.time()}), encoding='utf-8')
+
+
 def worker_loop(stop: threading.Event, hardware: probe.Hardware, share_ref: dict) -> None:
     """Duty-cycled work: run for `duty` of every 100 ms, sleep the rest, so the CPU share is real."""
     last_save = time.time()
@@ -80,8 +88,10 @@ def worker_loop(stop: threading.Event, hardware: probe.Hardware, share_ref: dict
             STATE['idle_seconds'] += window - work
         STATE['ticks'] += 1
         if time.time() - last_save > 10:
-            EARNINGS_PATH.write_text(json.dumps({'credits_thb': STATE['credits_thb'],
-                                                 'saved_at': time.time()}), encoding='utf-8')
+            try:
+                save_earnings()
+            except OSError:
+                logging.getLogger(__name__).warning('Could not save worker earnings; will retry', exc_info=True)
             last_save = time.time()
 
 

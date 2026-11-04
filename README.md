@@ -297,3 +297,13 @@ Named after *ปัสสัทธิ* — calm, settled, at rest. The machine s
 [Release checksums](web/download/v0.1.0/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) · [Release manifest](web/download/v0.1.0/release.json) · [Latest version manifest](web/download/latest/release.json).
 
 The website and White Papers use bundled open-source fonts; see [font licenses](web/fonts/README.md).
+
+## First-run worker fix 0.1.2
+
+Linux and macOS Python bundles now create the earnings directory automatically.
+The worker retries storage errors without stopping its compute loop. The same fix
+is included in Android/Termux and source bundles. Windows standalone remains 0.1.1.
+
+[Linux 0.1.2](web/download/PASADHI-0.1.2-linux.tar.gz) ·
+[macOS 0.1.2](web/download/PASADHI-0.1.2-macos.tar.gz) ·
+[Release notes](docs/RELEASE-0.1.2.md).
