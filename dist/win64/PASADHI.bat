@@ -7,11 +7,11 @@ if errorlevel 1 (
   pause
   exit /b 1
 )
-python -c "import psutil" 2>nul
+python -c "import psutil, zeroconf" 2>nul
 if errorlevel 1 (
-  echo Installing the one dependency...
-  python -m pip install --quiet psutil
+  echo Installing PASADHI dependencies...
+  python -m pip install --quiet psutil==7.2.2 zeroconf==0.153.0
 )
 echo PASADHI settings: http://127.0.0.1:8765
-python "pasadhi\app\service.py" --port 8765
+python "pasadhi\app\service.py" --host 0.0.0.0 --port 8765 %*
 pause

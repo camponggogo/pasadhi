@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")"
-exec sh ./pasadhi.sh --lan "$@"
+exec sh ./pasadhi.sh "$@"

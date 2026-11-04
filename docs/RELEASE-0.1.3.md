@@ -25,3 +25,11 @@ Adds automatic DNS-SD discovery for all roles, visible LAN-disabled states, LAN
 launchers and per-node dashboard links. Includes coordinator hostname mDNS and its
 required dependencies in the rebuilt Windows EXE. Python bundles require their
 updated requirements.txt. Version stays 0.1.3; archives/checksums are refreshed.
+
+## LAN defaults, 5 November 2026
+
+All main platform launchers now bind to 0.0.0.0 by default. Use PASADHI.bat,
+pasadhi.sh or PASADHI.command; separate LAN launchers are compatibility aliases.
+Pass --host 127.0.0.1 for localhost-only access. Python bundles still require
+requirements.txt (including zeroconf). No firewall settings change. Version remains
+0.1.3; re-download all packages and compare refreshed checksums.

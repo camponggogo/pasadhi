@@ -41,19 +41,19 @@ def main():
         if native:
             shutil.copy2(args.windows_exe, package / 'pasadhi.exe')
         windows = '@echo off\r\ncd /d "%~dp0"\r\n'
-        windows += 'pasadhi.exe %*\r\npause\r\n' if native else 'python -m pasadhi.app.service %*\r\npause\r\n'
+        windows += 'pasadhi.exe --host 0.0.0.0 %*\r\npause\r\n' if native else 'python -m pasadhi.app.service --host 0.0.0.0 %*\r\npause\r\n'
         (package / 'PASADHI.bat').write_bytes(windows.encode())
-        lan_windows = windows.replace('pasadhi.exe %*', 'pasadhi.exe --lan %*').replace('python -m pasadhi.app.service %*', 'python -m pasadhi.app.service --lan %*')
-        (package / 'PASADHI-LAN.bat').write_bytes(lan_windows.encode())
+        # Compatibility alias; the main launcher now enables LAN by default.
+        (package / 'PASADHI-LAN.bat').write_bytes(windows.encode())
         unix = '#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\n'
         if platform == 'linux':
-            unix += 'exec python3 -m pasadhi.app.service --port "${PASADHI_PORT:-8766}" "$@"\n'
+            unix += 'exec python3 -m pasadhi.app.service --host 0.0.0.0 --port "${PASADHI_PORT:-8766}" "$@"\n'
         else:
-            unix += 'exec python -m pasadhi.app.service "$@"\n' if platform == 'android-termux' else 'exec python3 -m pasadhi.app.service "$@"\n'
+            unix += 'exec python -m pasadhi.app.service --host 0.0.0.0 "$@"\n' if platform == 'android-termux' else 'exec python3 -m pasadhi.app.service --host 0.0.0.0 "$@"\n'
         launcher = package / ('PASADHI.command' if platform == 'macos' else 'pasadhi.sh')
         launcher.write_text(unix, encoding='utf-8', newline='\n')
         lan_launcher = package / ('PASADHI-LAN.command' if platform == 'macos' else 'pasadhi-lan.sh')
-        lan_launcher.write_text('#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\nexec sh ./'+launcher.name+' --lan "$@"\n', encoding='utf-8', newline='\n')
+        lan_launcher.write_text('#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\nexec sh ./'+launcher.name+' "$@"\n', encoding='utf-8', newline='\n')
         install = ('pkg install python\npython -m pip install -r requirements.txt\nbash pasadhi.sh' if platform == 'android-termux'
                    else 'python3 -m pip install -r requirements.txt\nsh pasadhi.sh')
         if platform == 'macos':
@@ -64,8 +64,8 @@ def main():
         (package / 'README.txt').write_text(
             f'PASADHI {VERSION} - {platform}\n\n{install}\n\n'
             f'Open http://127.0.0.1:{default_port}/dashboard for the coordinator overview. All page URLs are printed at startup. Ctrl+C stops the service.\n'
-            'To see all PASADHI computers, use PASADHI-LAN.bat on Windows, pasadhi-lan.sh on Linux/Termux, or PASADHI-LAN.command on macOS on EVERY computer. Python bundles: install requirements.txt first. LAN nodes are discovered automatically without worker IP lists.\n'
-            'Default launchers announce presence but keep HTTP on localhost; those nodes appear as LAN disabled until restarted in LAN mode. Allow the application TCP port and multicast UDP 5353 only on the intended trusted LAN.\n'
+            'All main launchers enable LAN by default: PASADHI.bat on Windows, pasadhi.sh on Linux/Termux, PASADHI.command on macOS. Run the main launcher on EVERY computer. Python bundles: install requirements.txt first. LAN nodes are discovered automatically without worker IP lists.\n'
+            'For localhost-only access, pass --host 127.0.0.1 to the launcher. Legacy LAN-named launchers remain compatibility aliases. Allow the application TCP port and multicast UDP 5353 only on the intended trusted LAN.\n'
             + ('Standalone Windows x64 executable; unsigned.\n' if native else
                'Python source distribution; Python 3.10+ required. psutil enables full hardware probing.\n')
             + ('Android requires Termux; this archive is not an APK.\n' if platform == 'android-termux' else ''), encoding='utf-8')

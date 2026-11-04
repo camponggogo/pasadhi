@@ -8,16 +8,17 @@ the shared `pasadhi.local` hostname through --mdns.
 
 ## Start every computer in LAN mode
 
-Windows: double-click PASADHI-LAN.bat.
-Linux: `python3 -m pip install -r requirements.txt`, then `sh pasadhi-lan.sh`.
-macOS: install requirements, then `sh PASADHI-LAN.command`.
-Termux: install requirements, then `sh pasadhi-lan.sh`.
-Source: install requirements, then `sh pasadhi.sh --lan`.
+Windows: double-click PASADHI.bat.
+Linux: `python3 -m pip install -r requirements.txt`, then `sh pasadhi.sh`.
+macOS: install requirements, then `sh PASADHI.command`.
+Termux: install requirements, then `sh pasadhi.sh`.
+Source: install requirements, then `sh pasadhi.sh`.
 
-An ordinary launcher keeps HTTP on localhost but still advertises its presence
-when discovery dependencies and LAN interfaces are available. It appears as
-`lan-disabled` on other dashboards. No remote resource measurement is invented for
-such a node. --lan explicitly binds the app to the LAN. No firewall rule is changed.
+Main launchers bind HTTP to 0.0.0.0 and enable LAN access by default. Install
+requirements.txt before starting Python bundles. For localhost-only access, pass
+`--host 127.0.0.1` to the launcher; that node appears as `lan-disabled` elsewhere.
+The direct Python/EXE command still accepts `--lan`. No firewall rule is changed.
+Legacy LAN-named launchers remain compatibility aliases; they are not required.
 
 All computers need this refreshed build. The version remains 0.1.3 at the owner's
 request, so compare the current release manifest/checksum or download again.
@@ -45,7 +46,7 @@ browsing. PASADHI_WORKERS remains an explicit fallback for routed/VLAN networks.
 
 ## If only this machine appears
 
-1. Use the LAN launcher on every node and install Python requirements where needed.
+1. Use the refreshed main launcher on every node and install Python requirements where needed.
 2. Check the dashboard's discovery status. A dependency or interface error is shown.
 3. Keep the computers on the same multicast-capable LAN. Guest/client isolation,
    VPNs and VLANs can prevent service discovery even with similar Wi-Fi names.

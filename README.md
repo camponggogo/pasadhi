@@ -28,16 +28,16 @@ of the separate PASADHI repository has not yet been verified.
 ## Coordinator dashboard v0.1.3
 
 To see **all computers running the refreshed PASADHI on the same LAN**, start the
-LAN launcher on every computer:
+main launcher on every computer (LAN is enabled by default):
 
-- Windows: `PASADHI-LAN.bat` (Python is included).
-- Linux: install `requirements.txt`, then `sh pasadhi-lan.sh`.
-- macOS: install `requirements.txt`, then `sh PASADHI-LAN.command`.
-- Source checkout: install `requirements.txt`, then `sh pasadhi.sh --lan`.
+- Windows: `PASADHI.bat` (Python is included).
+- Linux: install `requirements.txt`, then `sh pasadhi.sh`.
+- macOS: install `requirements.txt`, then `sh PASADHI.command`.
+- Source checkout: install `requirements.txt`, then `sh pasadhi.sh`.
 
 LAN nodes announce and discover each other automatically. No worker IP list is
-required. Default localhost-only instances are visible as **LAN off**; restart
-them with the LAN launcher to collect their resources. Older downloads without
+required. Explicit localhost-only instances are visible as **LAN off**; restart
+them with the refreshed main launcher to collect their resources. Older downloads without
 discovery must be replaced on every node. Guest Wi-Fi isolation, VLAN separation
 and firewalls can block multicast discovery.
 

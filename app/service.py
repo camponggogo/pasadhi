@@ -265,7 +265,7 @@ def main():
             raise SystemExit(str(error)) from None
     print(f'PASADHI role={Handler.decision.role} score={Handler.decision.score}', flush=True)
     print(startup_urls.startup_links(args.host, port), flush=True)
-    print('LAN discovery: ' + ('disabled' if args.no_discovery else 'enabled') + '. Use --lan on every node to share resources; manual PASADHI_WORKERS remains supported.', flush=True)
+    print('LAN discovery: ' + ('disabled' if args.no_discovery else 'enabled') + '. Main launchers enable LAN access by default; manual PASADHI_WORKERS remains supported.', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
