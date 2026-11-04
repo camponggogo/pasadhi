@@ -23,7 +23,7 @@ if __package__ in (None, ''):
 
 from pasadhi.app import budget, identity as ident, probe, roles  # noqa: E402
 from pasadhi.app.ui import PAGE  # noqa: E402
-from pasadhi.app import cluster, startup_urls
+from pasadhi.app import cluster, startup_urls, mdns
 from pasadhi.app.coordinator_page import PAGE as COORDINATOR_PAGE
 
 CONFIG_DIR = ident.config_dir()
@@ -206,9 +206,18 @@ def main():
     parser.add_argument('--port', type=int, default=int(os.environ.get('PASADHI_PORT', '8765')))
     parser.add_argument('--host', default=os.environ.get('PASADHI_HOST', '127.0.0.1'))
     parser.add_argument('--role', default='auto')
+    parser.add_argument('--mdns', action='store_true', default=os.environ.get('PASADHI_MDNS') == '1')
+    parser.add_argument('--mdns-name', default=os.environ.get('PASADHI_MDNS_NAME', 'pasadhi'))
+    parser.add_argument('--mdns-port', type=int, default=os.environ.get('PASADHI_MDNS_PORT') or None, help='Advertised proxy port; defaults to actual app port')
     parser.add_argument('--once', action='store_true', help='print the state and exit (for tests)')
     args = parser.parse_args()
 
+    if args.mdns and (args.role != 'coordinator' or args.host != '0.0.0.0'):
+        parser.error('--mdns requires --role coordinator --host 0.0.0.0')
+    if args.mdns:
+        mdns.validate_name(args.mdns_name)
+        if args.mdns_port is not None and not 1 <= args.mdns_port <= 65535:
+            parser.error('--mdns-port must be 1..65535')
     cluster.configured_workers()
     startup_urls.public_url()
     try:
@@ -228,6 +237,15 @@ def main():
         server.server_close()
         return
     port = server.server_address[1]
+    announcer = None
+    if args.mdns:
+        announcer = mdns.CoordinatorMDNS(args.mdns_name, args.mdns_port or port, os.environ.get('PASADHI_MDNS_INTERFACE') or None)
+        try:
+            announcer.start()
+        except RuntimeError as error:
+            server.pasadhi_stop.set()
+            server.server_close()
+            raise SystemExit(str(error)) from None
     print(f'PASADHI role={Handler.decision.role} score={Handler.decision.score}', flush=True)
     print(startup_urls.startup_links(args.host, port), flush=True)
     print('Ctrl+C stops PASADHI. Worker URLs are configured with PASADHI_WORKERS.', flush=True)
@@ -236,8 +254,12 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        server.pasadhi_stop.set()
-        server.server_close()
+        try:
+            if announcer is not None:
+                announcer.close()
+        finally:
+            server.pasadhi_stop.set()
+            server.server_close()
 
 
 if __name__ == '__main__':

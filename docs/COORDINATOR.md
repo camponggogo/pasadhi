@@ -32,7 +32,7 @@ DHCP and configure router/DNS host records for stable names. PASADHI_PUBLIC_URL
 only supplies the displayed URL; it does not create DNS records. If the DNS
 record's IP changes, connections resolve the name again, subject to DNS caches.
 `.local` requires working mDNS (for example Avahi/Bonjour); support varies by OS.
-No automatic mDNS advertisement or automatic node discovery is implemented.
+Opt-in mDNS advertisement is now available in the updated source; see [MDNS.md](MDNS.md). Automatic node discovery remains unimplemented.
 
 ## Reading the numbers
 

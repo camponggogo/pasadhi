@@ -1,0 +1,5 @@
+# Optional LAN proxy. Adjust the upstream if the app uses another port.
+# The explicit http:// scheme avoids automatic HTTPS certificate setup.
+http://pasadhi.local {
+    reverse_proxy 127.0.0.1:8766
+}

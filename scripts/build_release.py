@@ -35,7 +35,7 @@ def main():
         (package / 'brand').mkdir(exist_ok=True)
         shutil.copy2(ROOT / 'brand/logo-light-transparent.png', package / 'brand/logo.png')
         shutil.copy2(ROOT / '.env.example', package / '.env.example')
-        (package / 'requirements.txt').write_text('psutil==7.2.2\n', encoding='utf-8')
+        (package / 'requirements.txt').write_text('psutil==7.2.2\nzeroconf==0.153.0\n', encoding='utf-8')
         native = platform == 'windows' and args.windows_exe is not None
         if native:
             shutil.copy2(args.windows_exe, package / 'pasadhi.exe')

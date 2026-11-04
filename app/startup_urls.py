@@ -17,7 +17,7 @@ def load_network_env():
             if '=' not in line or line.lstrip().startswith('#'):
                 continue
             key, value = line.split('=', 1)
-            if key.strip() in ('PASADHI_HOST', 'PASADHI_PORT', 'PASADHI_WORKERS', 'PASADHI_PUBLIC_URL'):
+            if key.strip() in ('PASADHI_HOST', 'PASADHI_PORT', 'PASADHI_WORKERS', 'PASADHI_PUBLIC_URL', 'PASADHI_MDNS', 'PASADHI_MDNS_NAME', 'PASADHI_MDNS_PORT', 'PASADHI_MDNS_INTERFACE'):
                 os.environ.setdefault(key.strip(), value.strip().strip('\"\''))
         break
 

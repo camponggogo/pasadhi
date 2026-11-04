@@ -47,6 +47,21 @@ Use these settings in `.env` on a trusted LAN, replacing the example names. Conf
 router DNS and DHCP reservations separately; setting PASADHI_PUBLIC_URL does not
 register a DNS name. Workers also need v0.1.3 and LAN binding.
 
+### Stable coordinator name with automatic LAN IP announcements
+
+The updated source can advertise **pasadhi.local** using mDNS and reannounce when
+its IPv4 addresses change. Install `requirements.txt`, then run:
+
+```sh
+sh pasadhi.sh --role coordinator --host 0.0.0.0 --mdns
+```
+
+Open **http://pasadhi.local:8766/dashboard**. For the exact
+**http://pasadhi.local/dashboard**, configure the optional port-80 reverse proxy
+and use `--mdns-port 80`. The app does not install that proxy or change router DNS.
+This is a source update; existing downloadable 0.1.3 binaries/archives have not
+been rebuilt with mDNS. See [mDNS setup and limitations](docs/MDNS.md).
+
 [Coordinator setup and metric definitions](docs/COORDINATOR.md) ·
 [Release notes](docs/RELEASE-0.1.3.md) ·
 [Windows](web/download/PASADHI-0.1.3-windows.zip) ·
