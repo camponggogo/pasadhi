@@ -1,0 +1,60 @@
+"""Offline UI translations for all platform bundles. Values are plain text."""
+LANGUAGES = {'en': 'English', 'th': 'ไทย', 'zh': '中文', 'ja': '日本語', 'es': 'Español', 'fr': 'Français', 'de': 'Deutsch'}
+CATALOG = {
+ 'en': {
+  'language':'Language','auto':'Automatic','share':'Share this device’s resources','disk':'Disk','network':'Network','autostart':'Start automatically at login',
+  'limitsNote':'Maximum shares: CPU 90%, RAM 80%, disk 50%, network 80%. Changes apply to the running worker.',
+  'earnings':'Your earnings estimate','month':'THB / month','day':'THB / day','hour':'THB / hour','limits':'Resource limits',
+  'creditsNote':'Modelled credits, not a cash payout. 1 credit = 1 THB; credit discounts are capped at 50% of the bill.',
+  'deviceHeading':'This device’s token','rotate':'Rotate token','rotated':'Token replaced. The previous token is no longer valid.',
+  'tokenNote':'Generated on installation and stored locally with restricted file permissions. Identifies this device to the coordinator; it is not a password.',
+  'device':'Device','token':'Token','role':'Role','score':'score','coordinator':'Coordinator','worker':'Worker','client':'Client','cores':'cores','threads':'threads','noGpu':'No NVIDIA GPU','uptime':'uptime','probe':'probe','hours':'h','error':'Could not reach the local service. Please retry.'},
+ 'th': {
+  'language':'ภาษา','auto':'อัตโนมัติ','share':'แชร์ทรัพยากรของเครื่องนี้','disk':'ดิสก์','network':'เครือข่าย','autostart':'เริ่มอัตโนมัติเมื่อเข้าสู่ระบบ',
+  'limitsNote':'เพดาน CPU 90% · RAM 80% · ดิสก์ 50% · เครือข่าย 80% ค่าที่ตั้งมีผลกับ worker ที่กำลังทำงาน',
+  'earnings':'รายได้ของคุณ (ประมาณการ)','month':'บาท / เดือน','day':'บาท / วัน','hour':'บาท / ชั่วโมง','limits':'เพดานที่ให้ใช้',
+  'creditsNote':'เครดิตจากแบบจำลอง ไม่ใช่การจ่ายเงินจริง 1 credit = 1 บาท ใช้ลดค่าบริการได้ไม่เกิน 50% ของบิล',
+  'deviceHeading':'Token ของเครื่องนี้','rotate':'ออก Token ใหม่','rotated':'สร้างใหม่แล้ว — Token เก่าใช้ไม่ได้อีก',
+  'tokenNote':'สร้างตอนติดตั้งและเก็บในเครื่องนี้ด้วยสิทธิ์ไฟล์เฉพาะผู้ใช้ ใช้ยืนยันตัวเครื่องกับ coordinator ไม่ใช่รหัสผ่าน',
+  'device':'เครื่อง','token':'Token','role':'บทบาท','score':'คะแนน','coordinator':'ผู้ประสานงาน','worker':'เครื่องประมวลผล','client':'ผู้ใช้งาน','cores':'คอร์','threads':'เธรด','noGpu':'ไม่มี NVIDIA GPU','uptime':'เวลาทำงาน','probe':'ตรวจสเปก','hours':'ชม.','error':'ติดต่อบริการในเครื่องไม่ได้ โปรดลองอีกครั้ง'},
+ 'zh': {
+  'language':'语言','auto':'自动','share':'共享此设备的资源','disk':'磁盘','network':'网络','autostart':'登录时自动启动',
+  'limitsNote':'共享上限：CPU 90%、RAM 80%、磁盘 50%、网络 80%。更改将应用于运行中的工作进程。',
+  'earnings':'预估收益','month':'泰铢 / 月','day':'泰铢 / 天','hour':'泰铢 / 小时','limits':'资源上限',
+  'creditsNote':'模型积分，非现金支付。1 积分 = 1 泰铢；账单抵扣上限为 50%。',
+  'deviceHeading':'此设备的令牌','rotate':'更换令牌','rotated':'令牌已更换，旧令牌不再有效。',
+  'tokenNote':'安装时生成，仅以受限文件权限保存在本机。用于向协调器标识设备，并非密码。',
+  'device':'设备','token':'令牌','role':'角色','score':'评分','coordinator':'协调器','worker':'工作节点','client':'客户端','cores':'核心','threads':'线程','noGpu':'无 NVIDIA GPU','uptime':'运行时间','probe':'检测','hours':'小时','error':'无法连接本地服务，请重试。'},
+ 'ja': {
+  'language':'言語','auto':'自動','share':'このデバイスのリソースを共有','disk':'ディスク','network':'ネットワーク','autostart':'ログイン時に自動起動',
+  'limitsNote':'共有上限：CPU 90%、RAM 80%、ディスク 50%、ネットワーク 80%。変更は実行中のワーカーに適用されます。',
+  'earnings':'推定収益','month':'THB / 月','day':'THB / 日','hour':'THB / 時間','limits':'リソース上限',
+  'creditsNote':'モデル上のクレジットであり、現金の支払いではありません。1 credit = 1 THB。割引は請求額の 50% が上限です。',
+  'deviceHeading':'このデバイスのトークン','rotate':'トークンを更新','rotated':'トークンを更新しました。以前のトークンは無効です。',
+  'tokenNote':'インストール時に生成し、制限されたファイル権限でローカルに保存します。コーディネーターへのデバイス識別用で、パスワードではありません。',
+  'device':'デバイス','token':'トークン','role':'役割','score':'スコア','coordinator':'コーディネーター','worker':'ワーカー','client':'クライアント','cores':'コア','threads':'スレッド','noGpu':'NVIDIA GPU なし','uptime':'稼働時間','probe':'検出','hours':'時間','error':'ローカルサービスに接続できません。再試行してください。'},
+ 'es': {
+  'language':'Idioma','auto':'Automático','share':'Compartir recursos de este equipo','disk':'Disco','network':'Red','autostart':'Iniciar al abrir sesión',
+  'limitsNote':'Máximos: CPU 90%, RAM 80%, disco 50%, red 80%. Los cambios se aplican al proceso de trabajo activo.',
+  'earnings':'Ingresos estimados','month':'THB / mes','day':'THB / día','hour':'THB / hora','limits':'Límites de recursos',
+  'creditsNote':'Créditos del modelo, sin pago en efectivo. 1 crédito = 1 THB; el descuento máximo es el 50% de la factura.',
+  'deviceHeading':'Token de este equipo','rotate':'Renovar token','rotated':'Token renovado. El anterior ya no es válido.',
+  'tokenNote':'Se genera al instalar y se guarda localmente con permisos restringidos. Identifica el equipo ante el coordinador; no es una contraseña.',
+  'device':'Equipo','token':'Token','role':'Rol','score':'puntuación','coordinator':'Coordinador','worker':'Nodo de trabajo','client':'Cliente','cores':'núcleos','threads':'hilos','noGpu':'Sin GPU NVIDIA','uptime':'tiempo activo','probe':'detección','hours':'h','error':'No se pudo conectar al servicio local. Inténtalo de nuevo.'},
+ 'fr': {
+  'language':'Langue','auto':'Automatique','share':'Partager les ressources de cet appareil','disk':'Disque','network':'Réseau','autostart':'Démarrer à l’ouverture de session',
+  'limitsNote':'Maximums : CPU 90 %, RAM 80 %, disque 50 %, réseau 80 %. Les modifications s’appliquent au processus de calcul actif.',
+  'earnings':'Revenus estimés','month':'THB / mois','day':'THB / jour','hour':'THB / heure','limits':'Limites des ressources',
+  'creditsNote':'Crédits modélisés, sans versement en espèces. 1 crédit = 1 THB ; réduction limitée à 50 % de la facture.',
+  'deviceHeading':'Jeton de cet appareil','rotate':'Renouveler le jeton','rotated':'Jeton renouvelé. L’ancien jeton n’est plus valide.',
+  'tokenNote':'Généré à l’installation et conservé localement avec des droits restreints. Identifie cet appareil auprès du coordinateur ; ce n’est pas un mot de passe.',
+  'device':'Appareil','token':'Jeton','role':'Rôle','score':'score','coordinator':'Coordinateur','worker':'Nœud de calcul','client':'Client','cores':'cœurs','threads':'fils','noGpu':'Aucun GPU NVIDIA','uptime':'durée de fonctionnement','probe':'détection','hours':'h','error':'Connexion au service local impossible. Veuillez réessayer.'},
+ 'de': {
+  'language':'Sprache','auto':'Automatisch','share':'Ressourcen dieses Geräts teilen','disk':'Datenträger','network':'Netzwerk','autostart':'Bei der Anmeldung automatisch starten',
+  'limitsNote':'Höchstwerte: CPU 90 %, RAM 80 %, Datenträger 50 %, Netzwerk 80 %. Änderungen gelten für den laufenden Arbeitsprozess.',
+  'earnings':'Geschätzte Einnahmen','month':'THB / Monat','day':'THB / Tag','hour':'THB / Stunde','limits':'Ressourcenlimits',
+  'creditsNote':'Modellierte Credits, keine Barauszahlung. 1 Credit = 1 THB; Rabatte sind auf 50 % der Rechnung begrenzt.',
+  'deviceHeading':'Token dieses Geräts','rotate':'Token erneuern','rotated':'Token erneuert. Der bisherige Token ist ungültig.',
+  'tokenNote':'Bei der Installation erzeugt und lokal mit eingeschränkten Dateirechten gespeichert. Identifiziert das Gerät beim Koordinator; kein Passwort.',
+  'device':'Gerät','token':'Token','role':'Rolle','score':'Bewertung','coordinator':'Koordinator','worker':'Arbeitsknoten','client':'Client','cores':'Kerne','threads':'Threads','noGpu':'Keine NVIDIA-GPU','uptime':'Laufzeit','probe':'Erkennung','hours':'Std.','error':'Der lokale Dienst ist nicht erreichbar. Bitte erneut versuchen.'},
+}

@@ -8,7 +8,7 @@
 
 **PASADHI** turns a room of ageing PCs and local networks into one addressable compute surface. Engineered as a hybrid orchestrator, it dynamically routes, balances, and executes heavy AI workloads—seamlessly shifting between edge networks and cloud endpoints to optimize cost, latency, and hardware utilization. 
 
-> Status: **M0 prototype, v0.1.0 builds shipped.** Kernel and pipeline benchmarks run on one host; the app runs on Windows today and from source elsewhere.
+> Status: **M0 prototype, v0.1.3 builds shipped.** Kernel and pipeline benchmarks run on one host; the app runs on Windows today and from source elsewhere.
 
 ## Open source work in the XERJ Corpus Hub
 
@@ -24,6 +24,33 @@ trace its source and build on what is reusable. PASADHI continues that approach
 with versioned papers and explicit measurement limits. The badge above links to
 our contributor profile, whose current public repository listing is SUAY; inclusion
 of the separate PASADHI repository has not yet been verified.
+
+## Coordinator dashboard v0.1.3
+
+Start PASADHI and open **http://127.0.0.1:8765/dashboard**. The terminal prints
+clickable URLs for the console, coordinator and JSON APIs, including the actual
+port and reachable LAN interface addresses when LAN binding is enabled.
+
+The dashboard sums configured nodes' CPU, RAM, disk and GPU capacity, contribution
+limits and measured host usage. Offline nodes and unavailable measurements remain
+visible. Host usage includes other apps; it does not measure distributed job usage.
+
+```dotenv
+PASADHI_HOST=0.0.0.0
+PASADHI_PORT=8765
+PASADHI_WORKERS=http://worker-1.lan:8765,http://worker-2.lan:8765
+PASADHI_PUBLIC_URL=http://pasadhi-coordinator.lan:8765
+```
+
+Use these settings in `.env` on a trusted LAN, replacing the example names. Configure
+router DNS and DHCP reservations separately; setting PASADHI_PUBLIC_URL does not
+register a DNS name. Workers also need v0.1.3 and LAN binding.
+
+[Coordinator setup and metric definitions](docs/COORDINATOR.md) ·
+[Release notes](docs/RELEASE-0.1.3.md) ·
+[Windows](web/download/PASADHI-0.1.3-windows.zip) ·
+[Linux](web/download/PASADHI-0.1.3-linux.tar.gz) ·
+[macOS](web/download/PASADHI-0.1.3-macos.tar.gz)
 
 ## From idle machines to evidence
 
@@ -154,15 +181,15 @@ Both are rebuilt by `python scripts/build_paper_pdf.py` (in the parent workspace
 
 ## Quick start
 
-### Release downloads · v0.1.0
+### Release downloads · v0.1.3
 
 | OS | Download | Requirements |
 |---|---|---|
-| Windows x64 | [Standalone app](web/download/PASADHI-0.1.0-windows.zip) | Unzip, run `PASADHI.bat`; Python included |
-| Linux | [Python bundle](web/download/PASADHI-0.1.0-linux.tar.gz) | Python 3.10+; run `sh pasadhi.sh` |
-| macOS | [Python bundle](web/download/PASADHI-0.1.0-macos.tar.gz) | Python 3.10+; run `sh PASADHI.command` |
-| Android | [Termux bundle](web/download/PASADHI-0.1.0-android-termux.zip) | Termux + Python; run `bash pasadhi.sh`; not an APK |
-| Source | [Source archive](web/download/PASADHI-0.1.0-source.zip) | Python 3.10+ |
+| Windows x64 | [Standalone app](web/download/PASADHI-0.1.3-windows.zip) | Unzip, run `PASADHI.bat`; Python included |
+| Linux | [Python bundle](web/download/PASADHI-0.1.3-linux.tar.gz) | Python 3.10+; run `sh pasadhi.sh` |
+| macOS | [Python bundle](web/download/PASADHI-0.1.3-macos.tar.gz) | Python 3.10+; run `sh PASADHI.command` |
+| Android | [Termux bundle](web/download/PASADHI-0.1.3-android-termux.zip) | Termux + Python; run `bash pasadhi.sh`; not an APK |
+| Source | [Source archive](web/download/PASADHI-0.1.3-source.zip) | Python 3.10+ |
 
 See each archive's `README.txt` for dependency installation. Builds are unsigned.
 [SHA-256 checksums](web/download/SHA256SUMS.txt) · [Release manifest](web/download/release.json).
@@ -284,17 +311,17 @@ Named after *ปัสสัทธิ* — calm, settled, at rest. The machine s
 
 ## Download · release and latest
 
-**Release: v0.1.0 · Latest: v0.1.0.** Versioned links stay fixed; latest links follow the newest published build. Downloads below are included in this repository and staged for the website; the website update has not been deployed.
+**Release: v0.1.3 · Latest: v0.1.3.** Versioned links stay fixed; latest links follow the newest published build. Downloads below are included in this repository and published on the website.
 
-| OS | Release v0.1.0 | Latest | How to run |
+| OS | Release v0.1.3 | Latest | How to run |
 |---|---|---|---|
-| Windows x64 | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-windows.zip) | [Latest ZIP](web/download/latest/PASADHI-windows.zip) | Unzip and run `PASADHI.bat`; standalone EXE, Python included |
-| Linux | [Download tar.gz](web/download/v0.1.0/PASADHI-0.1.0-linux.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-linux.tar.gz) | Python 3.10+; `sh pasadhi.sh` |
-| macOS | [Download tar.gz](web/download/v0.1.0/PASADHI-0.1.0-macos.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-macos.tar.gz) | Python 3.10+; `sh PASADHI.command` |
-| Android / Termux | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-android-termux.zip) | [Latest ZIP](web/download/latest/PASADHI-android-termux.zip) | Termux + Python; `bash pasadhi.sh`; not an APK |
-| Source | [Download ZIP](web/download/v0.1.0/PASADHI-0.1.0-source.zip) | [Latest ZIP](web/download/latest/PASADHI-source.zip) | Python 3.10+; instructions in `README.txt` |
+| Windows x64 | [Download ZIP](web/download/v0.1.3/PASADHI-0.1.3-windows.zip) | [Latest ZIP](web/download/latest/PASADHI-windows.zip) | Unzip and run `PASADHI.bat`; standalone EXE, Python included |
+| Linux | [Download tar.gz](web/download/v0.1.3/PASADHI-0.1.3-linux.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-linux.tar.gz) | Python 3.10+; `sh pasadhi.sh` |
+| macOS | [Download tar.gz](web/download/v0.1.3/PASADHI-0.1.3-macos.tar.gz) | [Latest tar.gz](web/download/latest/PASADHI-macos.tar.gz) | Python 3.10+; `sh PASADHI.command` |
+| Android / Termux | [Download ZIP](web/download/v0.1.3/PASADHI-0.1.3-android-termux.zip) | [Latest ZIP](web/download/latest/PASADHI-android-termux.zip) | Termux + Python; `bash pasadhi.sh`; not an APK |
+| Source | [Download ZIP](web/download/v0.1.3/PASADHI-0.1.3-source.zip) | [Latest ZIP](web/download/latest/PASADHI-source.zip) | Python 3.10+; instructions in `README.txt` |
 
-[Release checksums](web/download/v0.1.0/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) · [Release manifest](web/download/v0.1.0/release.json) · [Latest version manifest](web/download/latest/release.json).
+[Release checksums](web/download/v0.1.3/SHA256SUMS.txt) · [Latest checksums](web/download/latest/SHA256SUMS.txt) · [Release manifest](web/download/v0.1.3/release.json) · [Latest version manifest](web/download/latest/release.json).
 
 The website and White Papers use bundled open-source fonts; see [font licenses](web/fonts/README.md).
 

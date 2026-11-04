@@ -22,6 +22,8 @@ if __package__ in (None, ''):
 
 from pasadhi.app import budget, identity as ident, probe, roles  # noqa: E402
 from pasadhi.app.ui import PAGE  # noqa: E402
+from pasadhi.app import cluster, startup_urls
+from pasadhi.app.coordinator_page import PAGE as COORDINATOR_PAGE
 
 CONFIG_DIR = ident.config_dir()
 CONFIG_PATH = CONFIG_DIR / 'config.json'
@@ -139,6 +141,18 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path in ('/', '/index.html'):
             self._send(200, PAGE.encode('utf-8'), 'text/html; charset=utf-8')
+        elif self.path in ('/dashboard', '/dashboard/'):
+            self._send(200, COORDINATOR_PAGE.encode('utf-8'), 'text/html; charset=utf-8')
+        elif self.path in ('/api/node/resources', '/api/cluster/resources'):
+            try:
+                local = cluster.node_resources(self.hardware, self.share_ref, self.decision.role,
+                                               ident.load_or_create(CONFIG_DIR).device_id)
+                payload = cluster.cluster_resources(local) if self.path == '/api/cluster/resources' else local
+                self._send(200, json.dumps(payload, ensure_ascii=False).encode('utf-8'))
+            except ValueError as error:
+                self._send(400, json.dumps({'error': str(error)}).encode('utf-8'))
+            except Exception:
+                self._send(503, b'{"error":"Resource telemetry unavailable"}')
         elif self.path == '/api/state':
             self._send(200, json.dumps(self._state(), ensure_ascii=False).encode('utf-8'))
         else:
@@ -165,7 +179,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send(404, b'{"error":"not found"}')
 
 
-def serve(port: int, role: str) -> ThreadingHTTPServer:
+def serve(port: int, role: str, host: str = '127.0.0.1') -> ThreadingHTTPServer:
     config = load_config()
     hardware = probe.probe()
     decision = roles.decide(hardware, role or config.get('role', 'auto'))
@@ -180,26 +194,32 @@ def serve(port: int, role: str) -> ThreadingHTTPServer:
     thread = threading.Thread(target=worker_loop, args=(stop, hardware, Handler.share_ref), daemon=True)
     thread.start()
 
-    server = ThreadingHTTPServer(('127.0.0.1', port), Handler)
+    server = ThreadingHTTPServer((host, port), Handler)
     server.pasadhi_stop = stop
     return server
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--port', type=int, default=8765)
+    startup_urls.load_network_env()
+    parser.add_argument('--port', type=int, default=int(os.environ.get('PASADHI_PORT', '8765')))
+    parser.add_argument('--host', default=os.environ.get('PASADHI_HOST', '127.0.0.1'))
     parser.add_argument('--role', default='auto')
     parser.add_argument('--once', action='store_true', help='print the state and exit (for tests)')
     args = parser.parse_args()
 
-    server = serve(args.port, args.role)
+    cluster.configured_workers()
+    startup_urls.public_url()
+    server = serve(args.port, args.role, args.host)
     if args.once:
         state = Handler._state(Handler.__new__(Handler))
         print(json.dumps(state, indent=2, ensure_ascii=False))
         server.pasadhi_stop.set()
         return
-    print(f'PASADHI app on http://127.0.0.1:{args.port}  role={Handler.decision.role} '
-          f'score={Handler.decision.score}')
+    port = server.server_address[1]
+    print(f'PASADHI role={Handler.decision.role} score={Handler.decision.score}', flush=True)
+    print(startup_urls.startup_links(args.host, port), flush=True)
+    print('Ctrl+C stops PASADHI. Worker URLs are configured with PASADHI_WORKERS.', flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

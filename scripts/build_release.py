@@ -10,7 +10,7 @@ import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '0.1.0'
+VERSION = '0.1.3'
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
     args = parser.parse_args()
     output = ROOT / 'web/download'
     output.mkdir(parents=True, exist_ok=True)
-    stage = ROOT / 'paper/_build/release'
+    stage = ROOT / 'paper/_build/release' / VERSION
     stage.mkdir(parents=True, exist_ok=True)
     entries = []
     for platform in ('windows', 'linux', 'macos', 'android-termux', 'source'):
@@ -33,6 +33,7 @@ def main():
             shutil.copy2(ROOT / filename, package / filename)
         (package / 'brand').mkdir(exist_ok=True)
         shutil.copy2(ROOT / 'brand/logo-light-transparent.png', package / 'brand/logo.png')
+        shutil.copy2(ROOT / '.env.example', package / '.env.example')
         (package / 'requirements.txt').write_text('psutil==7.2.2\n', encoding='utf-8')
         native = platform == 'windows' and args.windows_exe is not None
         if native:
@@ -52,7 +53,8 @@ def main():
             install = 'Double-click PASADHI.bat. No Python installation needed.' if native else 'Install Python 3.10+, then run PASADHI.bat.'
         (package / 'README.txt').write_text(
             f'PASADHI {VERSION} - {platform}\n\n{install}\n\n'
-            'Open http://127.0.0.1:8765 after starting. Ctrl+C stops the service.\n'
+            'Open http://127.0.0.1:8765/dashboard for the coordinator overview. All page URLs are printed at startup. Ctrl+C stops the service.\n'
+            'Copy .env.example to .env to configure LAN binding, worker URLs and a stable DNS URL. DNS records must be configured on your router or DNS server.\n'
             + ('Standalone Windows x64 executable; unsigned.\n' if native else
                'Python source distribution; Python 3.10+ required. psutil enables full hardware probing.\n')
             + ('Android requires Termux; this archive is not an APK.\n' if platform == 'android-termux' else ''), encoding='utf-8')

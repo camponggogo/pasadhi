@@ -2,86 +2,41 @@
   {
     "file": "PASADHI-windows.zip",
     "platform": "windows",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "kind": "native",
-    "languages": [
-      "en",
-      "th",
-      "zh",
-      "ja",
-      "es",
-      "fr",
-      "de"
-    ],
-    "bytes": 10788840,
-    "sha256": "acd6ad9e0feb124daa1dd8d433ae1ec6ca20586859e489642dd4fdc95577ecbf"
+    "bytes": 11363728,
+    "sha256": "3ad654a970cfb212ce33fde7c5603c55ef55602f84d1d798017a1107e0fb95f3"
   },
   {
     "file": "PASADHI-linux.tar.gz",
     "platform": "linux",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "kind": "python-source",
-    "languages": [
-      "en",
-      "th",
-      "zh",
-      "ja",
-      "es",
-      "fr",
-      "de"
-    ],
-    "bytes": 1709085,
-    "sha256": "110908a75559db5a5fbd1455ff9505430d3ed4c9a53f5d4a6fe654f6836d096f"
+    "bytes": 1717115,
+    "sha256": "aabb41c78739a78a251dd62b431bf803c190f872cc6498a22192bda7a56e5de3"
   },
   {
     "file": "PASADHI-macos.tar.gz",
     "platform": "macos",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "kind": "python-source",
-    "languages": [
-      "en",
-      "th",
-      "zh",
-      "ja",
-      "es",
-      "fr",
-      "de"
-    ],
-    "bytes": 1709073,
-    "sha256": "6836f7314bbb5d821b5af9b2426406cccd14e312c9528da419daaca600d91188"
+    "bytes": 1717114,
+    "sha256": "e12863c420177ede8c74bfb1d11f4c608f4c2c75cd2afd00e70cf7936449712b"
   },
   {
     "file": "PASADHI-android-termux.zip",
     "platform": "android-termux",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "kind": "python-source",
-    "languages": [
-      "en",
-      "th",
-      "zh",
-      "ja",
-      "es",
-      "fr",
-      "de"
-    ],
-    "bytes": 1712000,
-    "sha256": "9070aee9b39b35b2bf57b35d563e9b7735c5e7bb821a139a3a430a8171c65c2e"
+    "bytes": 1722282,
+    "sha256": "9980754a526c4f5b9190a5d13ad721367db51ceb312bc338ccf67cc540213cc7"
   },
   {
     "file": "PASADHI-source.zip",
     "platform": "source",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "kind": "python-source",
-    "languages": [
-      "en",
-      "th",
-      "zh",
-      "ja",
-      "es",
-      "fr",
-      "de"
-    ],
-    "bytes": 1711958,
-    "sha256": "8eec5b6005763843b7c6866c5dc2f40eaa3bd1b0b1feaeb19b769e8aeb54bcca"
+    "bytes": 1722234,
+    "sha256": "8977879f3d5fcaeb44fb75fe2c3db6e80fcd948de4e3e06df71a40bd46ad0467"
   }
 ]
