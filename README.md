@@ -27,7 +27,8 @@ of the separate PASADHI repository has not yet been verified.
 
 ## Coordinator dashboard v0.1.3
 
-Start PASADHI and open **http://127.0.0.1:8765/dashboard**. The terminal prints
+Start PASADHI and open **http://127.0.0.1:8766/dashboard** on Linux
+(**http://127.0.0.1:8765/dashboard** on Windows/macOS). The terminal prints
 clickable URLs for the console, coordinator and JSON APIs, including the actual
 port and reachable LAN interface addresses when LAN binding is enabled.
 

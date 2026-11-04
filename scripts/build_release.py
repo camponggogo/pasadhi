@@ -16,6 +16,7 @@ VERSION = '0.1.3'
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--windows-exe', type=Path)
+    parser.add_argument('--replace-existing-version', action='store_true', help='Explicitly replace an existing versioned build and its checksums')
     args = parser.parse_args()
     output = ROOT / 'web/download'
     output.mkdir(parents=True, exist_ok=True)
@@ -42,7 +43,10 @@ def main():
         windows += 'pasadhi.exe %*\r\npause\r\n' if native else 'python -m pasadhi.app.service %*\r\npause\r\n'
         (package / 'PASADHI.bat').write_bytes(windows.encode())
         unix = '#!/bin/sh\nset -eu\ncd "$(dirname "$0")"\n'
-        unix += 'exec python -m pasadhi.app.service "$@"\n' if platform == 'android-termux' else 'exec python3 -m pasadhi.app.service "$@"\n'
+        if platform == 'linux':
+            unix += 'exec python3 -m pasadhi.app.service --port "${PASADHI_PORT:-8766}" "$@"\n'
+        else:
+            unix += 'exec python -m pasadhi.app.service "$@"\n' if platform == 'android-termux' else 'exec python3 -m pasadhi.app.service "$@"\n'
         launcher = package / ('PASADHI.command' if platform == 'macos' else 'pasadhi.sh')
         launcher.write_text(unix, encoding='utf-8', newline='\n')
         install = ('pkg install python\npython -m pip install -r requirements.txt\nbash pasadhi.sh' if platform == 'android-termux'
@@ -79,11 +83,11 @@ def main():
                         'sha256': hashlib.sha256(archive.read_bytes()).hexdigest()})
     (output / 'release.json').write_text(json.dumps(entries, indent=2) + '\n', encoding='utf-8')
     (output / 'SHA256SUMS.txt').write_text(''.join(f"{e['sha256']}  {e['file']}\n" for e in entries), encoding='utf-8')
-    publish_aliases(output)
+    publish_aliases(output, allow_replace=args.replace_existing_version)
     print(json.dumps(entries, indent=2))
 
 
-def publish_aliases(output):
+def publish_aliases(output, allow_replace=False):
     """Keep immutable version links and stable latest links with matching checksums."""
     entries = json.loads((output / 'release.json').read_text(encoding='utf-8'))
     version = entries[0]['version']
@@ -94,7 +98,7 @@ def publish_aliases(output):
         version_dir = output / f'v{version}'
         version_dir.mkdir(exist_ok=True)
         version_file = version_dir / path.name
-        if version_file.exists() and version_file.read_bytes() != path.read_bytes():
+        if not allow_replace and version_file.exists() and version_file.read_bytes() != path.read_bytes():
             raise ValueError(f'Refusing to replace existing versioned release: {version_file}')
         shutil.copy2(path, version_file)
         latest_dir = output / 'latest'

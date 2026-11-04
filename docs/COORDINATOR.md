@@ -1,11 +1,17 @@
 # Coordinator dashboard v0.1.3
 
-After starting PASADHI, open http://127.0.0.1:8765/dashboard.
+After starting the Linux shell launcher, open http://127.0.0.1:8766/dashboard.
+Windows/macOS default to http://127.0.0.1:8765/dashboard.
+Linux overrides: `PASADHI_PORT=8770 ./pasadhi.sh` or `./pasadhi.sh --port 8770`.
+The shell default is a CLI argument, so a port in .env alone does not override it.
 The terminal prints all supported page/API URLs and the actual bound port.
 The homepage also links to the dashboard. A coordinator label alone does not
 connect machines: worker addresses must be configured explicitly.
 
 ## Example trusted LAN
+
+The following example uses port 8765. On Linux, start with
+`./pasadhi.sh --port 8765` to match it, or change all worker/public URLs to 8766.
 
 On each worker, copy .env.example to .env in the folder containing pasadhi.sh,
 PASADHI.command or PASADHI.bat. Set PASADHI_HOST=0.0.0.0. Allow the chosen

@@ -8,6 +8,7 @@ and records earnings in the same config directory as the device identity.
 from __future__ import annotations
 
 import argparse
+import errno
 import json
 import logging
 import os
@@ -190,11 +191,11 @@ def serve(port: int, role: str, host: str = '127.0.0.1') -> ThreadingHTTPServer:
     Handler.config = config
     Handler.share_ref = dict(share)
 
+    # Bind before starting background work: a busy port must not launch a worker.
+    server = ThreadingHTTPServer((host, port), Handler)
     stop = threading.Event()
     thread = threading.Thread(target=worker_loop, args=(stop, hardware, Handler.share_ref), daemon=True)
     thread.start()
-
-    server = ThreadingHTTPServer((host, port), Handler)
     server.pasadhi_stop = stop
     return server
 
@@ -210,11 +211,21 @@ def main():
 
     cluster.configured_workers()
     startup_urls.public_url()
-    server = serve(args.port, args.role, args.host)
+    try:
+        server = serve(args.port, args.role, args.host)
+    except OSError as error:
+        if error.errno == errno.EADDRINUSE or getattr(error, 'winerror', None) == 10048:
+            raise SystemExit(
+                f'PASADHI cannot start: port {args.port} on {args.host} is already in use. '
+                'An older PASADHI instance may still be running. Stop it with Ctrl+C, '
+                f'or restart this launcher with --port {args.port + 1} '
+                '(choose another free port if needed).') from None
+        raise
     if args.once:
         state = Handler._state(Handler.__new__(Handler))
         print(json.dumps(state, indent=2, ensure_ascii=False))
         server.pasadhi_stop.set()
+        server.server_close()
         return
     port = server.server_address[1]
     print(f'PASADHI role={Handler.decision.role} score={Handler.decision.score}', flush=True)
@@ -226,6 +237,7 @@ def main():
         pass
     finally:
         server.pasadhi_stop.set()
+        server.server_close()
 
 
 if __name__ == '__main__':
